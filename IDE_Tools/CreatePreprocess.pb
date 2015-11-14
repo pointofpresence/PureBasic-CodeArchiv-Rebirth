@@ -1,4 +1,4 @@
-﻿; Description: Create a preprocess file (all macros are expanded, false compilerif - compilerendif are removed
+﻿; Description: Create a preprocess file (all macros are expanded, false compilerif - compilerendif are removed)
 ; Parameter: "%FILE"
 ; Author: GPI
 ; Date: 14-11-2015
@@ -159,7 +159,6 @@ EndIf
 
 
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
-; CursorPosition = 32
 ; Folding = -
 ; EnableUnicode
 ; EnableXP
