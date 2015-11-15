@@ -1,5 +1,5 @@
 ﻿; Description: Named GadgetData
-;              Under windows and linux objects are released.
+;              Under windows and linux objects are automatic released.
 ; Author : mk-soft
 ; Date: 13.11.2015
 ; PB-Version: 5.40
@@ -223,6 +223,7 @@ EndMacro
 ;-End Named GadgetData
 
 ; ***************************************************************************************
+;-Example
 
 CompilerIf #PB_Compiler_IsMainFile
   
@@ -308,7 +309,7 @@ CompilerIf #PB_Compiler_IsMainFile
 CompilerEndIf
 
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
-; CursorPosition = 4
+; CursorPosition = 2
 ; Folding = ----
 ; EnableUnicode
 ; EnableXP
