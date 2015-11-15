@@ -1,3 +1,5 @@
+# User-specific files
 *.exe
 *.pre.pb
 temp*
+*.bat
