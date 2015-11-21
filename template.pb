@@ -12,8 +12,9 @@
 CompilerIf #PB_Compiler_IsMainFile
 CompilerEndIf
 
+
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
-; CursorPosition = 9
+; CursorPosition = 14
 ; Folding = -
 ; EnableUnicode
 ; EnableXP
