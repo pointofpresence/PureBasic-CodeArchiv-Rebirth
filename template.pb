@@ -18,6 +18,7 @@ CompilerEndIf
 ; Folding = -
 ; EnableUnicode
 ; EnableXP
-; EnableCompileCount = 8
+; Compiler = PureBasic 5.40 LTS (Windows - x86)
+; EnableCompileCount = 13
 ; EnableBuildCount = 0
 ; EnableExeConstant
