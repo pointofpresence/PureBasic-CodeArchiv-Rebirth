@@ -102,10 +102,11 @@ SetActiveGadget(#edIn)
 Repeat
 Until WaitWindowEvent()=#PB_Event_CloseWindow
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
-; CursorPosition = 7
+; CursorPosition = 9
 ; Folding = --
 ; EnableUnicode
 ; EnableXP
-; EnableCompileCount = 1
-; EnableBuildCount = 0
+; Executable = Beautifier_format_XML_and_JSON.exe
+; EnableCompileCount = 2
+; EnableBuildCount = 1
 ; EnableExeConstant

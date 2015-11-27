@@ -185,11 +185,11 @@ Repeat
   
 ForEver
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
-; CursorPosition = 3
+; CursorPosition = 10
 ; Folding = --
 ; EnableUnicode
 ; EnableXP
-; Executable = FindProcedureName.Exe
-; EnableCompileCount = 1
-; EnableBuildCount = 1
+; Executable = FindAllReferences.exe
+; EnableCompileCount = 2
+; EnableBuildCount = 2
 ; EnableExeConstant
