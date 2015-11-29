@@ -1,4 +1,4 @@
-;    Description: Hyphenation - Module
+ï»¿;    Description: Hyphenation - Module
 ;         Author: Kurzer
 ;           Date: 04-05-2015
 ;     PB-Version: 5.20+
@@ -29,15 +29,15 @@
 ;*
 ;* Silbentrennung(sWort.s, sTrenner.s)
 ;* Das deutsche Wort in Parameter "sWort" wird in seine Silben zerlegt
-;* Zurückgegeben wird ein aufbereiteter String, bei dem die Silben durch das Zeichen in Parameter "sTrenner" getrennt sind.
+;* ZurÃ¼ckgegeben wird ein aufbereiteter String, bei dem die Silben durch das Zeichen in Parameter "sTrenner" getrennt sind.
 ;*
 ;* Beispiel:
-;*   Silbentrennung("Unverwüstlich", "|")
-;*   Gibt zurück: "Un|ver|wüst|lich"
+;*   Silbentrennung("UnverwÃ¼stlich", "|")
+;*   Gibt zurÃ¼ck: "Un|ver|wÃ¼st|lich"
 ;*
 ;* Anmerkung:
-;* Da eine algorithmische Silbentrennung ohne Nutzung einer Wörtbuchdatenbank niemals absolut fehlerfreie Ergebnisse liefern
-;* kann, sind die Ergebnisse dieser Prozedur ggf. nicht immer völlig korrekt.
+;* Da eine algorithmische Silbentrennung ohne Nutzung einer WÃ¶rtbuchdatenbank niemals absolut fehlerfreie Ergebnisse liefern
+;* kann, sind die Ergebnisse dieser Prozedur ggf. nicht immer vÃ¶llig korrekt.
 ;*
 ;* -----------------------------------------------------------------------
 ;* ALGORITHMUS:
@@ -45,21 +45,21 @@
 ;* Ein Wort besteht ggf. aus einer Vorsilbe und einer oder mehrerer nachfolgender Silben.
 ;*
 ;* Definition einer Vorsilbe:
-;* Vorsilben sind reguläre Silben (s.u.), deren Beginn sich durch den Wortanfang definieren. Eine Silbe, die einer Vorsilbe
+;* Vorsilben sind regulÃ¤re Silben (s.u.), deren Beginn sich durch den Wortanfang definieren. Eine Silbe, die einer Vorsilbe
 ;* folgt, kann ausnahmsweise mit einem Vokal beginnen. Bei allen anderen Silben ist dies nicht so, denn sie beginnen immer
 ;* mit einem Konsonanten.
 ;*
-;* Beispiele: Ge-spräch, ver-ein-zelt, ab-schrei-ben
+;* Beispiele: Ge-sprÃ¤ch, ver-ein-zelt, ab-schrei-ben
 ;* Programmtechnisch sind die Vorsilben hartkodiert als Strings hinterlegt: vor, ver, ge, an, un, ...
 ;*
 ;* Definition einer Silbe:
-;* Jeder Vokal (a, e, i, o, u) ist Kern einer Silbe. Dabei zählen die Diphtonge (eu, au, ei) und die Umlaute (ä, ü, ö) ebenfalls als Vokal.
-;* Ausgehend vom Kern (Vokal) einer Silbe reicht diese nach rechts bis zum letzten Konsonanten vor dem nächsten Vokal, wobei der letzte
-;* Konsonant bereits zur nächsten Silbe gehört. Der Beginn einer Silbe definiert sich durch das Ende der vorherigen Silbe bzw. der Vorsilbe.
+;* Jeder Vokal (a, e, i, o, u) ist Kern einer Silbe. Dabei zÃ¤hlen die Diphtonge (eu, au, ei) und die Umlaute (Ã¤, Ã¼, Ã¶) ebenfalls als Vokal.
+;* Ausgehend vom Kern (Vokal) einer Silbe reicht diese nach rechts bis zum letzten Konsonanten vor dem nÃ¤chsten Vokal, wobei der letzte
+;* Konsonant bereits zur nÃ¤chsten Silbe gehÃ¶rt. Der Beginn einer Silbe definiert sich durch das Ende der vorherigen Silbe bzw. der Vorsilbe.
 ;* 
 ;* Beispiel: ver-lau-fen
 ;*            |   |  ||
-;*            |   |  |nächste Silbe
+;*            |   |  |nÃ¤chste Silbe
 ;*            |   |  |
 ;*            |   |  letzter Konsonant
 ;*            |   |  
@@ -70,7 +70,7 @@
 ;* Konsonantengruppen, die einen einzigen Laut bezeichnen, werden wie ein einzelner Konsonant behandelt: ch, sch, ck.
 ;* Beispiel: ver-su-chung
 ;*            |   | | |
-;*            |   | | nächste Silbe
+;*            |   | | nÃ¤chste Silbe
 ;*            |   | |
 ;*            |   | letzter Konsonant (ch)
 ;*            |   |  
@@ -78,17 +78,17 @@
 ;*            Vorsilbe
 ;*
 ;* Besteht der erste Buchstabe des Wortes bereits aus einem Vokal, dann ist dieser Vokal nicht Kern der Silbe.
-;* Beispiel: Über-schall
+;* Beispiel: Ãœber-schall
 ;*           | |     |
-;*           | |     nächste Silbe
+;*           | |     nÃ¤chste Silbe
 ;*           | Silbe
 ;*           Nicht Kern der Silbe!
 ;*
-;* Da es Ausnahmen gibt, sollten diese über die hartkodierten Vorsilben abgedeckt werden.
+;* Da es Ausnahmen gibt, sollten diese Ã¼ber die hartkodierten Vorsilben abgedeckt werden.
 ;* Beispiel: Erd-beer-saft
 ;*           |    |    |
-;*           |    |    nächste Silbe
-;*           |    nächste Silbe
+;*           |    |    nÃ¤chste Silbe
+;*           |    nÃ¤chste Silbe
 ;*           Silbe
 ;*
 ;* Doppelkonsonanten:
@@ -99,8 +99,8 @@
 ;* Befindet sich in einem Wortteil ein Mehfachvokal, dann word dort aufgetrennt (An-schau-ung)
 ;* Hier liegen die Vokale "au" und "u" direkt beieinander.
 ;*
-;* Sonderfälle:
-;* Am Ende des Moduls befindet sich eine Datasektion, in der u.a. Sonderfälle hinterlegt werden können, die durch
+;* SonderfÃ¤lle:
+;* Am Ende des Moduls befindet sich eine Datasektion, in der u.a. SonderfÃ¤lle hinterlegt werden kÃ¶nnen, die durch
 ;* die algorithmische Bearbeitung nicht korrekt getrennt werden. Hierzu ist jeweils der Silbenteil hinterlegt,
 ;* der nicht korrekt getrennt wird sowie die Position der Trennstelle innerhalb des Silbenteils.
 ;*
@@ -117,12 +117,12 @@
 ;*   Tren|nungs|pro|blem
 ;*
 ;* Wortendungen:
-;* Am Ende des Moduls befindet sich eine Datasektion, in der u.a. Wortendungen hinterlegt werden können,
-;* die nicht getrennt werden dürfen.
+;* Am Ende des Moduls befindet sich eine Datasektion, in der u.a. Wortendungen hinterlegt werden kÃ¶nnen,
+;* die nicht getrennt werden dÃ¼rfen.
 ;*
 ;* Beispiel einer nicht zu trennenden Wortendung:
 ;*
-;*   Ein|stel|lun|gen  <- "gen" würde ohne die Wortendungs-Regel in "ge|n" getrennt werden
+;*   Ein|stel|lun|gen  <- "gen" wÃ¼rde ohne die Wortendungs-Regel in "ge|n" getrennt werden
 ;*
 ;* Die Wortendungsdaten sehen dazu so aus:
 ;*   Data.s "gen"
@@ -130,13 +130,13 @@
 ;* -----------------------------------------------------------------------
 ;* Historie:
 ;* 1.03 - 04.05.15:
-;*        add Trennung an Doppelkonsonanten und Mehrfachvokalen zugefügt
+;*        add Trennung an Doppelkonsonanten und Mehrfachvokalen zugefÃ¼gt
 ;* 1.02 - 04.05.15:
-;*        add Wortendungsbehandlung zugefügt
+;*        add Wortendungsbehandlung zugefÃ¼gt
 ;* 1.01 - 04.05.15:
-;*        add Sonderfallbehandlung zugefügt
+;*        add Sonderfallbehandlung zugefÃ¼gt
 ;*        opt Optimierungen bei Vokal- und Konsonantensuche
-;*        opt Kommentare überarbeitet
+;*        opt Kommentare Ã¼berarbeitet
 ;* 1.00 - 03.05.15:
 ;*        rel Erste Version
 ;*
@@ -168,10 +168,10 @@ Module Silbentrennung
 	Declare.i Wortendung(sWort.s)
 	
 	; Achtung: Alles klein geschrieben
-	Global.s sVorsilben3 = "auf aus dau emp ent ein erd geo nau ini rös sau sym syn sys uhr ver vor"
-	Global.s sVorsilben2 = "ab al an än ak be em en er ge hy in un um ur zu"
-	Global.s sVokale2= "aa au äu ee ei eu ia ie ii io ou ua uu"
-	Global.s sVokale1= "ä ü ö a e i o u"
+	Global.s sVorsilben3 = "auf aus dau emp ent ein erd geo nau ini rÃ¶s sau sym syn sys uhr ver vor"
+	Global.s sVorsilben2 = "ab al an Ã¤n ak be em en er ge hy in un um ur zu"
+	Global.s sVokale2= "aa au Ã¤u ee ei eu ia ie ii io ou ua uu"
+	Global.s sVokale1= "Ã¤ Ã¼ Ã¶ a e i o u"
 	Global.s sKonsonanten4 = "schl schr"
 	Global.s sKonsonanten3 = "sch spr"
 	Global.s sKonsonanten2= "bl br ch ck fl gl pr sp st tr th"
@@ -188,7 +188,7 @@ Module Silbentrennung
 		; |Arguments    : sWort.s : Das in Silben aufzutrennende Wort
 		; |             : sWort.s : Trennzeichen zwischen den Silben
 		; |Results      : Result.s: String bestehend aus Silben und Trennzeichen
-		; |Remarks      : Aus "unverschämt" wird "un|ver|schämt", wenn sTrenner = "|"
+		; |Remarks      : Aus "unverschÃ¤mt" wird "un|ver|schÃ¤mt", wenn sTrenner = "|"
 		; +-----------------------------------------------------------------
 		Protected.s sSilbe, sSilbenkette
 		Protected.i iSilbenlaenge
@@ -219,14 +219,14 @@ Module Silbentrennung
 	Procedure.s ErsteSilbe(sWort.s)
 		; +-----------------------------------------------------------------
 		; |Description  : Ermittelt die erste Silbe in sWort
-		; |Arguments    : sWort.s : zu prüfendes Wort
+		; |Arguments    : sWort.s : zu prÃ¼fendes Wort
 		; |Results      : Result.s: Die ermittelte Silbe
-		; |Remarks      : Wurde keine Silbe ermittelt, wird "" zurückgegeben
+		; |Remarks      : Wurde keine Silbe ermittelt, wird "" zurÃ¼ckgegeben
 		; +-----------------------------------------------------------------
 		Protected.s sVorsilbe, sSonderfall
 		Protected.i iPosition, iPositionDK
 		
-		; Prüfen, ob es sich um eine nicht zu trennende Wortendung handelt
+		; PrÃ¼fen, ob es sich um eine nicht zu trennende Wortendung handelt
 		If Wortendung(sWort.s) = #True
 			ProcedureReturn sWort
 		EndIf 
@@ -250,7 +250,7 @@ Module Silbentrennung
 			ProcedureReturn sSonderfall
 		EndIf
 		
-		; Wenn kein Sonderfall vorhanden ist, dann die Silbe regulär ermitteln
+		; Wenn kein Sonderfall vorhanden ist, dann die Silbe regulÃ¤r ermitteln
 		If iPosition > 0
 			iPosition = PositionVorherigerKonsonant(sWort, iPosition - 1)
 			If iPosition > 0
@@ -258,7 +258,7 @@ Module Silbentrennung
 			EndIf
 		EndIf
 		
-		; Wenn die Silbe bis zum Wortende reicht, dann prüfen wir auf einen
+		; Wenn die Silbe bis zum Wortende reicht, dann prÃ¼fen wir auf einen
 		; Doppelkonsonanten. Kommt einer vor, dann trennen wir dort
 		iPositionDK = DoppelKonsonant(sWort)
 		If iPositionDK > 0
@@ -270,9 +270,9 @@ Module Silbentrennung
 	Procedure.s Vorsilbe(sWort.s)
 		; +-----------------------------------------------------------------
 		; |Description  : Ermittelt die Vorsilbe in sWort
-		; |Arguments    : sWort.s : zu prüfendes Wort
+		; |Arguments    : sWort.s : zu prÃ¼fendes Wort
 		; |Results      : Result.s: Die ermittelte Vorsilbe
-		; |Remarks      : Ist keine Vorsilbe enthalten, wird "" zurückgegeben
+		; |Remarks      : Ist keine Vorsilbe enthalten, wird "" zurÃ¼ckgegeben
 		; +-----------------------------------------------------------------
 		Protected.s sLCWort
 		
@@ -292,10 +292,10 @@ Module Silbentrennung
 	EndProcedure
 	Procedure.s Sonderfall(sWort.s)
 		; +-----------------------------------------------------------------
-		; |Description  : Prüft, ob es für das Wort in "sWort" einen Sonderfall gibt
-		; |Arguments    : sWort.s     : Zu prüfendes Wort
+		; |Description  : PrÃ¼ft, ob es fÃ¼r das Wort in "sWort" einen Sonderfall gibt
+		; |Arguments    : sWort.s     : Zu prÃ¼fendes Wort
 		; |Results      : Result.s    : Die korrekte Silbe dieses Sonderfalls
-		; |Remarks      : Wird kein Sonderfall gefunden, wird "" zurückgegeben
+		; |Remarks      : Wird kein Sonderfall gefunden, wird "" zurÃ¼ckgegeben
 		; +-----------------------------------------------------------------
 		Protected.s sLCWort, sSonderfall
 		Protected.i iSilbenlaenge, iPosition
@@ -318,13 +318,13 @@ Module Silbentrennung
 	Procedure.i PositionZweiterVokal(sWort.s)
 		; +-----------------------------------------------------------------
 		; |Description  : Ermittelt die Position des zweiten Vokals in sWort
-		; |Arguments    : sWort.s     : Zu prüfendes Wort
+		; |Arguments    : sWort.s     : Zu prÃ¼fendes Wort
 		; |Results      : Result.i    : Zeichenposition des zweitens Vokals in Anzahl Zeichen
-		; |Remarks      : Wird kein zweiter Vokal gefunden, dann wird -1 zurückgegeben
-		; |               Bei Vokalen mit 2 Buchstaben wird die Position des ersten Buchstabens zurückgegeben
+		; |Remarks      : Wird kein zweiter Vokal gefunden, dann wird -1 zurÃ¼ckgegeben
+		; |               Bei Vokalen mit 2 Buchstaben wird die Position des ersten Buchstabens zurÃ¼ckgegeben
 		; |               
-		; |               Beispiel: sWort = "Schuhgeschäft"
-		; |               Die Prozedur wird 7 zurückgeben, das "e" von "geschäft". Der erste Vokal ist das "u" in "Schuh"
+		; |               Beispiel: sWort = "SchuhgeschÃ¤ft"
+		; |               Die Prozedur wird 7 zurÃ¼ckgeben, das "e" von "geschÃ¤ft". Der erste Vokal ist das "u" in "Schuh"
 		; +-----------------------------------------------------------------
 		Protected.s sVokal
 		Protected.i i, j, iOffset, iPosition, iAltePosition
@@ -371,28 +371,28 @@ Module Silbentrennung
 	Procedure.i PositionVorherigerKonsonant(sWort.s, iPosition.i)
 		; +-----------------------------------------------------------------
 		; |Description  : Ermittelt die Position des direkten vorherigen Konsonanten in sWort an Stelle iPosition
-		; |Arguments    : sWort.s     : Zu prüfendes Wort
-		; |             : iStartpos.i : Startposition für die Rückwärtssuche in Anzahl Zeichen
+		; |Arguments    : sWort.s     : Zu prÃ¼fendes Wort
+		; |             : iStartpos.i : Startposition fÃ¼r die RÃ¼ckwÃ¤rtssuche in Anzahl Zeichen
 		; |Results      : Result.i    : Position des gefundenen Konsonanten in Anzahl Zeichen
-		; |Remarks      : Wird kein Konsonant gefunden, dann wird geprüft, ob sich am Ende des Wortes
+		; |Remarks      : Wird kein Konsonant gefunden, dann wird geprÃ¼ft, ob sich am Ende des Wortes
 		; |               ein Vokal befindet. In dem Fall handelt es sich um einen Mehrfachvokal.
 		; |               An dieser Stelle wird dann getrennt. Es wird also die Position nach
-		; |               dem gefundenen Vokal zurückgegeben.
+		; |               dem gefundenen Vokal zurÃ¼ckgegeben.
 		; |               
-		; |               Bei Konsonanten mit 4, 3 bzw. 2 Buchstaben wird die Position des ersten Buchstabens zurückgegeben
+		; |               Bei Konsonanten mit 4, 3 bzw. 2 Buchstaben wird die Position des ersten Buchstabens zurÃ¼ckgegeben
 		; |               
 		; |               Beispiel: sWort = "verschenkt", iPosition = 6
 		; |               Hier wird am Zeichen Nr. 6 (das "h" vom "sch") von links gehend nach einem Konsonsanten gesucht
-		; |               Da das "sch" als ein Konsonant gilt, wird die Prozedur die Position 4 zurückgeben, also das erste
+		; |               Da das "sch" als ein Konsonant gilt, wird die Prozedur die Position 4 zurÃ¼ckgeben, also das erste
 		; |               Zeichen des "sch".
 		; |               
 		; |               Beispiel: sWort = "verpennt", iPosition = 4
-		; |               Die Prozedur wird 4 zurückgeben, da vor dem Umlaut "e" weder ein 3er Konsonant noch ein 2er Konsonant
+		; |               Die Prozedur wird 4 zurÃ¼ckgeben, da vor dem Umlaut "e" weder ein 3er Konsonant noch ein 2er Konsonant
 		; |               steht, sondern das p als 1er-Konsonant.
 		; +-----------------------------------------------------------------
 		Protected.s sWortMV
 		
-		; Wenn die Satrtposition ungültig ist, -1
+		; Wenn die Satrtposition ungÃ¼ltig ist, -1
 		If iPosition > Len(sWort)
 			ProcedureReturn -1
 		EndIf
@@ -401,7 +401,7 @@ Module Silbentrennung
 			sWort = Space(4 - iPosition) + sWort
 		EndIf
 		
-		; 4er Konsonaten prüfen
+		; 4er Konsonaten prÃ¼fen
 		sWort = Mid(LCase(sWort), iPosition - 3, 4)
 		sWortMV = Right(sWort, 2)
 		
@@ -409,25 +409,25 @@ Module Silbentrennung
 			ProcedureReturn iPosition - 3
 		EndIf
 		
-		; 3er Konsonaten prüfen
+		; 3er Konsonaten prÃ¼fen
 		sWort = Right(sWort, 3)
 		If FindString(sKonsonanten3, sWort)
 			ProcedureReturn iPosition - 2
 		EndIf
 		
-		; 2er Konsonaten prüfen
+		; 2er Konsonaten prÃ¼fen
 		sWort = Right(sWort, 2)
 		If FindString(sKonsonanten2, sWort)
 			ProcedureReturn iPosition - 1
 		EndIf
 		
-		; 1er Konsonaten prüfen
+		; 1er Konsonaten prÃ¼fen
 		sWort = Right(sWort, 1)
 		If FindString(sKonsonanten1, sWort)
 			ProcedureReturn iPosition
 		EndIf
 		
-		; Wenn kein Konsonant gefunden wurde, dann prüfen, ob ein Mehrfachvokal vorliegt
+		; Wenn kein Konsonant gefunden wurde, dann prÃ¼fen, ob ein Mehrfachvokal vorliegt
 		If FindString(sVokale2, sWortMV)
 			ProcedureReturn iPosition + 1
 		EndIf
@@ -440,11 +440,11 @@ Module Silbentrennung
 	EndProcedure      
 	Procedure.i DoppelKonsonant(sWort.s)
 		; +-----------------------------------------------------------------
-		; |Description  : Prüft, ob das Wort in "sWort" einen Doppelkonsonanten enthält
-		; |Arguments    : sWort.s  : Zu prüfendes Wort
+		; |Description  : PrÃ¼ft, ob das Wort in "sWort" einen Doppelkonsonanten enthÃ¤lt
+		; |Arguments    : sWort.s  : Zu prÃ¼fendes Wort
 		; |Results      : Result.i : Position des gefundenen Doppelkonsonanten in Anzahl Zeichen
-		; |Remarks      : Es wird die Position des ersetn Zeichens des Doppelkonsonanten zurückgegeben
-		; |               Wird kein Doppelkonsonant gefunden, dann wird -1 zurückgegeben
+		; |Remarks      : Es wird die Position des ersetn Zeichens des Doppelkonsonanten zurÃ¼ckgegeben
+		; |               Wird kein Doppelkonsonant gefunden, dann wird -1 zurÃ¼ckgegeben
 		; |               Doppelkonsonanten am Ende des wortes werden ignoriert, z.B. Schloss
 		; +-----------------------------------------------------------------
 		Protected.s sDoppelKonsonant
@@ -464,8 +464,8 @@ Module Silbentrennung
 	EndProcedure
 	Procedure.i Wortendung(sWort.s)
 		; +-----------------------------------------------------------------
-		; |Description  : Prüft, ob das Wort in "sWort" eine Wortendung ist
-		; |Arguments    : sWort.s  : Zu prüfendes Wort
+		; |Description  : PrÃ¼ft, ob das Wort in "sWort" eine Wortendung ist
+		; |Arguments    : sWort.s  : Zu prÃ¼fendes Wort
 		; |Results      : Result.i : #True, wenn ja / #False, wenn nein
 		; |Remarks      : 
 		; +-----------------------------------------------------------------
@@ -486,7 +486,7 @@ Module Silbentrennung
 	EndProcedure      
 	
 	DataSection
-		; Sonderfälle der Silbenterennung. Alles klein schreiben.
+		; SonderfÃ¤lle der Silbenterennung. Alles klein schreiben.
 		Sonderfaelle:
 		Data.s "nungs"                  ; Tren-nungs-pro-blem
 		Data.i 5
@@ -531,7 +531,7 @@ Module Silbentrennung
 		Data.s "*"                        ; Listenende
 		Data.i 0
 		
-		; Wortendungen die nicht getrennt werden dürfen. Alles klein schreiben.
+		; Wortendungen die nicht getrennt werden dÃ¼rfen. Alles klein schreiben.
 		Wortendungen:
 		Data.s "gen"                     ; Ein-stel-lun-ge|n
 		Data.s "ung"										 ; An-schau-ung
@@ -546,15 +546,15 @@ EndModule
 CompilerIf #PB_Compiler_IsMainFile = 1
 	
 	Debug Silbentrennung::Silbentrennung("Auskommen", "|")
-	Debug Silbentrennung::Silbentrennung("Überschallflugzeug", "|")
+	Debug Silbentrennung::Silbentrennung("Ãœberschallflugzeug", "|")
 	Debug Silbentrennung::Silbentrennung("Erdbeersaft", "|")
 	Debug Silbentrennung::Silbentrennung("Vorschule", "|")
-	Debug Silbentrennung::Silbentrennung("Knäckebrottestzentrum", "|")
-	Debug Silbentrennung::Silbentrennung("Ösenflanschgerät", "|")
+	Debug Silbentrennung::Silbentrennung("KnÃ¤ckebrottestzentrum", "|")
+	Debug Silbentrennung::Silbentrennung("Ã–senflanschgerÃ¤t", "|")
 	Debug Silbentrennung::Silbentrennung("Desktoplautsprecherset", "|")
-	Debug Silbentrennung::Silbentrennung("Vielfachmessgerät", "|")
+	Debug Silbentrennung::Silbentrennung("VielfachmessgerÃ¤t", "|")
 	Debug Silbentrennung::Silbentrennung("Zauberschloss", "|")
-	Debug Silbentrennung::Silbentrennung("Schuhgeschäft", "|")
+	Debug Silbentrennung::Silbentrennung("SchuhgeschÃ¤ft", "|")
 	Debug Silbentrennung::Silbentrennung("verschleppt", "|")
 	Debug Silbentrennung::Silbentrennung("verschleppung", "|")
 	Debug Silbentrennung::Silbentrennung("bitte", "|")
@@ -562,7 +562,7 @@ CompilerIf #PB_Compiler_IsMainFile = 1
 	Debug Silbentrennung::Silbentrennung("verschenken", "|")
 	Debug Silbentrennung::Silbentrennung("Trennungsproblem", "|")
 	Debug Silbentrennung::Silbentrennung("Jungspunt", "|")
-	Debug Silbentrennung::Silbentrennung("Mundspülungsbecher", "|")
+	Debug Silbentrennung::Silbentrennung("MundspÃ¼lungsbecher", "|")
 	Debug Silbentrennung::Silbentrennung("Mundwasser", "|")
 	Debug Silbentrennung::Silbentrennung("wunderhaftes", "|")
 	Debug Silbentrennung::Silbentrennung("Installationseinstellungen", "|")
@@ -572,7 +572,7 @@ CompilerIf #PB_Compiler_IsMainFile = 1
 	Debug Silbentrennung::Silbentrennung("Aktualisierung", "|")
 	Debug Silbentrennung::Silbentrennung("Trinkflasche", "|")
 	Debug Silbentrennung::Silbentrennung("Uhrzeit", "|")
-	Debug Silbentrennung::Silbentrennung("Änderung", "|")
+	Debug Silbentrennung::Silbentrennung("Ã„nderung", "|")
 	Debug Silbentrennung::Silbentrennung("empfangen", "|")
 	Debug Silbentrennung::Silbentrennung("Briefumschlag", "|")
 	Debug Silbentrennung::Silbentrennung("Erkennung", "|")
@@ -584,6 +584,7 @@ CompilerIf #PB_Compiler_IsMainFile = 1
 	
 CompilerEndIf
 ; IDE Options = PureBasic 5.41 LTS Beta 1 (Windows - x86)
-; CursorPosition = 17
+; CursorPosition = 584
+; FirstLine = 538
 ; Folding = --
 ; EnableXP
