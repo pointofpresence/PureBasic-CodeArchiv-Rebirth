@@ -83,11 +83,11 @@ If ScintillaText <> ""
   
 EndIf
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
-; CursorPosition = 21
+; CursorPosition = 10
 ; Folding = -
 ; EnableUnicode
 ; EnableXP
 ; Executable = FindProcedureName.Exe
-; EnableCompileCount = 1
-; EnableBuildCount = 1
+; EnableCompileCount = 2
+; EnableBuildCount = 2
 ; EnableExeConstant
