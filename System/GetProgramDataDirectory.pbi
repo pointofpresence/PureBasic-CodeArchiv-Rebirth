@@ -25,7 +25,7 @@ Procedure.s GetProgramDataDirectory()
     CompilerCase #PB_OS_MacOS
       ProcedureReturn GetHomeDirectory() + "Library/Application Support/"
     CompilerCase #PB_OS_Linux
-      ProcedureReturn GetHomeDirectory() 
+      ProcedureReturn GetHomeDirectory() + "."
   CompilerEndSelect
 EndProcedure
 
@@ -36,8 +36,11 @@ CompilerIf #PB_Compiler_IsMainFile
   Debug FileSize(path$)
 CompilerEndIf
 
-; IDE Options = PureBasic 5.40 LTS (MacOS X - x64)
-; CursorPosition = 20
+; IDE Options = PureBasic 5.40 LTS (Windows - x64)
+; CursorPosition = 27
 ; Folding = -
 ; EnableUnicode
 ; EnableXP
+; EnableCompileCount = 0
+; EnableBuildCount = 0
+; EnableExeConstant
