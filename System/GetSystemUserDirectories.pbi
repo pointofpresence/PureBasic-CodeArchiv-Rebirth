@@ -96,6 +96,8 @@ Module Directory
       _Create(Music,FOLDERID_Music,4BD8D571,6D19,48D3,BE97,422220080E43)
       _Create(Pictures,FOLDERID_Pictures,33E28130,4E1E,4676,835A,98395C3BC3BB)
       _Create(Public,FOLDERID_PublicDocuments,ED4824AF,DCE4,45A8,81E2,FC7965083634)
+      CloseLibrary(shell32dll)
+
       ;}
       
     CompilerCase #PB_OS_Linux
@@ -168,6 +170,6 @@ CompilerIf #PB_Compiler_IsMainFile
   EndIf
     
 CompilerEndIf
-; IDE Options = PureBasic 5.40 LTS (MacOS X - x64)
+; IDE Options = PureBasic 5.40 LTS (Windows - x64)
 ; EnableUnicode
 ; EnableXP

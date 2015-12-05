@@ -5,7 +5,7 @@
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 
 ;   French-Forum: 
-;   German-Forum: 
+;   German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=29323
 ; -----------------------------------------------------------------------------
 EnableExplicit
 
@@ -27,12 +27,52 @@ NeedMask("ENABLEXP")
 
 OpenConsole("CodeCleaner")
 
+Procedure.s CheckSyntax(file.s,EnableThread)
+  Protected compiler
+  Protected Output$
+  Protected do
+  Protected ret.s
+  Protected a$
+  If Left(file,2)=".\"
+    file=GetCurrentDirectory()+Mid(file,3)
+  EndIf  
+  If EnableThread
+    a$="--thread "
+  Else
+    a$=""
+  EndIf
+  Compiler = RunProgram(#PB_Compiler_Home+"Compilers\pbcompiler.exe", a$+"--check "+Chr(34)+file+Chr(34), #PB_Compiler_Home+"Compilers", #PB_Program_Open | #PB_Program_Read)
+  Output$ = ""
+  do=#False
+  If Compiler
+    While ProgramRunning(Compiler)
+      If AvailableProgramOutput(Compiler)
+        a$=ReadProgramString(Compiler)
+        
+        If a$="Starting syntax check..."
+          do=#True
+        ElseIf do And a$<>""         
+          Output$ + a$ + Chr(13)
+        EndIf
+      EndIf
+    Wend
+    If ProgramExitCode(Compiler)
+      ret= "ERROR:"+file+" "+output$
+    EndIf
+    CloseProgram(Compiler) ; Close the connection to the program
+  EndIf
+  ProcedureReturn ret
+EndProcedure
 Procedure CheckFile(file.s)
   Protected in
   Protected check.s
   Protected do
   Protected out
   Protected Format
+  Protected Syncheck.s
+  Protected EnableThread=#False
+  ConsoleTitle("Check "+file)
+  
   NewList FLine.s()
   in=ReadFile(#PB_Any,file )
   If in
@@ -72,6 +112,9 @@ Procedure CheckFile(file.s)
       If FindMapElement(NeedMask(),check)
         NeedMask()=#True
       EndIf
+      If check="ENABLETHREAD"
+        EnableThread=#True
+      EndIf
     Wend
     
     ForEach NeedMask()
@@ -95,12 +138,19 @@ Procedure CheckFile(file.s)
     CloseFile(out)
   EndIf
   
+  Syncheck=CheckSyntax(file,EnableThread)
+  If Syncheck
+    PrintN(Syncheck)
+  EndIf
+  
+  
 EndProcedure
 
 Procedure dir(Start.s=".\")
   Protected dir
   Protected name.s,ext.s
   Protected placeholder.s
+  Protected count
   dir=ExamineDirectory(#PB_Any,Start,"*.*")
   If dir
     While NextDirectoryEntry(dir)
@@ -113,12 +163,7 @@ Procedure dir(Start.s=".\")
         If UCase(name)="PLACEHOLDER.TXT"
           placeholder=name
         Else
-          If placeholder
-            DeleteFile(start+name)
-            PrintN( "delete "+start+name)
-            placeholder=""
-          EndIf
-          
+          count +1          
           ext=UCase(GetExtensionPart(name))
           If (ext="PB" Or ext="PBI") And name<>"CodeCleaner.pb"
             CheckFile(start+name)
@@ -129,6 +174,12 @@ Procedure dir(Start.s=".\")
         
       EndIf
     Wend
+    
+    If count And placeholder<>""
+      DeleteFile(start+placeholder)
+      PrintN( "delete "+start+placeholder)
+    EndIf          
+    
     FinishDirectory(dir)
   EndIf
 EndProcedure
@@ -142,13 +193,13 @@ Input()
 CloseConsole()
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
 ; ExecutableFormat = Console
-; CursorPosition = 18
+; CursorPosition = 25
 ; Folding = -
 ; EnableUnicode
 ; EnableXP
 ; Executable = CodeCleaner.exe
-; EnableCompileCount = 6
-; EnableBuildCount = 1
+; EnableCompileCount = 24
+; EnableBuildCount = 4
 ; EnableExeConstant
 ; Constant = Test=20
 ; Constant = Test=20
