@@ -113,9 +113,5 @@ If OpenWindow(0, 0, 0, #w, #h, "Mahagoni-Shader")
   Until WaitWindowEvent(20) = #PB_Event_CloseWindow
 EndIf
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
-; CursorPosition = 9
 ; EnableUnicode
 ; EnableXP
-; EnableCompileCount = 2
-; EnableBuildCount = 0
-; EnableExeConstant

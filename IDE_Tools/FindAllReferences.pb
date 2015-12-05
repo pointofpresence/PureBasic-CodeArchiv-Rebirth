@@ -185,11 +185,5 @@ Repeat
   
 ForEver
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
-; CursorPosition = 10
-; Folding = --
 ; EnableUnicode
 ; EnableXP
-; Executable = FindAllReferences.exe
-; EnableCompileCount = 2
-; EnableBuildCount = 2
-; EnableExeConstant

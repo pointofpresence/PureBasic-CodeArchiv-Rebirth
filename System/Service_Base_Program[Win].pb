@@ -655,11 +655,5 @@ svMain()
 
 
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
-; CursorPosition = 4
-; Folding = ----
 ; EnableUnicode
 ; EnableXP
-; Executable = delme.exe
-; EnableCompileCount = 1
-; EnableBuildCount = 1
-; EnableExeConstant

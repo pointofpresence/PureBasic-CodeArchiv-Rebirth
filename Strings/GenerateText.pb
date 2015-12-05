@@ -63,10 +63,5 @@ Repeat
 Until event = #PB_Event_CloseWindow
 
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
-; CursorPosition = 21
-; Folding = -
 ; EnableUnicode
 ; EnableXP
-; EnableCompileCount = 1
-; EnableBuildCount = 0
-; EnableExeConstant

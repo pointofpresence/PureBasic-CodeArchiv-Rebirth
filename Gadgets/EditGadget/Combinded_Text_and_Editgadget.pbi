@@ -427,10 +427,5 @@ CompilerEndIf
 
 
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
-; CursorPosition = 11
-; Folding = ----
 ; EnableUnicode
 ; EnableXP
-; EnableCompileCount = 3
-; EnableBuildCount = 0
-; EnableExeConstant

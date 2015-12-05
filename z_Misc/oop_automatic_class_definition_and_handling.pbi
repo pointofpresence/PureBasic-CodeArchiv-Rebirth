@@ -1,4 +1,4 @@
-;    Description: Macros and procedures for creation and handling of objects
+ï»¿;    Description: Macros and procedures for creation and handling of objects
 ;         Author: GPI
 ;           Date: 07-11-2015
 ;     PB-Version: 5.40
@@ -367,7 +367,7 @@ Module oop
     
     *subTable.subTable=GetSubTable(*vTable)
     
-    ;erst child zerstören
+    ;erst child zerstÃ¶ren
     Debug "DisposeObject:"+*obj+" "+*vTable+" "+*subTable\Name+"  "+*obj\__ObjectName,10
     
     ;Gibts ein Dispose
@@ -375,7 +375,7 @@ Module oop
       *subTable\Dispose(*obj)
     EndIf
     
-    ;objecte in Variable zerstören
+    ;objecte in Variable zerstÃ¶ren
     *SubObjects=*subTable\SubObjects
     While *SubObjects
       
@@ -389,7 +389,7 @@ Module oop
       *SubObjects=*SubObjects\nextObject
     Wend
     
-    ; danach parent zerstören
+    ; danach parent zerstÃ¶ren
     If *subTable\vTableParent
       DispObj(*obj,*subTable\vTableParent)
     EndIf
@@ -423,10 +423,10 @@ Module oop
       Protected oldLine=*obj\__Line
     CompilerEndIf
     
-    ;Zerstören, aber nicht freigeben
+    ;ZerstÃ¶ren, aber nicht freigeben
     DispObj(*obj,*obj\__vTable)
     
-    ;daten zurücksetzen
+    ;daten zurÃ¼cksetzen
     *subTable\ClearStructure(*obj)
     *obj\__Mutex=oldMutex
     *obj\__DisposeChain=*oldchain
@@ -464,7 +464,7 @@ Module oop
       Protected oldLine=*Dest\__Line
     CompilerEndIf
     
-    ;Ziel zerstören, aber nicht freigeben (deswegen vTable)
+    ;Ziel zerstÃ¶ren, aber nicht freigeben (deswegen vTable)
     DispObj(*Dest,*Dest\__vTable)
     
     ;Quelle auf Ziel kopieren
@@ -483,7 +483,7 @@ Module oop
       EndIf
     CompilerEndIf
     
-    ;Gesicherte Werte zurücksetzen
+    ;Gesicherte Werte zurÃ¼cksetzen
     If *dest
       *Dest\__DisposeChain=*oldchain
       *Dest\__Mutex=oldMutex
@@ -521,7 +521,7 @@ Module oop
       ;und zum aktuellen machen
       *obj=*new
       
-      ;DisposeChain löschen
+      ;DisposeChain lÃ¶schen
       *obj\__DisposeChain=0      
       ;Debug-Werte schreiben
       CompilerIf #PB_Compiler_Debugger
@@ -760,7 +760,7 @@ DeclareModule EnableClass
       CompilerError "Missing declaration of Class"
     CompilerEndIf
     
-    ;Block übersprigen
+    ;Block Ã¼bersprigen
     Goto  __class_#ClassName#_EndTag
     __class_#ClassName#_Initalize:
     
@@ -794,7 +794,7 @@ DeclareModule EnableClass
     ;ein neues Subobject
     Global __class_SubObjects_#MacroExpandedCount.oop::SubObjects
     
-    ;in die Subtable einhängen
+    ;in die Subtable einhÃ¤ngen
     __class_SubObjects_#MacroExpandedCount\nextObject=__currentClass()__class_subTable\SubObjects
     __currentClass()__class_subTable\SubObjects=__class_SubObjects_#MacroExpandedCount
     
@@ -1911,7 +1911,7 @@ CompilerIf #PB_Compiler_IsMainFile
   
   
   
-  ; TODO alles bei disposechain löschen
+  ; TODO alles bei disposechain lÃ¶schen
   _FakeEnd
   
   
@@ -2263,10 +2263,5 @@ CompilerIf #PB_Compiler_IsMainFile
 CompilerEndIf
 
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
-; CursorPosition = 3
-; Folding = -------------------------------------------
 ; EnableUnicode
 ; EnableXP
-; EnableCompileCount = 7
-; EnableBuildCount = 0
-; EnableExeConstant

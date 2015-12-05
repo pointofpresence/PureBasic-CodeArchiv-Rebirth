@@ -16,10 +16,5 @@ If handle
 EndIf
 
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
-; CursorPosition = 10
 ; EnableUnicode
 ; EnableXP
-; Executable = SetCaretPolicy.exe
-; EnableCompileCount = 1
-; EnableBuildCount = 1
-; EnableExeConstant

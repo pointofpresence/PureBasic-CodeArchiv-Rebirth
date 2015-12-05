@@ -54,11 +54,5 @@ CompilerIf #PB_Compiler_IsMainFile
   Debug OpenWithDialog(File$,#OAIF_ALLOW_REGISTRATION|#OAIF_EXEC) 
 CompilerEndIf
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
-; CursorPosition = 54
-; FirstLine = 4
-; Folding = -
 ; EnableUnicode
 ; EnableXP
-; EnableCompileCount = 0
-; EnableBuildCount = 0
-; EnableExeConstant

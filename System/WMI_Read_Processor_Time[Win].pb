@@ -49,9 +49,5 @@ Else
   Debug XMLError(0)
 EndIf
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
-; CursorPosition = 42
 ; EnableUnicode
 ; EnableXP
-; EnableCompileCount = 0
-; EnableBuildCount = 0
-; EnableExeConstant

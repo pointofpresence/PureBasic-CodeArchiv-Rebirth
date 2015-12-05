@@ -1568,10 +1568,5 @@ CompilerIf #PB_Compiler_IsMainFile
   test::finish()
 CompilerEndIf
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
-; CursorPosition = 8
-; Folding = -----------
 ; EnableUnicode
 ; EnableXP
-; EnableCompileCount = 2
-; EnableBuildCount = 0
-; EnableExeConstant
