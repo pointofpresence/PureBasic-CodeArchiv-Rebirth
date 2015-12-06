@@ -2,12 +2,22 @@
 ;         Author: GPI
 ;           Date: 05-12-2015
 ;     PB-Version: 5.40
-;             OS: Windows, Linux, Mac
+;             OS: Windows, Mac
 ;  English-Forum: 
 ;   French-Forum: 
 ;   German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=29323
 ; -----------------------------------------------------------------------------
 EnableExplicit
+
+CompilerIf  #PB_Compiler_OS=#PB_OS_MacOS
+  SetCurrentDirectory(#PB_Compiler_FilePath)
+CompilerEndIf
+
+CompilerIf #PB_Compiler_OS=#PB_OS_Windows
+  #slash="\"
+CompilerElse
+  #slash="/"
+CompilerEndIf
 
 Global NewMap KillMask()
 KillMask("CURRENTDIRECTORY")=#True
@@ -19,7 +29,7 @@ KillMask("ENABLECOMPILECOUNT")=#True
 KillMask("ENABLEBUILDCOUNT")=#True
 KillMask("ENABLEEXECONSTANT")=#True
 KillMask("EXECUTABLE")=#True
-KillMask("CONSTANT")
+KillMask("CONSTANT")=#True
 
 Global NewMap NeedMask()
 NeedMask("ENABLEUNICODE")
@@ -33,7 +43,8 @@ Procedure.s CheckSyntax(file.s,EnableThread)
   Protected do
   Protected ret.s
   Protected a$
-  If Left(file,2)=".\"
+  Protected sfile.s=file
+  If Left(file,2)="."+#slash
     file=GetCurrentDirectory()+Mid(file,3)
   EndIf  
   If EnableThread
@@ -41,23 +52,29 @@ Procedure.s CheckSyntax(file.s,EnableThread)
   Else
     a$=""
   EndIf
-  Compiler = RunProgram(#PB_Compiler_Home+"Compilers\pbcompiler.exe", a$+"--check "+Chr(34)+file+Chr(34), #PB_Compiler_Home+"Compilers", #PB_Program_Open | #PB_Program_Read)
+  CompilerIf #PB_Compiler_OS=#PB_OS_Windows 
+    Compiler = RunProgram(#PB_Compiler_Home+"Compilers"+#slash+"pbcompiler.exe", a$+"--check "+Chr(34)+file+Chr(34), #PB_Compiler_Home+"Compilers", #PB_Program_Open | #PB_Program_Read)
+  CompilerElse
+    Compiler = RunProgram(#PB_Compiler_Home+"Compilers"+#slash+"pbcompiler", a$+"--check "+Chr(34)+file+Chr(34), #PB_Compiler_Home+"Compilers", #PB_Program_Open | #PB_Program_Read)
+  CompilerEndIf  
+  ;Debug compiler
   Output$ = ""
   do=#False
   If Compiler
     While ProgramRunning(Compiler)
       If AvailableProgramOutput(Compiler)
         a$=ReadProgramString(Compiler)
-        
-        If a$="Starting syntax check..."
+        If a$="Starting syntax check..." Or a$="Starting compilation..."
           do=#True
         ElseIf do And a$<>""         
-          Output$ + a$ + Chr(13)
+          Output$ + a$ 
         EndIf
       EndIf
     Wend
-    If ProgramExitCode(Compiler)
-      ret= "ERROR:"+file+" "+output$
+    If ProgramExitCode(Compiler)      
+      If Right(output$,6)<>" Only!"
+        ret=output$+ " : "+sfile
+      EndIf
     EndIf
     CloseProgram(Compiler) ; Close the connection to the program
   EndIf
@@ -125,7 +142,7 @@ Procedure CheckFile(file.s)
     
   EndIf
   
-  If do
+  If do; And #False ;-------
     PrintN( "ReCreate "+file)
     out=CreateFile(#PB_Any,file,#PB_UTF8)
     
@@ -146,7 +163,8 @@ Procedure CheckFile(file.s)
   
 EndProcedure
 
-Procedure dir(Start.s=".\")
+Procedure dir(Start.s="."+#slash)
+  ;Debug start
   Protected dir
   Protected name.s,ext.s
   Protected placeholder.s
@@ -157,17 +175,16 @@ Procedure dir(Start.s=".\")
       name.s=DirectoryEntryName(dir)
       If DirectoryEntryType(dir)=#PB_DirectoryEntry_Directory
         If Left(name,1)<>"."
-          dir(start+name+"\")
+          dir(start+name+#slash)
         EndIf
-      Else
+      Else;If #False ;----
         If UCase(name)="PLACEHOLDER.TXT"
           placeholder=name
         Else
           count +1          
           ext=UCase(GetExtensionPart(name))
           If (ext="PB" Or ext="PBI") And name<>"CodeCleaner.pb"
-            CheckFile(start+name)
-            
+            CheckFile(start+name)            
           EndIf          
           
         EndIf   
@@ -191,14 +208,14 @@ PrintN("")
 PrintN("Press return")
 Input()
 CloseConsole()
-; IDE Options = PureBasic 5.40 LTS (Windows - x64)
+; IDE Options = PureBasic 5.40 LTS (MacOS X - x64)
 ; ExecutableFormat = Console
-; CursorPosition = 25
-; Folding = -
+; CursorPosition = 4
+; Folding = --
 ; EnableUnicode
 ; EnableXP
 ; Executable = CodeCleaner.exe
-; EnableCompileCount = 24
+; EnableCompileCount = 50
 ; EnableBuildCount = 4
 ; EnableExeConstant
 ; Constant = Test=20

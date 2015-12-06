@@ -14,7 +14,7 @@ CompilerIf #PB_Compiler_OS = #PB_OS_Windows
     CompilerWarning "IPC_MemMsg - NEED THREADSAFE executable"   
   CompilerEndIf
 CompilerElse 
-  CompilerError "<IPC.pbi> Windows ONLY"   
+  CompilerError "Windows Only!"   
 CompilerEndIf
 
 DeclareModule IPC_Mutex
@@ -1027,7 +1027,6 @@ CompilerIf #PB_Compiler_IsMainFile
     
   CompilerEndIf 
 CompilerEndIf
-
-; IDE Options = PureBasic 5.40 LTS (Windows - x64)
+; IDE Options = PureBasic 5.40 LTS (MacOS X - x64)
 ; EnableUnicode
 ; EnableXP

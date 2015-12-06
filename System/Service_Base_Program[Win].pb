@@ -7,6 +7,10 @@
 ;   French-Forum: 
 ;   German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=25667
 ;-----------------------------------------------------------------------------
+CompilerIf #PB_Compiler_OS<>#PB_OS_Windows
+  CompilerError "Windows Only!"
+CompilerEndIf
+
 ;- TOP
 
 ; Comment: MySerive Base Program
@@ -653,7 +657,6 @@ EndProcedure
 
 svMain()
 
-
-; IDE Options = PureBasic 5.40 LTS (Windows - x64)
+; IDE Options = PureBasic 5.40 LTS (MacOS X - x64)
 ; EnableUnicode
 ; EnableXP

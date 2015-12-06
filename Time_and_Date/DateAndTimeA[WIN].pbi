@@ -7,6 +7,9 @@
 ;   French-Forum: 
 ;   German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=28592
 ;-----------------------------------------------------------------------------
+CompilerIf #PB_Compiler_OS<>#PB_OS_Windows
+  CompilerError "Windows Only!"
+CompilerEndIf
 ; DateAndTimeA - erweiterte Datumsfunktionalität   - WIN only
 ; http://www.purebasic.fr/german/viewtopic.php?f=8&t=28592
 ; es_91   12.12.2014 / Updated: 2014-12-13
@@ -1102,6 +1105,6 @@ CompilerIf #PB_Compiler_IsMainFile
     
   ForEver
 CompilerEndIf
-; IDE Options = PureBasic 5.40 LTS (Windows - x64)
+; IDE Options = PureBasic 5.40 LTS (MacOS X - x64)
 ; EnableUnicode
 ; EnableXP

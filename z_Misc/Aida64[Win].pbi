@@ -1,13 +1,15 @@
-﻿; Description: Read PC-Sensor-data with the Aida64-Api
-; Author: Bisonte
-; Date: 03-11-2015
-; PB-Version: 5,40
-; OS: Windows
+﻿;   Description: Read PC-Sensor-data with the Aida64-Api
+;        Author: Bisonte
+;          Date: 03-11-2015
+;    PB-Version: 5,40
+;            OS: Windows
 ; English-Forum: 
-; French-Forum: 
-; German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=29241
+;  French-Forum: 
+;  German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=29241
 ;-----------------------------------------------------------------------------
-
+CompilerIf #PB_Compiler_OS<>#PB_OS_Windows
+  CompilerError "Windows Only!"
+CompilerEndIf
 
 ;: ############################################################################
 ;: #
@@ -203,8 +205,7 @@ CompilerIf #PB_Compiler_IsMainFile
   ForEver
   
 CompilerEndIf
-
-; IDE Options = PureBasic 5.40 LTS (Windows - x64)
+; IDE Options = PureBasic 5.40 LTS (MacOS X - x64)
 ; EnableUnicode
 ; EnableThread
 ; EnableXP
