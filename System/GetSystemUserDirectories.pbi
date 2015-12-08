@@ -3,7 +3,7 @@
 ;           Date: 04-12-2015
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
-;  English-Forum: 
+;  English-Forum: http://www.purebasic.fr/english/viewtopic.php?f=12&t=64216
 ;   French-Forum: 
 ;   German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=3&t=29320
 ; -----------------------------------------------------------------------------
@@ -170,6 +170,8 @@ CompilerIf #PB_Compiler_IsMainFile
   EndIf
     
 CompilerEndIf
-; IDE Options = PureBasic 5.40 LTS (Windows - x64)
+; IDE Options = PureBasic 5.40 LTS (MacOS X - x64)
+; CursorPosition = 5
+; Folding = --
 ; EnableUnicode
 ; EnableXP
