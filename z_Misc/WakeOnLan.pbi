@@ -228,13 +228,13 @@ CompilerIf #PB_Compiler_IsMainFile
   ; Netzwerk MUSS initialisiert sein:
   InitNetwork()
  
-  WoL::sendMagicPacket("AA:BB:CC:DD:EE:FF", "127.255.255.255", 9)
+  a=WoL::sendMagicPacket("AA:BB:CC:DD:EE:FF", "127.255.255.255", 9)
+  Debug a
   
   UseModule WoL
   sendMagicPacket("AA:BB:CC:DD:EE:FF", "127.255.255.255", 9)
   
 CompilerEndIf
-; IDE Options = PureBasic 5.41 LTS Beta 1 (Windows - x86)
-; CursorPosition = 20
-; Folding = --
+; IDE Options = PureBasic 5.40 LTS (Windows - x64)
+; EnableUnicode
 ; EnableXP

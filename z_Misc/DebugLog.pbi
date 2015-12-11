@@ -404,7 +404,7 @@ CompilerIf  #PB_Compiler_IsMainFile
 	EndIf
 	
 CompilerEndIf
-; IDE Options = PureBasic 5.41 LTS Beta 1 (Windows - x86)
-; CursorPosition = 21
-; Folding = ----
+; IDE Options = PureBasic 5.40 LTS (Windows - x64)
+; EnableUnicode
 ; EnableXP
+; DisableDebugger

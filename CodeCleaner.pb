@@ -208,15 +208,15 @@ PrintN("")
 PrintN("Press return")
 Input()
 CloseConsole()
-; IDE Options = PureBasic 5.40 LTS (MacOS X - x64)
+; IDE Options = PureBasic 5.40 LTS (Windows - x64)
 ; ExecutableFormat = Console
 ; CursorPosition = 4
 ; Folding = --
 ; EnableUnicode
 ; EnableXP
 ; Executable = CodeCleaner.exe
-; EnableCompileCount = 50
-; EnableBuildCount = 4
+; EnableCompileCount = 51
+; EnableBuildCount = 5
 ; EnableExeConstant
 ; Constant = Test=20
 ; Constant = Test=20
