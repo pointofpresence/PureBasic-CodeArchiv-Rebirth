@@ -171,7 +171,5 @@ CompilerIf #PB_Compiler_IsMainFile
     
 CompilerEndIf
 ; IDE Options = PureBasic 5.40 LTS (MacOS X - x64)
-; CursorPosition = 5
-; Folding = --
 ; EnableUnicode
 ; EnableXP
