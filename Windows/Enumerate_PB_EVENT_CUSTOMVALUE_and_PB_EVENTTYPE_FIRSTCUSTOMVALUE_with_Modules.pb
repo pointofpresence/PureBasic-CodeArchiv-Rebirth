@@ -76,10 +76,5 @@ Debug #my_test11_Eventtype_1
 Debug #my_test11_Eventtype_2
 
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
-; CursorPosition = 6
-; Folding = ---
 ; EnableUnicode
 ; EnableXP
-; EnableCompileCount = 2
-; EnableBuildCount = 0
-; EnableExeConstant

@@ -159,11 +159,5 @@ EndIf
 
 
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
-; CursorPosition = 11
-; Folding = -
 ; EnableUnicode
 ; EnableXP
-; Executable = CreatePreprocess.exe
-; EnableCompileCount = 35
-; EnableBuildCount = 30
-; EnableExeConstant

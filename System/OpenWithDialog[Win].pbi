@@ -7,6 +7,10 @@
 ;   French-Forum: 
 ;   German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=28919#p330197
 ;-----------------------------------------------------------------------------
+CompilerIf #PB_Compiler_OS<>#PB_OS_Windows
+  CompilerError "Windows Only!"
+CompilerEndIf
+
 EnableExplicit
 
 #OAIF_ALLOW_REGISTRATION = $00000001 ; Enable the "always use this program" checkbox. If Not passed, it will be disabled.
@@ -53,12 +57,6 @@ CompilerIf #PB_Compiler_IsMainFile
   Define File$ = #PB_Compiler_Home + "SDK\VisualC\Readme.txt"
   Debug OpenWithDialog(File$,#OAIF_ALLOW_REGISTRATION|#OAIF_EXEC) 
 CompilerEndIf
-; IDE Options = PureBasic 5.40 LTS (Windows - x64)
-; CursorPosition = 54
-; FirstLine = 4
-; Folding = -
+; IDE Options = PureBasic 5.40 LTS (MacOS X - x64)
 ; EnableUnicode
 ; EnableXP
-; EnableCompileCount = 0
-; EnableBuildCount = 0
-; EnableExeConstant

@@ -9,6 +9,10 @@
 ;-----------------------------------------------------------------------------
 ;Mini-EditGadget, HJBremer 18.01.2015 Ver.1.28
 
+CompilerIf #PB_Compiler_OS<>#PB_OS_Windows
+  CompilerError "Windows Only!"
+CompilerEndIf
+
 DeclareModule EditGadget
   Declare.i EditGadget(nr, x, y, b, h, text$, flag = 0, decimals = 0)
   Declare.i EditGadget_GetLfdnr(nr)
@@ -425,12 +429,6 @@ CompilerIf #PB_Compiler_IsMainFile
   
 CompilerEndIf
 
-
-; IDE Options = PureBasic 5.40 LTS (Windows - x64)
-; CursorPosition = 11
-; Folding = ----
+; IDE Options = PureBasic 5.40 LTS (MacOS X - x64)
 ; EnableUnicode
 ; EnableXP
-; EnableCompileCount = 3
-; EnableBuildCount = 0
-; EnableExeConstant

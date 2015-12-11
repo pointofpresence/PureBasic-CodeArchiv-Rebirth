@@ -1,4 +1,4 @@
-﻿;    Description: Hyphenation - Module
+﻿;    Description: Hyphenation - Module (German)
 ;         Author: Kurzer
 ;           Date: 04-05-2015
 ;     PB-Version: 5.20+
@@ -583,8 +583,6 @@ CompilerIf #PB_Compiler_IsMainFile = 1
 	Debug Silbentrennung::Silbentrennung("Urkunde", "|")
 	
 CompilerEndIf
-; IDE Options = PureBasic 5.41 LTS Beta 1 (Windows - x86)
-; CursorPosition = 584
-; FirstLine = 538
-; Folding = --
+; IDE Options = PureBasic 5.40 LTS (Windows - x64)
+; EnableUnicode
 ; EnableXP

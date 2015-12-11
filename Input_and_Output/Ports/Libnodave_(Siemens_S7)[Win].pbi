@@ -9,6 +9,9 @@
 ; German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=25179
 ;-----------------------------------------------------------------------------
 
+CompilerIf #PB_Compiler_OS<>#PB_OS_Windows
+  CompilerError "Windows Only!"
+CompilerEndIf
 
 ;-TOP
 ;
@@ -1321,11 +1324,6 @@ CompilerIf #PB_Compiler_IsMainFile
     DoEvent()
   CompilerEndIf
 CompilerEndIf
-
-; IDE Options = PureBasic 5.40 LTS (Windows - x64)
-; Folding = ------
+; IDE Options = PureBasic 5.40 LTS (MacOS X - x64)
 ; EnableUnicode
 ; EnableXP
-; EnableCompileCount = 0
-; EnableBuildCount = 0
-; EnableExeConstant

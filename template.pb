@@ -1,4 +1,4 @@
-;    Description: 
+﻿;    Description: 
 ;         Author: 
 ;           Date: 
 ;     PB-Version: 5.40
@@ -8,17 +8,17 @@
 ;   German-Forum: 
 ; -----------------------------------------------------------------------------
 
+; CompilerIf #PB_Compiler_Thread=#False
+;   CompilerError "Threadsafe needed!"
+; CompilerEndIf
+
+; CompilerIf #PB_Compiler_OS<>#PB_OS_Windows
+;  CompilerError "Windows Only!"
+; CompilerEndIf
+
 ;-Example
 CompilerIf #PB_Compiler_IsMainFile
 CompilerEndIf
-
-
-; IDE Options = PureBasic 5.40 LTS (Windows - x64)
-; CursorPosition = 8
-; Folding = -
+; IDE Options = PureBasic 5.40 LTS (MacOS X - x64)
 ; EnableUnicode
 ; EnableXP
-; Compiler = PureBasic 5.40 LTS (Windows - x86)
-; EnableCompileCount = 13
-; EnableBuildCount = 0
-; EnableExeConstant

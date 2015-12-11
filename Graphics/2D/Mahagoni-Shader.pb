@@ -158,12 +158,6 @@ If OpenWindow(0, 0, 0, #w, #h, "Mahagoni-Shader", #PB_Window_ScreenCentered|#PB_
   MessageRequester("Time - CustomFilterCallback", "Average processing time: " + Str(avg_time / avg_time_count) + " ms")
 EndIf
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
-; CursorPosition = 103
-; FirstLine = 81
-; Folding = --
 ; EnableUnicode
 ; EnableXP
 ; DisableDebugger
-; EnableCompileCount = 3
-; EnableBuildCount = 0
-; EnableExeConstant

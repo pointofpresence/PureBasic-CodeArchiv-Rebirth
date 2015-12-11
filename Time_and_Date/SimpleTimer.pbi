@@ -1,4 +1,4 @@
-;    Description: Simple Timer Routine
+﻿;    Description: Simple Timer Routine
 ;         Author: True29
 ;           Date: 24-05-2015
 ;     PB-Version: 5.40
@@ -209,10 +209,5 @@ CompilerIf #PB_Compiler_IsMainFile
 CompilerEndIf
 
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
-; CursorPosition = 5
-; Folding = ---
 ; EnableUnicode
 ; EnableXP
-; EnableCompileCount = 8
-; EnableBuildCount = 0
-; EnableExeConstant

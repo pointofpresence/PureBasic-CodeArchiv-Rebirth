@@ -1,0 +1,9 @@
+﻿;    Description: Audio IN and Out with WinAPI
+;         Author: Chimorin (Bananenfreak) / Dadido3
+;           Date: 06-11-2014
+;     PB-Version: 5.40
+;             OS: Windows
+;  English-Forum: 
+;   French-Forum: 
+;   German-Forum: http://www.purebasic.fr/german/viewtopic.php?p=326031#p326031
+; -----------------------------------------------------------------------------

@@ -10,6 +10,10 @@
 ;-----------------------------------------------------------------------------
 ; FindAllReferences
 
+CompilerIf #PB_Compiler_OS<>#PB_OS_Windows
+  CompilerError "Windows Only!"
+CompilerEndIf
+
 EnableExplicit
 
 Enumeration ; Windows
@@ -184,12 +188,6 @@ Repeat
   EndIf
   
 ForEver
-; IDE Options = PureBasic 5.40 LTS (Windows - x64)
-; CursorPosition = 10
-; Folding = --
+; IDE Options = PureBasic 5.40 LTS (MacOS X - x64)
 ; EnableUnicode
 ; EnableXP
-; Executable = FindAllReferences.exe
-; EnableCompileCount = 2
-; EnableBuildCount = 2
-; EnableExeConstant
