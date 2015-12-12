@@ -210,43 +210,9 @@ Input()
 CloseConsole()
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
 ; ExecutableFormat = Console
-; CursorPosition = 4
 ; Folding = --
 ; EnableUnicode
 ; EnableXP
 ; Executable = CodeCleaner.exe
-; EnableCompileCount = 51
-; EnableBuildCount = 5
-; EnableExeConstant
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
+; DisableCompileCount = 52
+; DisableBuildCount = 5
