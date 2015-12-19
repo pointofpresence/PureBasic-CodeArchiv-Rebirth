@@ -1,12 +1,18 @@
 ﻿;    Description: WakeOnLan - Module: send MagicPacket
-;         Author: Imhotheb (Andreas Wenzl)
-;           Date: 02-04-2015
+;         Author: Imhotheb (Andreas Wenzl), ABBKlaus
+;           Date: 19-12-2015
 ;     PB-Version: PB5.31
 ;             OS: Windows, Linux
 ;  English-Forum: 
 ;   French-Forum: 
 ;   German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=28836
 ; -----------------------------------------------------------------------------
+
+;GPI:1.1 Repair Windows code, Broadcast can now 255.255.255.255
+
+CompilerIf #PB_Compiler_OS<>#PB_OS_Windows And #PB_Compiler_OS<>#PB_OS_Linux
+ CompilerError "Windows&Linux Only!"
+CompilerEndIf
 
 ; ==================================================
 ;|                 WakeOnLan - Module               |
@@ -30,9 +36,6 @@
 ;
 ; InitNetwork() wird benötigt
 ; 
-; Linux: Broadcast muss 255.255.255.255, die lokale Broadcast Addresse oder eine direkte IP sein
-; Win: für Broadcast ist alles außer 255.255.255.255 zulässig
-;
 ;
 ; Aufruf:
 ; WoL::sendMagicPacket("MacAddresse", "Broadcast oder IP", Portnummer)
@@ -51,22 +54,26 @@
 ;
 ; ------------------------------------------------------------------
 
+
+
+
 DeclareModule WoL
-  Declare sendMagicPacket(Mac.s, Broadcast.s = "10.255.255.255", Port = 9)
+  Declare sendMagicPacket(Mac.s, Broadcast.s = "255.255.255.255", Port = 9)
 EndDeclareModule
 
 Module WoL
   EnableExplicit
- 
+  InitNetwork()
+  
   Structure MacAddress
-    Byte.b[6]
+    Byte.a[6]
   EndStructure
- 
+  
   Structure MagicPacket
-    Header.b[6]
+    Header.a[6]
     Mac.MacAddress[16]
   EndStructure
-   
+  
   Structure MacAddress_Stringfields
     Byte1.s{2}
     Seperator1.s{1}
@@ -80,14 +87,14 @@ Module WoL
     Seperator5.s{1}
     Byte6.s{2}
   EndStructure
- 
+  
   Structure MacAddress_String
     StructureUnion
       Stringfields.MacAddress_Stringfields
       Mac.s{17}
     EndStructureUnion
   EndStructure
- 
+  
   ; Konstanten und Strukturen für Linux / sendMagicPacket()
   CompilerIf #PB_Compiler_OS = #PB_OS_Linux
     Structure sockaddr_in Align #PB_Structure_AlignC
@@ -97,24 +104,24 @@ Module WoL
       Zero.a[8]
     EndStructure     
     #IP_Family = 2      ;IPv4
-    #Socket_DGRAM = 2     ;UDP
-    #SO_BROADCAST = 6 ;??
-    #SOL_SOCKET = 1   ;??
+    #Socket_DGRAM = 2   ;UDP
+    #SO_BROADCAST = 6   ;??
+    #SOL_SOCKET = 1     ;??
     #FIONBIO = $5421
     #INVALID_SOCKET = -1
   CompilerEndIf
- 
- 
- 
+  
+  
+  
   ; MacAddress & MagicPacket
   ; ----------------------
- 
+  
   ; *dest = Zeiger mit einer MacAddress-Struktur
   ; Mac.s = MacAddress als String (z.B. 11:22:33:44:55:66 oder 11-22-33-44-55-66)
   Procedure createMacAdress(*Dest.MacAddress, Mac.s)
     Protected Mac_String.MacAddress_String
     Mac_String\Mac = Mac
-   
+    
     ; man könnte hier sicherlich auch StringField() benutzen,
     ; aber so können die Trennzeichen beliebig gewählt werden
     *dest\Byte[0] = Val("$" + Mac_String\Stringfields\Byte1)
@@ -123,18 +130,26 @@ Module WoL
     *dest\Byte[3] = Val("$" + Mac_String\Stringfields\Byte4)
     *dest\Byte[4] = Val("$" + Mac_String\Stringfields\Byte5)
     *dest\Byte[5] = Val("$" + Mac_String\Stringfields\Byte6)
-   
+    
+    Debug *dest\Byte[0]
+    Debug *dest\Byte[1]
+    Debug *dest\Byte[2]
+    Debug *dest\Byte[3]
+    Debug *dest\Byte[4]
+    Debug *dest\Byte[5]
+    
+    
     ProcedureReturn #True
   EndProcedure
- 
+  
   ; *dest = Zeiger mit einer MacAddress-Struktur
   ; Mac.s = MacAddress als String (z.B. 11:22:33:44:55:66 oder 11-22-33-44-55-66)
   Procedure createMagicPacket(*Dest.MagicPacket, Mac.s)
     Protected i.b, j.b
     Protected MacAddress.MacAddress
-   
+    
     createMacAdress(@MacAddress, Mac)
-   
+    
     For i = 0 To 5              ; Header erstellen ($FFFFFFFFFFFF)
       *Dest\Header[i] = $FF
     Next
@@ -143,45 +158,59 @@ Module WoL
         *Dest\Mac[i]\Byte[j] = MacAddress\Byte[j]
       Next j
     Next i
-   
+    
     ProcedureReturn #True 
   EndProcedure
- 
- 
-  ; BENÖTIGT: InitNetwork()
-  ; Linux: Broadcast muss 255.255.255.255, die lokale Broadcast Addresse oder eine direkte IP sein
-  ; Win: für Broadcast ist alles außer 255.255.255.255 zulässig
-  Procedure sendMagicPacket(Mac.s, Broadcast.s = "10.255.255.255", Port = 9)
+  
+  
+  Procedure sendMagicPacket(Mac.s, Broadcast.s = "255.255.255.255", Port = 9)
     Protected MagicPacket.MagicPacket
     createMagicPacket(@MagicPacket, Mac)
-   
+    
     CompilerSelect #PB_Compiler_OS
       CompilerCase #PB_OS_Windows
-        Protected cID                 ; ConnectionID
-        Protected sendBytes.w
-        Protected BufferLength = SizeOf(MagicPacket)
-       
-        cID = OpenNetworkConnection(Broadcast, Port, #PB_Network_UDP)
-        If cID
-          sendBytes = SendNetworkData(cID, @MagicPacket, BufferLength)
-          If sendBytes = -1
-            Debug "WOL::sendMagicPacket(): keine Daten übertragen" ; TODO Debug wenn nicht gewünscht entfernen/ändern
-            CloseNetworkConnection(cID)
-            ProcedureReturn #False
-          ElseIf sendBytes = BufferLength
-            CloseNetworkConnection(cID)
-            ProcedureReturn #True
-          Else
-            Debug "WoL::sendMagicPacket(): Puffer / übertragene Daten unterschiedlich: " +
-                  Str(sendBytes) + "/" + Str(BufferLength) ; TODO Debug wenn nicht gewünscht entfernen/ändern
-             ProcedureReturn #False
-          EndIf
+        
+        Protected Success.i=0
+        Protected client_socket.l
+        Protected socket_keepalive.b
+        Protected server_mode.l
+        Protected client_sockaddr.SOCKADDR_IN
+        Protected send.i
+        Protected *mem,len
+        
+        len=StringByteLength(broadcast,#PB_Ascii)+1
+        *mem=AllocateMemory(len)
+        If *mem 
+          PokeS(*mem,Broadcast,len,#PB_Ascii)
         Else
-          Debug "WoL::sendMagicPacket(): Kann Netzwrkverbindung nicht herstellen" ; TODO Debug wenn nicht gewünscht entfernen/ändern
           ProcedureReturn #False
+        EndIf   
+        
+        client_socket = SOCKET_(#AF_INET, #SOCK_DGRAM, #IPPROTO_UDP) ; create the socket
+        If client_socket
+          socket_keepalive = 1
+          If setsockopt_(client_socket, #SOL_SOCKET, #SO_BROADCAST, @socket_keepalive, 1) = 0
+            client_sockaddr.SOCKADDR_IN
+            client_sockaddr\sin_family = #AF_INET
+            client_sockaddr\sin_port =htons_(Port)
+            client_sockaddr\sin_addr = inet_addr_(*mem)
+            
+            server_mode = 0
+            If ioctlsocket_(client_socket,#FIONBIO,@server_mode) = 0
+              send = sendto_(client_socket, @magicpacket, SizeOf(magicpacket), 0, @client_sockaddr, 16)
+              If send=SizeOf(magicpacket) And WSAGetLastError_()=0
+                Debug "Magic packet send"
+                Success=1
+              EndIf
+            EndIf
+          EndIf
+          closesocket_(client_socket)
         EndIf
-        ProcedureReturn #True
-       
+        If *mem
+          FreeMemory(*mem)
+        EndIf
+        ProcedureReturn Success
+        
       CompilerCase #PB_OS_Linux
         Protected TxAddr.sockaddr_in  ; Structur-Zeiger für Socket-Erstellung
         Protected Socket.i
@@ -189,50 +218,50 @@ Module WoL
         Protected Addr_Broadcast  ; wir brauchen eine numerische IP
         Addr_Broadcast = MakeIPAddress(Val(StringField(Broadcast, 1, ".")),Val(StringField(Broadcast, 2, ".")),
                                        Val(StringField(Broadcast, 3, ".")), Val(StringField(Broadcast, 4, ".")))
-       
+        
         ; Socket erstellen
         Socket = SOCKET_(#IP_Family, #Socket_DGRAM, 0)
         If Socket = #INVALID_SOCKET
           Debug "SocketFehler" ; TODO Debug wenn nicht gewünscht entfernen/ändern
           ProcedureReturn #False
         EndIf
-       
+        
         ; Blocking abschalten
         argp = 1
         ioctl_(Socket, #FIONBIO, @argp)
-       
+        
         ; Broadcasts erlauben
         argp = Addr_Broadcast ; oder $FFFFFFFF
         setsockopt_(Socket, #SOL_SOCKET, #SO_BROADCAST, @argp, 4)
-       
+        
         ; Daten-Zeiger erzeugen
         TxAddr\IP_Family = #IP_Family
         TxAddr\Port = htons_(Port)   ;PortNr.
         TxAddr\Addr = Addr_Broadcast
-       
+        
         ;senden
         sendto_(Socket, @MagicPacket, SizeOf(MagicPacket) , 0, @TxAddr, SizeOf(sockaddr_in))
-       
+        
         ;schließen
         close_(Socket)
         ProcedureReturn #True
-       
+        
     CompilerEndSelect
-   
+    
     ProcedureReturn #False
   EndProcedure 
 EndModule
 
 CompilerIf #PB_Compiler_IsMainFile
- 
+  
   ; Netzwerk MUSS initialisiert sein:
   InitNetwork()
- 
-  a=WoL::sendMagicPacket("AA:BB:CC:DD:EE:FF", "127.255.255.255", 9)
+  
+  a=WoL::sendMagicPacket("00:11:32:1D:85:0C", "255.255.255.255", 9)
   Debug a
   
-  UseModule WoL
-  sendMagicPacket("AA:BB:CC:DD:EE:FF", "127.255.255.255", 9)
+  ;UseModule WoL
+  ;sendMagicPacket("AA:BB:CC:DD:EE:FF", "127.255.255.255", 9)
   
 CompilerEndIf
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
