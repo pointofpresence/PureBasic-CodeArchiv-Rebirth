@@ -1,10 +1,10 @@
 ﻿; Description: Named GadgetData
 ;              Under windows and linux objects are automatic released.
 ; Author : mk-soft
-; Date: 13.11.2015
+; Date: 13.12.2015
 ; PB-Version: 5.40
 ; OS: Windows, Linux, Mac
-; English-Forum: http://www.purebasic.fr/english/viewtopic.php?f=24&t=63979
+; English-Forum: http://www.purebasic.fr/english/viewtopic.php?f=12&t=63937
 ; French-Forum:
 ; German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=29255
 ;-----------------------------------------------------------------------------
@@ -13,22 +13,23 @@
 
 ; Comment: Named GadgetData
 ; Author : mk-soft
-; Version: v1.04
+; Version: v1.05
 ; Created: 08.11.2015
-; Updated: 13.11.2015
-; Link   :
+; Updated: 26.11.2015
+; Link   : http://www.purebasic.fr/english/viewtopic.php?f=12&t=63937
 
 ; ***************************************************************************************
 
-
 DeclareModule MyGadgetData
   
+  Declare   InitGadgetData(event = #PB_Event_FirstCustomValue + 10001)
   Declare   SetGadgetDataValue(gadget, *value, property.s = "Default")
   Declare   GetGadgetDataValue(gadget, property.s = "Default")
   Declare   SetGadgetDataString(gadget, text.s, property.s = "Default")
   Declare.s GetGadgetDataString(gadget, property.s = "Default")
   Declare   FreeGadgetData(gadget)
   Declare   DebugGadgetData(gadget)
+  Declare   RemoveGadgetItemEx(gadget, position)
   Declare   FreeGadgetEx(gadget)
   Declare   CloseWindowEx(window)
   
@@ -49,6 +50,18 @@ Module MyGadgetData
   EndStructure
   
   Global NewList GadgetData.udtMyGadgetDataSet()
+  Global event_update
+  
+  Declare UpdateGadgetData()
+  
+  ; ---------------------------------------------------------------------------------------
+  
+  Procedure InitGadgetData(event = #PB_Event_FirstCustomValue + 10001)
+    
+    BindEvent(event, @UpdateGadgetData())
+    event_update = event
+    
+  EndProcedure
   
   ; ---------------------------------------------------------------------------------------
   
@@ -164,17 +177,33 @@ Module MyGadgetData
   
   ; ---------------------------------------------------------------------------------------
   
+  Procedure RemoveGadgetItemEx(gadget, position)
+    
+    RemoveGadgetItem(gadget, position)
+    If GadgetType(gadget) = #PB_GadgetType_Panel
+      CompilerIf #PB_Compiler_OS = #PB_OS_MacOS
+        PostEvent(event_update)
+      CompilerElse
+        UpdateGadgetData()
+      CompilerEndIf
+    EndIf
+    
+  EndProcedure
+  
+  ; ---------------------------------------------------------------------------------------
+  
   Procedure FreeGadgetEx(gadget)
     
     If gadget = #PB_All
-      ClearList(GadgetData())
       FreeGadget(#PB_All)
+      ClearList(GadgetData())
     Else
-      CompilerIf #PB_Compiler_OS = #PB_OS_MacOS
-        FreeGadgetData(gadget)
-      CompilerEndIf
       FreeGadget(gadget)
-      UpdateGadgetData()
+      CompilerIf #PB_Compiler_OS = #PB_OS_MacOS
+        PostEvent(event_update)
+      CompilerElse
+        UpdateGadgetData()
+      CompilerEndIf
     EndIf
     
   EndProcedure
@@ -184,11 +213,15 @@ Module MyGadgetData
   Procedure CloseWindowEx(window)
     
     If window = #PB_All
-      ClearList(GadgetData())
       CloseWindow(#PB_All)
+      ClearList(GadgetData())
     Else
       CloseWindow(window)
-      UpdateGadgetData()
+      CompilerIf #PB_Compiler_OS = #PB_OS_MacOS
+        PostEvent(event_update)
+      CompilerElse
+        UpdateGadgetData()
+      CompilerEndIf
     EndIf
     
   EndProcedure
@@ -204,12 +237,20 @@ EndModule
 
 UseModule MyGadgetData
 
+CompilerIf #PB_Compiler_OS = #PB_OS_MacOS
+  InitGadgetData()
+CompilerEndIf
+
 Macro SetGadgetData(gadget, value, property = "Default")
   SetGadgetDataValue(gadget, value, property)
 EndMacro
 
 Macro GetGadgetData(gadget, property = "Default")
   GetGadgetDataValue(gadget, property)
+EndMacro
+
+Macro RemoveGadgetItem(gadget, position)
+  RemoveGadgetItemEx(gadget, position)
 EndMacro
 
 Macro FreeGadget(gadget)
@@ -223,8 +264,8 @@ EndMacro
 ;-End Named GadgetData
 
 ; ***************************************************************************************
-;-Example
 
+;-Example
 CompilerIf #PB_Compiler_IsMainFile
   
   ; CalendarGadget Events
