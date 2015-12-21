@@ -3,7 +3,7 @@
 ;           Date: 19-12-2015
 ;     PB-Version: PB5.31
 ;             OS: Windows, Linux
-;  English-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=28836
+;  English-Forum: http://www.purebasic.fr/english/viewtopic.php?f=12&t=29643
 ;   French-Forum: 
 ;   German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=28836
 ; -----------------------------------------------------------------------------
