@@ -1,6 +1,6 @@
 ﻿;    Description: Removes Options of the pb and pbi source
 ;         Author: GPI
-;           Date: 05-12-2015
+;           Date: 22-12-2015
 ;     PB-Version: 5.40
 ;             OS: Windows, Mac
 ;  English-Forum: 
@@ -72,7 +72,7 @@ Procedure.s CheckSyntax(file.s,EnableThread)
       EndIf
     Wend
     If ProgramExitCode(Compiler)      
-      If Right(output$,6)<>" Only!"
+      If LCase(Right(output$,6))<>" only!"
         ret=output$+ " : "+sfile
       EndIf
     EndIf
@@ -88,6 +88,7 @@ Procedure CheckFile(file.s)
   Protected Format
   Protected Syncheck.s
   Protected EnableThread=#False
+  Protected pos
   ConsoleTitle("Check "+file)
   
   NewList FLine.s()
@@ -111,6 +112,22 @@ Procedure CheckFile(file.s)
     PrintN("Convert to UTF8 "+file)
     do=#True
   EndIf
+  
+  FirstElement(fline())
+  While Left(Fline(),1)=";"
+    If FindString(fline(),"-Forum") 
+      pos=FindString(fline(),"&sid=")
+      If pos
+        fline()=Left(fline(),pos-1)
+        PrintN("Remove SID from URL "+file)
+        do=#True
+      EndIf
+    EndIf
+    If NextElement(fline())=#False
+      Break
+    EndIf    
+  Wend
+  
   
   If LastElement(FLine())
     While Left(FLine(),1)=";" And Left(FLine(),15)<>"; IDE Options =" And PreviousElement(FLine())
@@ -214,5 +231,38 @@ CloseConsole()
 ; EnableUnicode
 ; EnableXP
 ; Executable = CodeCleaner.exe
-; DisableCompileCount = 52
-; DisableBuildCount = 5
+; EnableCompileCount = 60
+; EnableBuildCount = 5
+; EnableExeConstant
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20
+; Constant = Test=20

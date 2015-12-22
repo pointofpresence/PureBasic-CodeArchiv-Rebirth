@@ -5,11 +5,11 @@
 ;             OS: Linux (amd64)
 ;  English-Forum: 
 ;   French-Forum: 
-;   German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=27769&sid=8e1fe21b5d0d81ef74199fbc5a9f0814
+;   German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=27769
 ; -----------------------------------------------------------------------------
 
 CompilerIf #PB_Compiler_OS<>#PB_OS_Linux
-  CompilerError "Linux only!!"
+  CompilerError "Linux only!"
 CompilerEndIf
 CompilerIf #PB_Compiler_Processor<>#PB_Processor_x64
   CompilerWarning "designed for amd64 / CAN work with i386"
@@ -306,7 +306,7 @@ PrintN("Modifiziert: " + FormatDate("%yyyy-%mm-%dd %hh:%ii:%ss", s\st_mtime) + "
 PrintN("Geändert   : " + FormatDate("%yyyy-%mm-%dd %hh:%ii:%ss", s\st_ctime) + "." + StrU(s\st_ctimensec, #PB_Long))
 Input()
 CloseConsole()
-; IDE Options = PureBasic 5.40 LTS (Windows - x86)
+; IDE Options = PureBasic 5.40 LTS (Windows - x64)
 ; EnableUnicode
 ; EnableXP
 ; CompileSourceDirectory

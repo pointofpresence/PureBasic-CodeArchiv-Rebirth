@@ -5,7 +5,7 @@
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 
 ;   French-Forum: 
-;   German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=27647&sid=8e1fe21b5d0d81ef74199fbc5a9f0814
+;   German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=27647
 ; -----------------------------------------------------------------------------
 
 
