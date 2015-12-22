@@ -5,7 +5,7 @@
 ;             OS: Linux (amd64)
 ;  English-Forum: 
 ;   French-Forum: 
-;   German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=27769&sid=8e1fe21b5d0d81ef74199fbc5a9f0814
+;   German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=27769
 ; -----------------------------------------------------------------------------
 
 CompilerIf #PB_Compiler_OS<>#PB_OS_Linux
