@@ -231,38 +231,5 @@ CloseConsole()
 ; EnableUnicode
 ; EnableXP
 ; Executable = CodeCleaner.exe
-; EnableCompileCount = 60
-; EnableBuildCount = 5
-; EnableExeConstant
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
-; Constant = Test=20
+; DisableCompileCount = 61
+; DisableBuildCount = 5

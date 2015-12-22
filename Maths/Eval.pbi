@@ -1318,6 +1318,9 @@ CompilerIf #PB_Compiler_IsMainFile
     test::set("str="+x)
     test::i(eval::i(str),=,value)
     test::i(eval::GetError(),=,eval:: er)
+    If eval::geterror()<> eval:: er
+      Debug eval:: ErrorText(eval::GetError())+"##"+eval::ErrorText(eval:: er)
+    EndIf
   EndMacro
   Macro evalx(x,value,er=#err_ok)
     evali(x,value,er)
@@ -1512,7 +1515,7 @@ CompilerIf #PB_Compiler_IsMainFile
   ;test and or xor
   
   Procedure.i ifi(a.i,b.i,c.i)
-    If a
+    If a<>0
       ProcedureReturn b
     EndIf
     ProcedureReturn c
@@ -1534,7 +1537,7 @@ CompilerIf #PB_Compiler_IsMainFile
   evalx("99 xor 0",1)
   
   
-  evali("10* if ( 10*3+4>0 and 123*32^5+88,2,3)+3",10*2+3)
+  evali("10* if ( 10*3+4>0 and 123*32^2+88,2,3)+3",10*2+3)
   
   evald("2/3*(sqr((1+4)/5))", 2/3*(Sqr((1+4)/5)) )
   
@@ -1558,13 +1561,15 @@ CompilerIf #PB_Compiler_IsMainFile
   
   evald("2^^2",0,#err_syntax_error)  
   evali("2^^2",0,#err_syntax_error)
-  evali("15^18",2152354138636261345,#warning_overflow)
-  evali("9223372036854775807+10",9223372036854775807+10,#warning_overflow)
-  evali("-9223372036854775807+-10",-9223372036854775807+-10,#warning_overflow)
-  evali("-9223372036854775807-10",-9223372036854775807-10,#warning_overflow)
-  evali("9223372036854775807--10",9223372036854775807--10,#warning_overflow)
-  evali("%11111111111111111111111111111111111111111111111111111<<20",-1048576,#warning_overflow)
-  
+  CompilerIf #PB_Compiler_Processor=#PB_Processor_x64
+    evali("15^18",2152354138636261345,#warning_overflow)  
+    evali("9223372036854775807+10",9223372036854775807+10,#warning_overflow)
+    evali("-9223372036854775807+-10",-9223372036854775807+-10,#warning_overflow)
+    evali("-9223372036854775807-10",-9223372036854775807-10,#warning_overflow)
+    evali("9223372036854775807--10",9223372036854775807--10,#warning_overflow)
+    evali("%11111111111111111111111111111111111111111111111111111<<20",-1048576,#warning_overflow)
+  CompilerEndIf
+
   test::finish()
 CompilerEndIf
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
