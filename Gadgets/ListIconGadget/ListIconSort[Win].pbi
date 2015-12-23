@@ -1,6 +1,6 @@
 ﻿;    Description: ListIcon sort
 ;         Author: HJBremer
-;           Date: 2013-09
+;           Date: 2013-09-16
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 
@@ -318,6 +318,6 @@ CompilerIf #PB_Compiler_IsMainFile
   Until event = #PB_Event_CloseWindow
   
 CompilerEndIf
-; IDE Options = PureBasic 5.40 LTS (Windows - x86)
+; IDE Options = PureBasic 5.41 LTS (Windows - x64)
 ; EnableUnicode
 ; EnableXP

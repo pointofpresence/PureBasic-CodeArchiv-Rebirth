@@ -1,6 +1,6 @@
 ﻿;    Description: Draw a formated text in a box
 ;         Author: mk-soft
-;           Date: 27-03-2014
+;           Date:2014-03-27
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

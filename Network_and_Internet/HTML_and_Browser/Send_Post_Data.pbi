@@ -1,6 +1,6 @@
 ﻿;    Description: Open Browser and send a POST data with the Browser
 ;         Author: NicTheQuick
-;           Date: 08-12-2015
+;           Date:2015-12-08
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux
 ;  English-Forum: 

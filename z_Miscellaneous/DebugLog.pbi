@@ -1,7 +1,7 @@
 ﻿;    Description: DebugLog - Module: save, show and manage logs
 ;         Author: Imhotheb (Andreas Wenzl)
-;           Date: 06-04-2015
-;     PB-Version: PB5.31
+;           Date:2015-04-06
+;     PB-Version: 5.40
 ;             OS: Windows, Linux
 ;  English-Forum: 
 ;   French-Forum: 

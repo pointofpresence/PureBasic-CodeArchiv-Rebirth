@@ -1,6 +1,6 @@
 ﻿; Description: Read Processor Time with WMI
 ; Author: Kiffi
-; Date: 02-11-2015
+; Date:2015-11-02
 ; PB-Version: 5.40
 ; OS: Windows
 ; English-Forum: 

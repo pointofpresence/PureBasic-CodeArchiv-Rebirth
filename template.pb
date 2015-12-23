@@ -1,7 +1,7 @@
 ﻿;    Description: 
 ;         Author: 
 ;           Date: 
-;     PB-Version: 5.40
+;     PB-Version: 5.41
 ;             OS: Mac
 ;  English-Forum: 
 ;   French-Forum: 
@@ -23,6 +23,7 @@ CompilerEndIf
 ;-Example
 CompilerIf #PB_Compiler_IsMainFile
 CompilerEndIf
-; IDE Options = PureBasic 5.40 LTS (Windows - x64)
+
+; IDE Options = PureBasic 5.41 LTS (Windows - x64)
 ; EnableUnicode
 ; EnableXP

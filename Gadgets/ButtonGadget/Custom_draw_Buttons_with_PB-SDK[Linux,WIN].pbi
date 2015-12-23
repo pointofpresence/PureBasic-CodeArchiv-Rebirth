@@ -1,6 +1,6 @@
 ﻿;    Description: Costum Draw Button Gadget with PB-SDK
 ;         Author: mk-soft
-;           Date: 19-04-2014
+;           Date:2014-04-19
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

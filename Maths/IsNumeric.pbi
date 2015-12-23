@@ -1,6 +1,6 @@
 ﻿;    Description: Contain the string a numeric value?
 ;         Author: NicTheQuick
-;           Date: 24-01-2015
+;           Date:2015-01-24
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

@@ -1,6 +1,6 @@
 ﻿; Description: Enable #PB_EventType_MouseEnter and #PB_EventType_MouseLeave for all gadgets
 ; Author: mk-soft
-; Date: 11.10.2015
+; Date:2015-10-11
 ; PB-Version: 5.40
 ; OS: Windows, Linux, Mac
 ; English-Forum: 

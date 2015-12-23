@@ -1,6 +1,6 @@
 ﻿;    Description: Show Custom Tooltip 
 ;         Author: SBond
-;           Date: 30-06-2014
+;           Date:2014-06-30
 ;     PB-Version: 5.40
 ;             OS: Windows
 ;  English-Forum: 

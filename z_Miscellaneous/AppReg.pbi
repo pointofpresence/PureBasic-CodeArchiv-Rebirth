@@ -1,6 +1,6 @@
 ﻿;    Description: Create a custom "Registry" in ProgramData / Library/Application Support/ / Home-directory 
 ;         Author: Thorsten1867
-;           Date: 01-08-2015
+;           Date:2015-08-01
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

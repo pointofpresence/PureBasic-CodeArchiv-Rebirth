@@ -1,6 +1,6 @@
 ﻿;    Description: Check if an IBAN is correct
 ;         Author: Rudi
-;           Date: 18-05-2014
+;           Date:2014-05-18
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

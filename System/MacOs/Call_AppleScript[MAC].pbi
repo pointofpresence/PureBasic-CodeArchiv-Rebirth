@@ -1,6 +1,6 @@
 ﻿;    Description: Call Apple Script
 ;         Author: wilbert
-;           Date: 16-10-2012
+;           Date:2012-10-16
 ;     PB-Version: 5.40
 ;             OS: Mac
 ;  English-Forum: http://www.purebasic.fr/english/viewtopic.php?p=393553#p393553

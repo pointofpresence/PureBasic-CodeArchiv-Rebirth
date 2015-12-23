@@ -1,6 +1,6 @@
 ﻿;    Description: Format xml and json for easier reading
 ;         Author: Kiffi
-;           Date: 23-10-2014
+;           Date:2014-10-23
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

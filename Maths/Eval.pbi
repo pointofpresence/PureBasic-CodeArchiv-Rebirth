@@ -1,6 +1,6 @@
 ﻿;    Description: Eval a math term in a String (for Double and Integer)
 ;         Author: GPI
-;           Date: 23-09-2015
+;           Date:2015-09-23
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

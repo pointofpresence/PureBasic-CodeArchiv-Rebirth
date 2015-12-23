@@ -1,6 +1,6 @@
 ﻿;    Description: Base for Service Program - IMPORTANT READ THE THREAD!
 ;         Author: mk-soft
-;           Date: 03-07-2012
+;           Date:2012-07-03
 ;     PB-Version: 5.40
 ;             OS: Windows
 ;  English-Forum: 

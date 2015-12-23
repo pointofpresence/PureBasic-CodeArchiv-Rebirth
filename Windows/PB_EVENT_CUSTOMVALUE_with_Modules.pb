@@ -1,6 +1,6 @@
 ﻿;    Description: Example how to Enumerate PB_Event_CustomValue and PB_EventType_FirstCustomValue
 ;         Author: hjbremer
-;           Date: 11-09-2014
+;           Date:2014-09-11
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

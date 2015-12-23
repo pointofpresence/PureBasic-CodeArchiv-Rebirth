@@ -1,7 +1,7 @@
 ﻿;    Description: Hyphenation - Module (German)
 ;         Author: Kurzer
-;           Date: 04-05-2015
-;     PB-Version: 5.20+
+;           Date:2015-05-04
+;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 
 ;   French-Forum: 

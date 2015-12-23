@@ -1,6 +1,6 @@
 ﻿;    Description: Simple Editable ListIconGadget
 ;         Author: hjbremer
-;           Date: 03-09-2014
+;           Date:2014-09-03
 ;     PB-Version: 5.40
 ;             OS: Windows
 ;  English-Forum: 

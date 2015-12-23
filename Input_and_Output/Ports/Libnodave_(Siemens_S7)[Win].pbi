@@ -1,12 +1,12 @@
-﻿; Description: Part of Libnodave, a free communication libray For Siemens S7 200/300/400 via
-;              http://libnodave.sourceforge.net/ 
-; Author: mk-soft
-; Date: 02-02-2012
-; PB-Version: 
-; OS: Windows
+﻿;   Description: Part of Libnodave, a free communication libray For Siemens S7 200/300/400 via
+;                http://libnodave.sourceforge.net/ 
+;        Author: mk-soft
+;          Date:2012-02-02
+;    PB-Version: 5.40
+;            OS: Windows
 ; English-Forum: 
-; French-Forum: 
-; German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=25179
+;  French-Forum: 
+;  German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=25179
 ;-----------------------------------------------------------------------------
 
 CompilerIf #PB_Compiler_OS<>#PB_OS_Windows
@@ -1324,6 +1324,6 @@ CompilerIf #PB_Compiler_IsMainFile
     DoEvent()
   CompilerEndIf
 CompilerEndIf
-; IDE Options = PureBasic 5.40 LTS (MacOS X - x64)
+; IDE Options = PureBasic 5.40 LTS (Windows - x64)
 ; EnableUnicode
 ; EnableXP

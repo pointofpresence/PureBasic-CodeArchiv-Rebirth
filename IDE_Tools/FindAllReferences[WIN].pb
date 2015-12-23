@@ -1,7 +1,7 @@
 ﻿;    Description: find all references of a Variable
 ;      Parameter: <empty>
 ;         Author: Kiffi
-;           Date: 19-08-2015
+;           Date:2015-08-19
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

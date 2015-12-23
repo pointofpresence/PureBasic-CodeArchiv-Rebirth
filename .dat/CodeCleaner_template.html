@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>CodeArchiv Rebirth</title>
+	<meta charset="UTF-8" /">
+	
+	<style type="text/css" media="screen">
+		a:link{
+			text-decoration:none;
+			color: #000000;
+		}
+		a:visited{
+			text-decoration:none;
+			color: #333333;
+		}
+		a:active{
+			text-decoration:none;
+			color: #333333;
+		}
+		a:hover{
+			text-decoration:underline;
+			color: #000000;
+		}
+		
+		table {
+			border: 1px solid black;
+			border-spacing: 0px;
+			border-collapse: collapse
+		}
+		
+		table td {
+			border: 1px solid black;
+			border-spacing: 0px;
+			border-collapse: collapse;
+			padding: 3px
+		}
+		
+		table tr:nth-child(even) {
+			background-color: #dfdfff;
+		}
+		table tr:hover {
+			background-color: #bfbfcf;
+		}
+		
+		table th {
+			border: 1px solid black;
+			border-spacing: 0px;
+			border-collapse: collapse;
+			padding: 3px;
+			background-color: #404040;
+			color:#ffffff
+		}
+		
+		table h2 {
+			margin: 0
+		}
+		
+		.hide {
+			display: none
+		}
+		
+		#block {
+			 white-space:nowrap;
+			 display:inline-block;			
+		}
+		
+		#grey {
+			background-color: #bfbfbf;
+		}
+		
+	</style>
+	<script type="text/javascript">
+		//<![CDATA[
+		(function () {
+			"use strict";
+			var TableSort = function (tab) {
+					var Titel = tab.getElementsByTagName("thead")[0].getElementsByTagName(
+						"tr")[0].getElementsByTagName("th");
+					var tbdy = tab.getElementsByTagName("tbody")[0];
+					var tz = tbdy.rows;
+					var nzeilen = tz.length;
+					if (nzeilen == 0) return;
+					var nspalten = tz[0].cells.length;
+					var Arr = new Array(nzeilen);
+					var sortiert = -1;
+					var initTableHead = function (sp) { // Kopfzeile vorbereiten
+						Titel[sp].addEventListener("click", function () {
+							tsort(sp);
+						}, false);
+						Titel[sp].style.cursor = "pointer";
+					}
+					var getData = function (ele) {
+						return ele.innerHTML;
+					}
+					var VglFkt_s = function (a, b) {
+							var as = a[sortiert],
+								bs = b[sortiert];
+							if (as > bs) return 1;
+							else return -1;
+						} // VglFkt_s
+					var tsort = function (sp) {
+							if (sp == sortiert) Arr.reverse(); // Tabelle ist schon nach dieser Spalte sortiert, also nur Reihenfolge umdrehen
+							else { // Sortieren
+								sortiert = sp;
+								Arr.sort(VglFkt_s);
+							}
+							for (var z = 0; z < nzeilen; z++) tbdy.appendChild(Arr[z][nspalten]); // Sortierte Daten zurÃ¼ckschreiben
+						} // tsort
+						// Kopfzeile vorbereiten
+					for (var i = 0; i < Titel.length; i++) initTableHead(i);
+					// Tabelleninhalt in ein Array kopieren
+					for (var z = 0; z < nzeilen; z++) {
+						var zelle = tz[z].getElementsByTagName("td"); // cells;
+						Arr[z] = new Array(nspalten + 1);
+						Arr[z][nspalten] = tz[z];
+						for (var s = 0; s < nspalten; s++) {
+							var zi = getData(zelle[s]);
+							Arr[z][s] = zi.replace(/<(?:.|\n)*?>/gm, '');
+							//zelle[s].innerHTML += "<br>"+zi; // zum Debuggen
+						}
+					}
+				} // TableSort
+			var initTableSort = function () {
+					var Sort_Table = document.querySelectorAll("table.sortable");
+					var JB_Tables = [];
+					for (var i = 0; i < Sort_Table.length; i++) JB_Tables[i] = new TableSort(
+						Sort_Table[i]);
+				} // initTable
+			if (window.addEventListener) window.addEventListener("DOMContentLoaded",
+				initTableSort, false); // nicht im IE8
+		})();
+		//]]>
+
+	</script>
+</head>
+
+<body>
+	<h1>CodeArchiv Rebirth</h1>
+	<main role="main">
+		<table class="sortable">
+			<thead>
+				<tr>
+					$$$HEADLINE$$$
+				</tr>
+			</thead>
+			<tfoot>
+				<tr>
+					$$$FEEDER$$$
+				</tr>
+			</tfoot>
+			<tbody>
+			    $$$TABLE$$$
+			</tbody>
+		</table>
+	</main>
+</body>
+
+</html>

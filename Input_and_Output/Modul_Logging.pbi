@@ -1,6 +1,6 @@
 ﻿; Description: Logging-Window
 ; Author: mk-soft
-; Date: 25-10-2015
+; Date:2015-10-25
 ; PB-Version: 5.40
 ; OS: Windows, Linux, Mac
 ; English-Forum: 

@@ -1,7 +1,7 @@
 ﻿;    Description: WakeOnLan - Module: send MagicPacket
 ;         Author: Imhotheb (Andreas Wenzl), ABBKlaus
-;           Date: 19-12-2015
-;     PB-Version: PB5.31
+;           Date:2015-12-19
+;     PB-Version: 5.40
 ;             OS: Windows, Linux
 ;  English-Forum: http://www.purebasic.fr/english/viewtopic.php?f=12&t=29643
 ;   French-Forum: 

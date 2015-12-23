@@ -1,6 +1,6 @@
 ﻿;    Description: Change Application Icon on runtime
 ;         Author: wilbert
-;           Date: 02-10-2012
+;           Date:2012-10-02
 ;     PB-Version: 5.40
 ;             OS: Mac
 ;  English-Forum: http://www.purebasic.fr/english/viewtopic.php?p=392372#p392372

@@ -1,5 +1,7 @@
-Licenses for the 3D engine integrated with PureBasic
-
+;    Description: Licenses for the 3D engine integrated with PureBasic
+;     PB-Version: 5.41
+;             OS: Mac, Windows, Linux
+; -----------------------------------------------------------------------------
 
 This program makes use of the following components:
 

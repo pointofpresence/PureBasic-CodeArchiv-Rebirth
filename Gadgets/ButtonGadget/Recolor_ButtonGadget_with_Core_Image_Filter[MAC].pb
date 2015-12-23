@@ -1,6 +1,6 @@
 ﻿;    Description: Recolor a button gadget using a Core Image Filter
 ;         Author: wilbert
-;           Date: 02-10-2012
+;           Date:2012-10-02
 ;     PB-Version: 5.40
 ;             OS: Mac
 ;  English-Forum: http://www.purebasic.fr/english/viewtopic.php?p=392371#p392371

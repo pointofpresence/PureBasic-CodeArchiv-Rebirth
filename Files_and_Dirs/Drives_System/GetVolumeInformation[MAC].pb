@@ -1,6 +1,6 @@
 ﻿;    Description: Get Volume Information
 ;         Author: Shardik
-;           Date: 22-06-2013
+;           Date:2013-06-22
 ;     PB-Version: 5.40
 ;             OS: Mac
 ;  English-Forum: http://www.purebasic.fr/english/viewtopic.php?p=415435#p415435

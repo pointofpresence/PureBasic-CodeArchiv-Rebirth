@@ -1,6 +1,6 @@
 ﻿;    Description: Dummy Text Generator for testing
 ;         Author: Tommy
-;           Date: 27-01-2015
+;           Date:2015-01-27
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

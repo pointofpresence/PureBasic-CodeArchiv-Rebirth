@@ -1,6 +1,6 @@
 ﻿;    Description: Macros and procedures for creation and handling of objects
 ;         Author: GPI
-;           Date: 07-11-2015
+;           Date:2015-11-07
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

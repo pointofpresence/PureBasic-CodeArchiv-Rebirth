@@ -1,6 +1,6 @@
 ﻿;    Description: right align string gadget
 ;         Author: wilbert
-;           Date: 06-09-2012
+;           Date:2012-09-06
 ;     PB-Version: 5.40
 ;             OS: Mac
 ;  English-Forum: http://www.purebasic.fr/english/viewtopic.php?p=390031#p390031

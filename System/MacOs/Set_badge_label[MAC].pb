@@ -1,6 +1,6 @@
 ﻿;    Description: Set Badge Label
 ;         Author: wilbert
-;           Date: 19-09-2012
+;           Date:2012-09-19
 ;     PB-Version: 5.40
 ;             OS: Mac
 ;  English-Forum: http://www.purebasic.fr/english/viewtopic.php?p=391168#p391168

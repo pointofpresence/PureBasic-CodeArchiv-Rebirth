@@ -1,6 +1,6 @@
 ﻿;    Description: ListIcon Handling (Sort, Add Column, Editable ...)
 ;         Author: Thorsten1867
-;           Date: 15-06-2015
+;           Date:2015-06-15
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

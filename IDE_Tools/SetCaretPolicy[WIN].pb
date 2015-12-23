@@ -1,7 +1,7 @@
 ﻿;   Description: Enable scrolling befor the cursor reach the border
 ;                Select as "Event to trigger the tool": "Sourcecode loaded" and "New Sourcecode created"
 ;        Author: GPI
-;          Date: 04-10-2015
+;          Date:2015-10-04
 ;    PB-Version: 5.40
 ;            OS: Windows
 ; English-Forum: 

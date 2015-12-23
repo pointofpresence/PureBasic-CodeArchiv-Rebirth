@@ -1,6 +1,6 @@
 ﻿;    Description: Create an DataSection.pbi from a binary file. Multi file select supported
 ;         Author: GPI
-;           Date: 19-12-2015
+;           Date:2015-12-19
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

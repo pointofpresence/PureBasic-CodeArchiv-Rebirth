@@ -1,6 +1,6 @@
 ﻿;    Description: Pack and unpack into memory with custom LZMA.
 ;         Author: Bisonte
-;           Date: 19-06-2014
+;           Date:2014-06-19
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

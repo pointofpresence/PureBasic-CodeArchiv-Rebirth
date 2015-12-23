@@ -1,4 +1,7 @@
-Licenses for the PureBasic applications (without using 3D engine)
+;    Description: Licenses for the PureBasic applications (without using 3D engine)
+;     PB-Version: 5.41
+;             OS: Mac, Windows, Linux
+; -----------------------------------------------------------------------------
 
 This program makes use of the following components:
 
@@ -599,7 +602,7 @@ Copyright (c) Stuart Coyle 2004-2006
 
 
 
-Rewritten by Kornel Lesiński (2009)
+Rewritten by Kornel LesiÅ„ski (2009)
 Euclidean distance, color matching dependent on alpha channel 
 and with gamma correction. code refreshed for modern compilers/architectures:
 ANSI C, floats, removed pointer tricks and used arrays and structs.

@@ -1,6 +1,6 @@
 ﻿;    Description: A combined Text- and EditGadget
 ;         Author: hjbremer
-;           Date: 21-01-2015
+;           Date:2015-01-21
 ;     PB-Version: 5.40
 ;             OS: Windows
 ;  English-Forum: 

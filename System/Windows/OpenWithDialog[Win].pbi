@@ -1,6 +1,6 @@
 ﻿;    Description: Open a File with the "Open With" Dialog
 ;         Author: Marty2PB
-;           Date: 30-05-2015
+;           Date:2015-05-30
 ;     PB-Version: 5.40
 ;             OS: Windows
 ;  English-Forum: 

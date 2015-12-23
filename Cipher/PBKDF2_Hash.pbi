@@ -1,6 +1,6 @@
 ﻿; Description: PBKDF2 Hash for passwords
 ; Author: TroaX
-; Date: 12-11-2015
+; Date:2015-11-12
 ; PB-Version: 5,40
 ; OS: Windows, Linux, Mac
 ; English-Forum: 

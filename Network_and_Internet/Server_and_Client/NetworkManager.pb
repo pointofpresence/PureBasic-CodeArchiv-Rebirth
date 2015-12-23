@@ -1,6 +1,6 @@
 ﻿; Description: for simple string, data and file transfer
 ; Author: Sirco
-; Date: 01-11-2015
+; Date:2015-11-01
 ; PB-Version: 5.40
 ; OS: Windows, Linux, Mac
 ; English-Forum: 
