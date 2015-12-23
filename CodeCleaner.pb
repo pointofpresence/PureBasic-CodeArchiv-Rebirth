@@ -36,6 +36,8 @@ Global NewMap NeedMask()
 NeedMask("ENABLEUNICODE")
 NeedMask("ENABLEXP")
 
+Global sum
+
 OpenConsole("CodeCleaner")
 
 Procedure.s CheckSyntax(file.s,EnableThread)
@@ -90,7 +92,9 @@ Procedure CheckFile(file.s)
   Protected Syncheck.s
   Protected EnableThread=#False
   Protected pos
+  
   ConsoleTitle("Check "+file)
+  sum+1
   
   NewList FLine.s()
   in=ReadFile(#PB_Any,file )
@@ -221,15 +225,15 @@ EndProcedure
 
 
 dir()
-
+PrintN("")
+PrintN("Code Count:"+sum)
 PrintN("")
 PrintN("Press return")
 Input()
 CloseConsole()
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
 ; ExecutableFormat = Console
-; CursorPosition = 30
-; Folding = --
+; Folding = 8-
 ; EnableUnicode
 ; EnableXP
 ; Executable = CodeCleaner.exe

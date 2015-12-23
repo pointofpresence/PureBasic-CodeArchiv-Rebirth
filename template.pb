@@ -2,11 +2,15 @@
 ;         Author: 
 ;           Date: 
 ;     PB-Version: 5.40
-;             OS: Windows, Linux, Mac
+;             OS: Mac
 ;  English-Forum: 
 ;   French-Forum: 
 ;   German-Forum: 
 ; -----------------------------------------------------------------------------
+
+CompilerIf #PB_Compiler_OS<>#PB_OS_MacOS
+  CompilerError "MacOs only!"
+CompilerEndIf
 
 ; CompilerIf #PB_Compiler_Thread=#False
 ;   CompilerError "Threadsafe needed!"
