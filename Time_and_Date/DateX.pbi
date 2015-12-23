@@ -409,4 +409,3 @@ CompilerEndIf
 ; IDE Options = PureBasic 5.40 LTS (Windows - x86)
 ; EnableUnicode
 ; EnableXP
-; CompileSourceDirectory

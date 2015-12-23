@@ -309,4 +309,3 @@ CloseConsole()
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
 ; EnableUnicode
 ; EnableXP
-; CompileSourceDirectory

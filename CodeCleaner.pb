@@ -30,6 +30,7 @@ KillMask("ENABLEBUILDCOUNT")=#True
 KillMask("ENABLEEXECONSTANT")=#True
 KillMask("EXECUTABLE")=#True
 KillMask("CONSTANT")=#True
+KillMask("COMPILESOURCEDIRECTORY")=#True
 
 Global NewMap NeedMask()
 NeedMask("ENABLEUNICODE")
@@ -227,9 +228,11 @@ Input()
 CloseConsole()
 ; IDE Options = PureBasic 5.40 LTS (Windows - x64)
 ; ExecutableFormat = Console
+; CursorPosition = 30
 ; Folding = --
 ; EnableUnicode
 ; EnableXP
 ; Executable = CodeCleaner.exe
 ; DisableCompileCount = 61
 ; DisableBuildCount = 5
+; EnableExeConstant

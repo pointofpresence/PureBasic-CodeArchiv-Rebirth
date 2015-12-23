@@ -389,4 +389,3 @@ CompilerEndIf
 ; EnableUnicode
 ; EnableThread
 ; EnableXP
-; CompileSourceDirectory
