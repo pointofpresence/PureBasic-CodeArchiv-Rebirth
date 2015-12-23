@@ -506,19 +506,17 @@ CloseConsole()
 
 DataSection
   template:
-  IncludeBinary ".dat\CodeCleaner_template.html"
+  IncludeBinary ".dat"+#slash+"CodeCleaner_template.html"
   Data.q 0
 EndDataSection
 
-
-; IDE Options = PureBasic 5.41 LTS (Windows - x64)
+; IDE Options = PureBasic 5.41 LTS (MacOS X - x64)
 ; ExecutableFormat = Console
+; CursorPosition = 139
 ; Folding = ---
 ; EnableUnicode
 ; EnableXP
 ; Executable = CodeCleaner.exe
-; DisableDebugger
-; Compiler = PureBasic 5.41 LTS (Windows - x86)
 ; DisableCompileCount = 61
 ; DisableBuildCount = 5
 ; EnableExeConstant

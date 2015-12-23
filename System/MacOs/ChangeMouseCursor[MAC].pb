@@ -95,6 +95,6 @@ DataSection
   Data.S "contextualMenuCursor"
   Data.S "IBeamCursorForVerticalLayout"
 EndDataSection
-; IDE Options = PureBasic 5.40 LTS (Windows - x64)
+; IDE Options = PureBasic 5.41 LTS (MacOS X - x64)
 ; EnableUnicode
 ; EnableXP
