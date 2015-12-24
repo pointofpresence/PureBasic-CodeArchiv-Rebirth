@@ -186,8 +186,6 @@ Procedure.s CheckSyntax(file.s,EnableThread)
     ProcedureReturn ""
   EndIf
   
-
-  
   If Left(file,2)="."+#slash
     file=GetCurrentDirectory()+Mid(file,3)
   EndIf  
@@ -640,7 +638,9 @@ EndDataSection
 
 ; IDE Options = PureBasic 5.41 LTS (Windows - x64)
 ; ExecutableFormat = Console
-; Folding = -fy-
+; CursorPosition = 605
+; FirstLine = 419
+; Folding = -fg-
 ; EnableUnicode
 ; EnableXP
 ; Executable = CodeCleaner.exe
