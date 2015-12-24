@@ -1,12 +1,12 @@
-﻿; Description: Create a preprocess file (all macros are expanded, false compilerif - compilerendif are removed)
-; Parameter: "%FILE"
-; Author: GPI
-; Date:2015-11-14
-; PB-Version: 5.40
-; OS: Windows, Linux, Mac
+﻿;   Description: Create a preprocess file (all macros are expanded, false compilerif - compilerendif are removed)
+;     Parameter: "%FILE"
+;        Author: GPI
+;          Date: 2015-11-14
+;    PB-Version: 5.40
+;            OS: Windows, Linux, Mac
 ; English-Forum: 
-; French-Forum: 
-; German-Forum: www.purebasic.fr/german/viewtopic.php?f=8&t=29152
+;  French-Forum: 
+;  German-Forum: www.purebasic.fr/german/viewtopic.php?f=8&t=29152
 ;-----------------------------------------------------------------------------
 
 

@@ -1,16 +1,16 @@
-﻿; Description: DOT is a plain text graph description language. It is a simple way of describing graphs that both humans and computer programs can use. 
-;              https://en.wikipedia.org/wiki/DOT_%28graph_description_language%29
-;              Download and install Graphviz from http://www.graphviz.org/
-;              And change the #DotExe constant!
-;              See DOT_(graph_description_language)_example_result.png
-; Author: Kiffi
-; Date:2015-10-09
-; PB-Version: 5.40
-; OS: Windows
-; English-Forum: 
+﻿;  Description: DOT is a plain text graph description language. It is a simple way of describing graphs that both humans and computer programs can use. 
+;       Author: Kiffi
+;         Date: 2015-10-09
+;   PB-Version: 5.40
+;           OS: Windows, Mac, Linux
+;English-Forum: 
 ; French-Forum: 
 ; German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=29191
 ;-----------------------------------------------------------------------------
+;https://en.wikipedia.org/wiki/DOT_%28graph_description_language%29
+;Download and install Graphviz from http://www.graphviz.org/
+;And change the #DotExe constant!
+;See DOT_(graph_description_language)_example_result.png
 
 
 EnableExplicit
@@ -129,6 +129,6 @@ TempXmlFileName ="DOT_(graph_description_language)_example.xml"; GetTemporaryDir
 ;  Debug "!ReceiveHTTPFile()"
   
 ;EndIf
-; IDE Options = PureBasic 5.40 LTS (Windows - x64)
+; IDE Options = PureBasic 5.41 LTS (Windows - x64)
 ; EnableUnicode
 ; EnableXP

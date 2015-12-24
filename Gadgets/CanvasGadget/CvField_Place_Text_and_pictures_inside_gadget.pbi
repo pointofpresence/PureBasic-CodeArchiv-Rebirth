@@ -1,6 +1,6 @@
 ﻿;    Description: Place Text and Pictures in a CanvasGadget
 ;         Author: Andesdaf
-;           Date:2014-08-16
+;           Date: 2014-08-16
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

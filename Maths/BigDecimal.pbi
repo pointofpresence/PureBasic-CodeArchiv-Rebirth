@@ -1,6 +1,6 @@
 ﻿;    Description: Calculating with infinitely large and exact numbers
 ;         Author: CSHW89
-;           Date:2014-04-23
+;           Date: 2014-04-23
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

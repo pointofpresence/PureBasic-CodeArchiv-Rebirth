@@ -1,6 +1,6 @@
 ﻿;    Description: Timestamp with 64Bit Values
 ;         Author: Sicro / ts-soft
-;           Date:2014-03-24
+;           Date: 2014-03-24
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

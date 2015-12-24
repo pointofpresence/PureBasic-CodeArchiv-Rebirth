@@ -1,6 +1,6 @@
 ﻿;    Description: Formated Number
 ;         Author: GPI
-;           Date:2015-11-22
+;           Date: 2015-11-22
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

@@ -1,11 +1,11 @@
-﻿; Description: PBKDF2 Hash for passwords
-; Author: TroaX
-; Date:2015-11-12
-; PB-Version: 5,40
-; OS: Windows, Linux, Mac
+﻿;   Description: PBKDF2 Hash for passwords
+;        Author: TroaX
+;          Date: 2015-11-12
+;    PB-Version: 5,40
+;            OS: Windows, Linux, Mac
 ; English-Forum: 
-; French-Forum: 
-; German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=29268
+;  French-Forum: 
+;  German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=29268
 ;-----------------------------------------------------------------------------
 
 ; PB_PBKDF2 1.0

@@ -1,6 +1,6 @@
 ﻿;    Description: Change Mouse Cursor
 ;         Author: Shardik
-;           Date:2012-11-14
+;           Date: 2012-11-14
 ;     PB-Version: 5.40
 ;             OS: Mac
 ;  English-Forum: http://www.purebasic.fr/english/viewtopic.php?p=395785#p395785

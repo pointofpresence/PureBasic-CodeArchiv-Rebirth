@@ -1,11 +1,11 @@
-﻿; Description: Read Processor Time with WMI
-; Author: Kiffi
-; Date:2015-11-02
-; PB-Version: 5.40
-; OS: Windows
+﻿;   Description: Read Processor Time with WMI
+;        Author: Kiffi
+;          Date: 2015-11-02
+;    PB-Version: 5.40
+;            OS: Windows
 ; English-Forum: 
-; French-Forum: 
-; German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=29242
+;  French-Forum: 
+;  German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=29242
 ;-----------------------------------------------------------------------------
 CompilerIf #PB_Compiler_OS<>#PB_OS_Windows
   CompilerError "Windows Only!"

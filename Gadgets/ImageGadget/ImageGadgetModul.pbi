@@ -1,6 +1,6 @@
 ﻿;    Description: ImageGadget handling
 ;         Author: silversurfer
-;           Date:2014-12-03
+;           Date: 2014-12-03
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

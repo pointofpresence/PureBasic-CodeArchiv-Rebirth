@@ -1,11 +1,11 @@
-﻿; Description: Enable #PB_EventType_MouseEnter and #PB_EventType_MouseLeave for all gadgets
-; Author: mk-soft
-; Date:2015-10-11
-; PB-Version: 5.40
-; OS: Windows, Linux, Mac
+﻿;   Description: Enable #PB_EventType_MouseEnter and #PB_EventType_MouseLeave for all gadgets
+;        Author: mk-soft
+;          Date: 2015-10-11
+;    PB-Version: 5.40
+;            OS: Windows, Linux, Mac
 ; English-Forum: 
-; French-Forum: 
-; German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=29047
+;  French-Forum: 
+;  German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=29047
 ;-----------------------------------------------------------------------------
 ;-Begin Module MouseOver
 ; Comment: Modul MouseOver

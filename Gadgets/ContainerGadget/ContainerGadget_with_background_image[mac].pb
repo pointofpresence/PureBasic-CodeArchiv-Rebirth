@@ -1,6 +1,6 @@
 ﻿;    Description: ContainerGadget with background image
 ;         Author: Shardik
-;           Date:2014-01-30
+;           Date: 2014-01-30
 ;     PB-Version: 5.40
 ;             OS: Mac
 ;  English-Forum: http://www.purebasic.fr/english/viewtopic.php?p=436415#p436415

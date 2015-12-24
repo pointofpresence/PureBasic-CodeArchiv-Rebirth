@@ -1,6 +1,6 @@
 ﻿;    Description: Fast crc32
 ;         Author: Helle
-;           Date:2015-12-05
+;           Date: 2015-12-05
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

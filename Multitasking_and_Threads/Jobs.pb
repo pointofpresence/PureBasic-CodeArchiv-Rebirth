@@ -2,7 +2,7 @@
 ;         Author: Danilo Krahn
 ;           Date: 2014-02-18
 ;     PB-Version: 5.40
-;             OS: Windows, Mac
+;             OS: Windows, Mac, Linux
 ;  English-Forum: 
 ;   French-Forum: 
 ;   German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=16950
@@ -385,7 +385,7 @@ CompilerIf #PB_Compiler_IsMainFile
     
 CompilerEndIf
 
-; IDE Options = PureBasic 5.40 LTS (Windows - x86)
+; IDE Options = PureBasic 5.41 LTS (Windows - x64)
 ; EnableUnicode
 ; EnableThread
 ; EnableXP

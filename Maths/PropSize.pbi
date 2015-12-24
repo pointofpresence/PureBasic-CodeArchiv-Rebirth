@@ -1,6 +1,6 @@
 ﻿;    Description: Calculate the width (or Height) when you resize a box
 ;         Author: Tommy
-;           Date:2015-01-27
+;           Date: 2015-01-27
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

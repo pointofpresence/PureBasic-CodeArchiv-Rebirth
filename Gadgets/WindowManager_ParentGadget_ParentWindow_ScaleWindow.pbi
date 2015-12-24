@@ -1,6 +1,6 @@
 ﻿;    Description: Manage gadgets to make ParentGadget(), ParentWindow(), ScaleWindow() possible
 ;         Author: mk-soft
-;           Date:2014-05-01
+;           Date: 2014-05-01
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

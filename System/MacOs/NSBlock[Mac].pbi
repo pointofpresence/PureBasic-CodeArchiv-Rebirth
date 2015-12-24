@@ -1,6 +1,6 @@
 ﻿;    Description: Working with NSBlock
 ;         Author: wilbert
-;           Date:2015-10-07
+;           Date: 2015-10-07
 ;     PB-Version: 5.40
 ;             OS: Mac
 ;  English-Forum: http://www.purebasic.fr/english/viewtopic.php?p=473875#p473875

@@ -1,9 +1,9 @@
 ﻿;    Description: find all references of a Variable
 ;      Parameter: <empty>
 ;         Author: Kiffi
-;           Date:2015-08-19
+;           Date: 2015-08-19
 ;     PB-Version: 5.40
-;             OS: Windows, Linux, Mac
+;             OS: Windows
 ;  English-Forum: 
 ;   French-Forum: 
 ;   German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=28292
@@ -188,6 +188,6 @@ Repeat
   EndIf
   
 ForEver
-; IDE Options = PureBasic 5.40 LTS (MacOS X - x64)
+; IDE Options = PureBasic 5.41 LTS (Windows - x64)
 ; EnableUnicode
 ; EnableXP

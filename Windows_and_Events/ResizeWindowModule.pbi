@@ -1,6 +1,6 @@
 ﻿;    Description: Resize window and gadgets (based on RS_ResizeGadget by USCode)
 ;         Author: Thorsten1867 
-;           Date:2014-08-02
+;           Date: 2014-08-02
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

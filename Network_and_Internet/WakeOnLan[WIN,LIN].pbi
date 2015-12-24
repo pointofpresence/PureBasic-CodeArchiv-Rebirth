@@ -1,6 +1,6 @@
 ﻿;    Description: WakeOnLan - Module: send MagicPacket
 ;         Author: Imhotheb (Andreas Wenzl), ABBKlaus
-;           Date:2015-12-19
+;           Date: 2015-12-19
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux
 ;  English-Forum: http://www.purebasic.fr/english/viewtopic.php?f=12&t=29643
@@ -264,6 +264,6 @@ CompilerIf #PB_Compiler_IsMainFile
   ;sendMagicPacket("AA:BB:CC:DD:EE:FF", "127.255.255.255", 9)
   
 CompilerEndIf
-; IDE Options = PureBasic 5.40 LTS (Windows - x64)
+; IDE Options = PureBasic 5.41 LTS (Windows - x64)
 ; EnableUnicode
 ; EnableXP

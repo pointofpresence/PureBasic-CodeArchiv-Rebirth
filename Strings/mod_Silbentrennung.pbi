@@ -1,6 +1,6 @@
 ﻿;    Description: Hyphenation - Module (German)
 ;         Author: Kurzer
-;           Date:2015-05-04
+;           Date: 2015-05-04
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

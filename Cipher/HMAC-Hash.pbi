@@ -1,6 +1,6 @@
 ﻿;    Description: Keyed-Hash Message Authentication Code (HMAC) Modul
 ;         Author: Christian+
-;           Date:2014-03-26
+;           Date: 2014-03-26
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

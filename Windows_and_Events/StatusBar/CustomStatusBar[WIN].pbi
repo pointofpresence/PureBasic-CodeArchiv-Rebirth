@@ -1,6 +1,6 @@
 ﻿;    Description: Costum Status Bar
 ;         Author: SBond
-;           Date:2014-04-02
+;           Date: 2014-04-02
 ;     PB-Version: 5.40
 ;             OS: Windows
 ;  English-Forum: 

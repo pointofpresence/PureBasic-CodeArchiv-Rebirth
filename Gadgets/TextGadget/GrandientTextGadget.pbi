@@ -1,6 +1,6 @@
 ﻿;    Description: Grandient Text Gadget
 ;         Author: Thorsten1867
-;           Date:2014-08-01
+;           Date: 2014-08-01
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

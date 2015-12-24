@@ -1,6 +1,6 @@
 ﻿;    Description: Cycle through button bezel styles
 ;         Author: gwhuntoon
-;           Date:2013-03-10
+;           Date: 2013-03-10
 ;     PB-Version: 5.40
 ;             OS: Mac
 ;  English-Forum: http://www.purebasic.fr/english/viewtopic.php?p=407476#p407476

@@ -1,11 +1,11 @@
-﻿; Description: System wide Mutex, Semaphore, Memory and Memory-Messages 
-; Author: Imhotheb
-; Date:2015-11-11
-; PB-Version: 5,40
-; OS: Windows
+﻿;   Description: System wide Mutex, Semaphore, Memory and Memory-Messages 
+;        Author: Imhotheb
+;          Date: 2015-11-11
+;    PB-Version: 5,40
+;            OS: Windows
 ; English-Forum: 
-; French-Forum: 
-; German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=29238
+;  French-Forum: 
+;  German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=29238
 ;-----------------------------------------------------------------------------
 
 CompilerIf #PB_Compiler_OS = #PB_OS_Windows

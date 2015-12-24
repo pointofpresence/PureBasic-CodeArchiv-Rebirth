@@ -1,6 +1,6 @@
 ﻿;    Description: Button-Gadget created with CanvasGadget
 ;         Author: mk-soft
-;           Date:2015-05-17
+;           Date: 2015-05-17
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

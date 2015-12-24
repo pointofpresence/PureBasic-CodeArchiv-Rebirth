@@ -1,6 +1,6 @@
 ﻿;    Description: Gadget for displaying and using tabs like in the browser
 ;         Author: STARGÅTE
-;           Date:2014-08-29
+;           Date: 2014-08-29
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: http://www.purebasic.fr/english/viewtopic.php?f=12&t=47588

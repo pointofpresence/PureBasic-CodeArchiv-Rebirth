@@ -1,6 +1,6 @@
 ﻿;    Description: Access the address book
 ;         Author: Wilbert
-;           Date:2013-06-13
+;           Date: 2013-06-13
 ;     PB-Version: 5.40
 ;             OS: Mac
 ;  English-Forum: http://www.purebasic.fr/english/viewtopic.php?p=414714

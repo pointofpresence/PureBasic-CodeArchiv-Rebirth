@@ -1,6 +1,6 @@
 ﻿;    Description: Default Button
 ;         Author: wilbert
-;           Date:2012-09-06
+;           Date: 2012-09-06
 ;     PB-Version: 5.40
 ;             OS: Mac
 ;  English-Forum: http://www.purebasic.fr/english/viewtopic.php?p=390031#p390031

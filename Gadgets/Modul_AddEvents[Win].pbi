@@ -1,6 +1,6 @@
 ﻿;    Description: Add more Events to Gadgets (MouseEnter, MouseLeave, etc.)
 ;         Author: Geroge Bisonte
-;           Date:2014-02-07
+;           Date: 2014-02-07
 ;     PB-Version: 5.40
 ;             OS: Windows (min. XP/2000)
 ;  English-Forum: 

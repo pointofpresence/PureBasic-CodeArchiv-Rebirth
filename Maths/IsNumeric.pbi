@@ -1,12 +1,11 @@
-﻿;    Description: Contain the string a numeric value?
-;         Author: NicTheQuick
-;           Date:2015-01-24
-;     PB-Version: 5.40
-;             OS: Windows, Linux, Mac
-;  English-Forum: 
-;   French-Forum: 
-;   German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=28676&start=10#p328016
-;                 http://www.purebasic.fr/german/viewtopic.php?f=8&t=28676&start=10#p328021
+﻿;          Description: Contain the string a numeric value?
+;               Author: NicTheQuick
+;                 Date: 2015-01-24
+;           PB-Version: 5.40
+;                   OS: Windows, Linux, Mac
+;        English-Forum: 
+;         French-Forum: 
+;         German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=28676&start=10#p328016
 ;-----------------------------------------------------------------------------
 
 Procedure.i isNumeric(value.s)
@@ -127,6 +126,6 @@ CompilerIf #PB_Compiler_IsMainFile
 CompilerEndIf
 
 
-; IDE Options = PureBasic 5.40 LTS (Windows - x64)
+; IDE Options = PureBasic 5.41 LTS (Windows - x64)
 ; EnableUnicode
 ; EnableXP

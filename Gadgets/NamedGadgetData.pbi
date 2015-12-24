@@ -1,12 +1,12 @@
-﻿; Description: Named GadgetData
-;              Under windows and linux objects are automatic released.
-; Author : mk-soft
-; Date:2015-12-13
-; PB-Version: 5.40
-; OS: Windows, Linux, Mac
+﻿;   Description: Named GadgetData
+;                              Under windows and linux objects are automatic released.
+;       Author : mk-soft
+;          Date: 2015-12-13
+;    PB-Version: 5.40
+;            OS: Windows, Linux, Mac
 ; English-Forum: http://www.purebasic.fr/english/viewtopic.php?f=12&t=63937
-; French-Forum:
-; German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=29255
+;  French-Forum: 
+;  German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=29255
 ;-----------------------------------------------------------------------------
 
 ;-Begin

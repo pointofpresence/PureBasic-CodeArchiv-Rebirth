@@ -1,8 +1,8 @@
 ﻿;    Description: DebugLog - Module: save, show and manage logs
 ;         Author: Imhotheb (Andreas Wenzl)
-;           Date:2015-04-06
+;           Date: 2015-04-06
 ;     PB-Version: 5.40
-;             OS: Windows, Linux
+;             OS: Windows, Linux, Mac
 ;  English-Forum: 
 ;   French-Forum: 
 ;   German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=28846
@@ -404,7 +404,7 @@ CompilerIf  #PB_Compiler_IsMainFile
 	EndIf
 	
 CompilerEndIf
-; IDE Options = PureBasic 5.40 LTS (Windows - x64)
+; IDE Options = PureBasic 5.41 LTS (Windows - x64)
 ; EnableUnicode
 ; EnableXP
 ; DisableDebugger

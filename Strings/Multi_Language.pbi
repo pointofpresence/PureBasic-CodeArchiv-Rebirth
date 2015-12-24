@@ -1,6 +1,6 @@
 ﻿;    Description: An easy to use solution for multilanguage programs (freak) 
 ;         Author: Original freak - Updated GPI
-;           Date:2015-09-09
+;           Date: 2015-09-09
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: http://www.purebasic.fr/english/viewtopic.php?f=12&t=26729&start=15#p471134

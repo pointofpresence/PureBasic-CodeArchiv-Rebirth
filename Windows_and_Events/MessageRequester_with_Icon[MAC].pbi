@@ -1,6 +1,6 @@
 ﻿;    Description: MessageRequester with Icon
 ;         Author: Shardik/Wilbert
-;           Date:2013-04-06
+;           Date: 2013-04-06
 ;     PB-Version: 5.40
 ;             OS: Mac
 ;  English-Forum: http://www.purebasic.fr/english/viewtopic.php?p=410009#p410009

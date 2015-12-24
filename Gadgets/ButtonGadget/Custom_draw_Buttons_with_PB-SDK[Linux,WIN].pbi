@@ -1,8 +1,8 @@
 ﻿;    Description: Costum Draw Button Gadget with PB-SDK
 ;         Author: mk-soft
-;           Date:2014-04-19
+;           Date: 2014-04-19
 ;     PB-Version: 5.40
-;             OS: Windows, Linux, Mac
+;             OS: Windows, Linux
 ;  English-Forum: 
 ;   French-Forum: 
 ;   German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=27851
@@ -1552,6 +1552,6 @@ CompilerIf #PB_Compiler_IsMainFile
   
 CompilerEndIf
 
-; IDE Options = PureBasic 5.40 LTS (Windows - x64)
+; IDE Options = PureBasic 5.41 LTS (Windows - x64)
 ; EnableUnicode
 ; EnableXP

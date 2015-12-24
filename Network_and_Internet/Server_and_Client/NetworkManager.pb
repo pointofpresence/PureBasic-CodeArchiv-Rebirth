@@ -1,11 +1,11 @@
-﻿; Description: for simple string, data and file transfer
-; Author: Sirco
-; Date:2015-11-01
-; PB-Version: 5.40
-; OS: Windows, Linux, Mac
+﻿;   Description: for simple string, data and file transfer
+;        Author: Sirco
+;          Date: 2015-11-01
+;    PB-Version: 5.40
+;            OS: Windows, Linux, Mac
 ; English-Forum: 
-; French-Forum: 
-; German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=28989
+;  French-Forum: 
+;  German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=28989
 ;-----------------------------------------------------------------------------
 
 ; Version: 1.0.3

@@ -1,6 +1,6 @@
 ﻿;    Description: iSight snapshot
 ;         Author: Shardik
-;           Date:2013-08-25
+;           Date: 2013-08-25
 ;     PB-Version: 5.40
 ;             OS: Mac
 ;  English-Forum: http://www.purebasic.fr/english/viewtopic.php?p=422589#p422589

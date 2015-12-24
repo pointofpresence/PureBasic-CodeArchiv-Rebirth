@@ -1,7 +1,7 @@
 ﻿;    Description: find the name of the procedure of the current cursor position
 ;      Parameter: "%TEMPFILE%"
 ;         Author: Kiffi
-;           Date:2015-08-22
+;           Date: 2015-08-22
 ;     PB-Version: 5.40
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 

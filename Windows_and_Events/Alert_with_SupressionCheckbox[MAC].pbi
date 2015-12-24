@@ -1,6 +1,6 @@
 ﻿;    Description: Show Alert with SuppressionCheckbox
 ;         Author: wilbert
-;           Date:2012-10-12
+;           Date: 2012-10-12
 ;     PB-Version: 5.40
 ;             OS: Mac
 ;  English-Forum: http://www.purebasic.fr/english/viewtopic.php?p=393221#p393221

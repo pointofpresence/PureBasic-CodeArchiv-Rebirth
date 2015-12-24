@@ -1,6 +1,6 @@
 ﻿;   Description: Read PC-Sensor-data with the Aida64-Api
 ;        Author: Bisonte
-;          Date:2015-11-03
+;          Date: 2015-11-03
 ;    PB-Version: 5,40
 ;            OS: Windows
 ; English-Forum: 

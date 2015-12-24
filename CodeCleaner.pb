@@ -1,7 +1,7 @@
 ﻿;    Description: Removes Options of the pb and pbi source and create the content.html
 ;         Author: GPI
 ;           Date: 24-12-2015
-;     PB-Version: 5.40
+;     PB-Version: 5.41
 ;             OS: Windows, Mac
 ;  English-Forum: 
 ;   French-Forum: 
@@ -30,7 +30,7 @@ EndStructure
 
 Global NewList codes.codes()
 Global NewMap cache.codes()
-#cacheid=$cacec0de
+#cacheid=$68636163;'cache'
 
 CompilerIf  #PB_Compiler_OS=#PB_OS_MacOS
   SetCurrentDirectory(#PB_Compiler_FilePath)
@@ -92,6 +92,12 @@ EndProcedure
 Procedure LoadCache()
   Protected in
   Protected str.s
+  Protected id.l
+  CompilerIf #PB_Compiler_Debugger
+    PrintN("Ignore cache file")
+    ProcedureReturn 0
+  CompilerEndIf
+  
   OpenPreferences(settingFile)
   Compiler1=ReadPreferenceString("Path1",Compiler1)
   Compiler1Pro=ReadPreferenceString("Processor1",Compiler1Pro)
@@ -100,26 +106,28 @@ Procedure LoadCache()
   ClosePreferences()
   
   in=ReadFile(#PB_Any,CacheFile)
-  If in And ReadLong(in)=#cacheid
-    While Not Eof(in)
-      str.s=inString(in)
-      If str="":Break:EndIf
-      cache(str)
-      cache()\ForMac     =ReadWord(in)
-      cache()\ForWindows =ReadWord(in)
-      cache()\ForLinux   =ReadWord(in)
-      cache()\Description=inString(in)
-      cache()\GermanURL  =inString(in)
-      cache()\FrenchURL  =inString(in)
-      cache()\EnglishURL =inString(in)
-      cache()\PBVer      =inString(in)
-      cache()\Author     =inString(in)
-      cache()\Date       =inString(in)
-  
-      cache()\fLen       =ReadLong(in)
-      cache()\fDate      =ReadLong(in)
-    Wend
-    
+  If in 
+    id=ReadLong(in)
+    If id=#cacheid
+      While Not Eof(in)
+        str.s=inString(in)
+        If str="":Break:EndIf
+        cache(str)
+        cache()\ForMac     =ReadWord(in)
+        cache()\ForWindows =ReadWord(in)
+        cache()\ForLinux   =ReadWord(in)
+        cache()\Description=inString(in)
+        cache()\GermanURL  =inString(in)
+        cache()\FrenchURL  =inString(in)
+        cache()\EnglishURL =inString(in)
+        cache()\PBVer      =inString(in)
+        cache()\Author     =inString(in)
+        cache()\Date       =inString(in)
+        
+        cache()\fLen       =ReadLong(in)
+        cache()\fDate      =ReadLong(in)
+      Wend
+    EndIf
     CloseFile(in)
   EndIf
   PrintN("Load Cache: "+MapSize(cache())+" Entries")
@@ -154,9 +162,14 @@ Procedure SaveCache()
         
         WriteLong(out,codes()\fLen       )
         WriteLong(out,codes()\fDate      )
+        ;Debug "save:"+codes()\file
+      Else
+        ;Debug "error:"+codes()\file
       EndIf
     Next
     CloseFile(out)
+  Else
+    PrintN("Can't create cache file:"+CacheFile)
   EndIf
 EndProcedure
 
@@ -256,6 +269,7 @@ Procedure CheckFile(file.s)
   Protected pos
   Protected PosLimit
   Protected ext.s=UCase(GetExtensionPart(file))
+  Protected lastLimit
   
   If ext="PB" Or ext="PBI"
     sum+1
@@ -319,6 +333,24 @@ Procedure CheckFile(file.s)
         While Left(Fline(),1)=";" And Left(fline(),2)<>";-" And Left(fline(),3)<>"; -"
           posLimit=FindString(fline(),":")
           
+          If PosLimit
+            If LastLimit=0
+              lastLimit=PosLimit
+            ElseIf lastLimit>0 And lastLimit<>PosLimit
+              lastLimit=-PosLimit
+            ElseIf lastLimit<0 And -PosLimit<lastLimit
+              lastLimit=-PosLimit
+            EndIf
+          EndIf
+              
+          
+          If poslimit And Mid(fline(),PosLimit+1,1)<>" "
+            fline()=Left(fline(),PosLimit)+" "+Right(fline(),Len(fline())-PosLimit)
+            PrintN("Add missing space in header:"+file)
+            do=#True
+          EndIf
+          
+          
           pos=FindString(fline(),"Description",0,#PB_String_NoCase)
           If pos<PosLimit And pos>0
             codes()\Description=Trim(Mid(fline(),PosLimit+1))
@@ -341,7 +373,7 @@ Procedure CheckFile(file.s)
             ;Debug codes()\date
             If Len(codes()\date)=10 And IsNumeric(Right(codes()\date,4)) And IsNumeric(Mid(codes()\Date,4,2)) And IsNumeric(Left(codes()\Date,2)) And Not Val(Mid(codes()\Date,4,2))>12
               codes()\date=Right(codes()\date,4)+"-"+Mid(codes()\date,4,2)+"-"+Left(codes()\date,2)
-              fline()=Left(fline(),PosLimit)+codes()\date
+              fline()=Left(fline(),PosLimit)+" "+codes()\date
               ;Debug fline()
               do=#True            
             EndIf
@@ -387,11 +419,65 @@ Procedure CheckFile(file.s)
               PrintN("Remove SID from URL "+file)
               do=#True
             EndIf
+            pos=FindString(fline(),"purebasic.com")
+            If pos
+              PrintN("Change purebasic.com to purebasic.fr")
+              fline()=ReplaceString(fline(),"purebasic.com","purebasic.fr")
+              do=#True
+            EndIf
+            
           EndIf
           If NextElement(fline())=#False
             Break
           EndIf    
         Wend        
+        
+       
+        If lastLimit<0 And FirstElement(fline())
+          lastLimit=-lastLimit          
+          While Left(Fline(),1)=";" And Left(fline(),2)<>";-" And Left(fline(),3)<>"; -"
+            poslimit=FindString(FLine(),":")
+            If poslimit<lastLimit
+              FLine()=Left(";                              ",lastLimit-PosLimit+1)+Mid(FLine(),2)
+            EndIf
+            If NextElement(fline())=#False
+              Break
+            EndIf 
+          Wend
+          PrintN("Correct header format:"+file)
+          do=#True
+        EndIf
+        
+        
+        ;dateiname korrekt?
+        pos=FindString(file,"[")
+        PosLimit=FindString(file,"]",pos)
+        If poslimit>0 And pos>0
+          
+          check=Mid(file,pos,poslimit-pos+1)
+
+          pos=FindString(check,"MAC",0,#PB_String_NoCase)
+          If (pos>0 And codes()\ForMac=#False) Or (pos=0 And codes()\ForMac=#True)
+            codes()\fNoError=#False
+            PrintN("Wrong file name or os dependence[MAC]:"+file)          
+          EndIf
+          pos=FindString(check,"LIN",0,#PB_String_NoCase)
+          If (pos>0 And codes()\ForLinux=#False) Or (pos=0 And codes()\ForLinux=#True)
+            codes()\fNoError=#False
+            PrintN("Wrong file name or os dependence[LIN]:"+file)          
+          EndIf
+          pos=FindString(check,"WIN",0,#PB_String_NoCase)
+          If (pos>0 And codes()\ForWindows=#False) Or (pos=0 And codes()\ForWindows=#True)
+            codes()\fNoError=#False
+            PrintN("Wrong file name or os dependence[WIN]:"+file)          
+          EndIf
+          
+        ElseIf codes()\ForLinux=0 Or codes()\ForMac=0 Or codes()\ForWindows=0
+          codes()\fNoError=#False
+          PrintN("Wrong file name or os dependence:"+file)          
+        EndIf
+        
+        
       EndIf 
       ;}
       
@@ -613,7 +699,7 @@ tab+"<th>Forum</th>"
 tab+"<th>Description</th>"
 template=ReplaceString(template,"$$$HEADLINE$$$",tab)
 
-tab=~"<td colspan=\"6\" align=\"right\">"+sum+" codes / "+FormatDate("%dd-%mm-%yyyy",Date())+"</td>"
+tab=~"<td colspan=\"6\" align=\"right\">"+sum+" codes / "+FormatDate("%yyyy-%mm-%dd",Date())+"</td>"
 template=ReplaceString(template,"$$$FEEDER$$$",tab)
 
 Define out
@@ -636,14 +722,12 @@ DataSection
   Data.q 0
 EndDataSection
 
-; IDE Options = PureBasic 5.41 LTS (MacOS X - x64)
+; IDE Options = PureBasic 5.41 LTS (Windows - x64)
 ; ExecutableFormat = Console
-; CursorPosition = 608
-; FirstLine = 393
-; Folding = -fg-
+; Folding = --F-
 ; EnableUnicode
 ; EnableXP
 ; Executable = CodeCleaner.exe
+; DisableDebugger
 ; DisableCompileCount = 61
 ; DisableBuildCount = 5
-; EnableExeConstant

@@ -1,6 +1,6 @@
 ﻿;    Description: load files associated with an app
 ;         Author: WilliamL/Fred
-;           Date:2012-09-22
+;           Date: 2012-09-22
 ;     PB-Version: 5.40
 ;             OS: Mac
 ;  English-Forum: http://www.purebasic.fr/english/viewtopic.php?p=391349#p391349

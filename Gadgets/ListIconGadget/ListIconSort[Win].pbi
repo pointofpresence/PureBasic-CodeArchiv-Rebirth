@@ -2,7 +2,7 @@
 ;         Author: HJBremer
 ;           Date: 2013-09-16
 ;     PB-Version: 5.40
-;             OS: Windows, Linux, Mac
+;             OS: Windows
 ;  English-Forum: 
 ;   French-Forum: 
 ;   German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=27260
