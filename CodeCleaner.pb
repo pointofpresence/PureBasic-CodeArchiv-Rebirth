@@ -72,7 +72,7 @@ CompilerIf #PB_Compiler_OS=#PB_OS_Windows
   Global Compiler1Pro.s="x64"
   Global Compiler2Pro.s="x32"
 CompilerElse
-  Global Compiler1.s=#PB_Compiler_Home+#slash+"Compilers\pbcompiler"
+  Global Compiler1.s=#PB_Compiler_Home+"Compilers/pbcompiler"
   Global Compiler2.s=""
   Global Compiler1Pro.s="x"  
   Global Compiler2Pro.s=""
@@ -554,7 +554,7 @@ ForEach codes()
     tab+"<td></td>"
     tab+"<td></td>"
     tab+"</tr>"
-    
+    tab+#CRLF$
     
     oldpath=p
   EndIf
@@ -600,6 +600,7 @@ ForEach codes()
   tab+"<td>"+SimpleHTML(codes()\Description)+"</td>"
   
   tab+"</tr>"
+  tab+#CRLF$
 Next
 
 template=ReplaceString(template,"$$$TABLE$$$",tab)
@@ -631,20 +632,18 @@ CloseConsole()
 
 DataSection
   template:
-  IncludeBinary ".dat\CodeCleaner_template.html"
+  IncludeBinary ".dat"+#slash+"CodeCleaner_template.html"
   Data.q 0
 EndDataSection
 
-
-; IDE Options = PureBasic 5.41 LTS (Windows - x64)
+; IDE Options = PureBasic 5.41 LTS (MacOS X - x64)
 ; ExecutableFormat = Console
-; CursorPosition = 605
-; FirstLine = 419
+; CursorPosition = 608
+; FirstLine = 393
 ; Folding = -fg-
 ; EnableUnicode
 ; EnableXP
 ; Executable = CodeCleaner.exe
-; Compiler = PureBasic 5.41 LTS (Windows - x86)
 ; DisableCompileCount = 61
 ; DisableBuildCount = 5
 ; EnableExeConstant
