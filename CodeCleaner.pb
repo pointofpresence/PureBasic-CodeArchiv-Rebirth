@@ -1,6 +1,6 @@
 ﻿;    Description: Removes Options of the pb and pbi source and create the content.html
 ;         Author: GPI
-;           Date: 23-12-2015
+;           Date: 24-12-2015
 ;     PB-Version: 5.40
 ;             OS: Windows, Mac
 ;  English-Forum: 
@@ -9,23 +9,9 @@
 ; -----------------------------------------------------------------------------
 
 EnableExplicit
-CompilerIf #PB_Compiler_OS=#PB_OS_Windows
-  
-  CompilerIf #PB_Compiler_Processor=#PB_Processor_x64
-    #alt_pbcompiler="C:\Program Files (x86)\PureBasic\Compilers"
-    #alt_Pro="x32"
-    #norm_pro="x64"    
-  CompilerElse
-    #alt_pbcompiler="C:\Program Files\PureBasic\Compilers"
-    #alt_Pro="x64"
-    #norm_pro="x32"
-  CompilerEndIf
-  
-CompilerEndIf
 
 Structure codes
   file.s
-  sort.s
   ForMac.i
   ForWindows.i
   ForLinux.i
@@ -36,10 +22,15 @@ Structure codes
   PBVer.s
   Author.s
   Date.s
+  
+  fLen.i
+  fDate.i
+  fNoError.i
 EndStructure
 
 Global NewList codes.codes()
-
+Global NewMap cache.codes()
+#cacheid=$cacec0de
 
 CompilerIf  #PB_Compiler_OS=#PB_OS_MacOS
   SetCurrentDirectory(#PB_Compiler_FilePath)
@@ -50,6 +41,9 @@ CompilerIf #PB_Compiler_OS=#PB_OS_Windows
 CompilerElse
   #slash="/"
 CompilerEndIf
+
+Global CacheFile.s=".dat"+#slash+"CodeCleaner_"+Hex(#PB_Compiler_OS)+".temp.dat"
+Global SettingFile.s=".dat"+#slash+"CodeCleaner_"+Hex(#PB_Compiler_OS)+".temp.ini"
 
 Global NewMap KillMask()
 KillMask("CURRENTDIRECTORY")=#True
@@ -72,6 +66,100 @@ Global sum
 
 OpenConsole("CodeCleaner")
 
+CompilerIf #PB_Compiler_OS=#PB_OS_Windows
+  Global Compiler1.s="C:\Program Files\PureBasic\Compilers\pbcompiler.exe"
+  Global Compiler2.s="C:\Program Files (x86)\PureBasic\Compilers\pbcompiler.exe"
+  Global Compiler1Pro.s="x64"
+  Global Compiler2Pro.s="x32"
+CompilerElse
+  Global Compiler1.s=#PB_Compiler_Home+#slash+"Compilers\pbcompiler"
+  Global Compiler2.s=""
+  Global Compiler1Pro.s="x"  
+  Global Compiler2Pro.s=""
+CompilerEndIf
+
+Procedure.s inString(in)
+  Protected l=ReadUnicodeCharacter(in)
+  Protected ret.s=ReadString(in,#PB_UTF8,l)
+  ProcedureReturn ret
+EndProcedure
+Procedure.s outString(out,str.s)
+  WriteUnicodeCharacter(out,Len(str))
+  WriteString(out,str,#PB_UTF8)
+EndProcedure
+  
+
+Procedure LoadCache()
+  Protected in
+  Protected str.s
+  OpenPreferences(settingFile)
+  Compiler1=ReadPreferenceString("Path1",Compiler1)
+  Compiler1Pro=ReadPreferenceString("Processor1",Compiler1Pro)
+  Compiler2=ReadPreferenceString("Path2",Compiler2)
+  Compiler2Pro=ReadPreferenceString("Processor2",Compiler2Pro)
+  ClosePreferences()
+  
+  in=ReadFile(#PB_Any,CacheFile)
+  If in And ReadLong(in)=#cacheid
+    While Not Eof(in)
+      str.s=inString(in)
+      If str="":Break:EndIf
+      cache(str)
+      cache()\ForMac     =ReadWord(in)
+      cache()\ForWindows =ReadWord(in)
+      cache()\ForLinux   =ReadWord(in)
+      cache()\Description=inString(in)
+      cache()\GermanURL  =inString(in)
+      cache()\FrenchURL  =inString(in)
+      cache()\EnglishURL =inString(in)
+      cache()\PBVer      =inString(in)
+      cache()\Author     =inString(in)
+      cache()\Date       =inString(in)
+  
+      cache()\fLen       =ReadLong(in)
+      cache()\fDate      =ReadLong(in)
+    Wend
+    
+    CloseFile(in)
+  EndIf
+  PrintN("Load Cache: "+MapSize(cache())+" Entries")
+  
+EndProcedure
+Procedure SaveCache()
+  Protected out
+  CreatePreferences(SettingFile)
+  WritePreferenceString("Path1",Compiler1)
+  WritePreferenceString("Processor1",Compiler1Pro)
+  WritePreferenceString("Path2",Compiler2)
+  WritePreferenceString("Processor2",Compiler2Pro)
+  ClosePreferences()
+  
+  out=CreateFile(#PB_Any,CacheFile)
+  If out
+    WriteLong(out,#cacheid)
+    ForEach codes()
+      If codes()\fNoError
+        outString(out,codes()\file)
+        
+        WriteWord(out,codes()\ForMac     )
+        WriteWord(out,codes()\ForWindows )
+        WriteWord(out,codes()\ForLinux   )
+        outString(out,codes()\Description)
+        outString(out,codes()\GermanURL  )
+        outString(out,codes()\FrenchURL  )
+        outString(out,codes()\EnglishURL )
+        outString(out,codes()\PBVer      )
+        outString(out,codes()\Author     )
+        outString(out,codes()\Date       )
+        
+        WriteLong(out,codes()\fLen       )
+        WriteLong(out,codes()\fDate      )
+      EndIf
+    Next
+    CloseFile(out)
+  EndIf
+EndProcedure
+
 Procedure IsNumeric(a$)
   Protected a,i,ret=#True
   For i=1 To Len(a$)
@@ -80,7 +168,6 @@ Procedure IsNumeric(a$)
   Next
   ProcedureReturn ret
 EndProcedure   
-
 
 Procedure.s CheckSyntax(file.s,EnableThread)
   Protected compiler
@@ -99,7 +186,7 @@ Procedure.s CheckSyntax(file.s,EnableThread)
     ProcedureReturn ""
   EndIf
   
-  sum+1
+
   
   If Left(file,2)="."+#slash
     file=GetCurrentDirectory()+Mid(file,3)
@@ -109,57 +196,57 @@ Procedure.s CheckSyntax(file.s,EnableThread)
   Else
     thread=""
   EndIf
-  CompilerIf Defined(alt_pbcompiler,#PB_Constant)
-    For i=0 To 1
-      
-      
-      If i=0
-      CompilerEndIf
-      exe=#PB_Compiler_Home+"Compilers"      
-      CompilerIf Defined(alt_pbcompiler,#PB_Constant)
-        pro=#norm_pro
-      Else
-        exe=#alt_pbcompiler       
-        pro=#alt_pro
-      EndIf
-    CompilerEndIf
+  
+  For i=0 To 1
+    If i=0  
+      exe=Compiler1
+      pro=Compiler1Pro
+    Else
+      exe=Compiler2
+      pro=Compiler2Pro
+    EndIf
     
-    
-    CompilerIf #PB_Compiler_OS=#PB_OS_Windows 
-      Compiler = RunProgram(exe+#slash+"pbcompiler.exe", thread+"--check "+Chr(34)+file+Chr(34), exe, #PB_Program_Open | #PB_Program_Read)
-    CompilerElse
-      Compiler = RunProgram(exe+#slash+"pbcompiler", thread+"--check "+Chr(34)+file+Chr(34), exe, #PB_Program_Open | #PB_Program_Read)
-    CompilerEndIf  
-    ;Debug compiler
-    Output$ = ""
-    do=#False
-    If Compiler
-      While ProgramRunning(Compiler)
-        If AvailableProgramOutput(Compiler)
-          a$=ReadProgramString(Compiler)
-          ;Debug a$
-          If a$="Starting syntax check..." Or a$="Starting compilation..."
-            do=#True
-          ElseIf do And a$<>""         
-            Output$ + a$ 
+    If exe<>"" And FileSize(exe)>0
+      ConsoleTitle(pro+" "+file)
+      
+      Compiler = RunProgram(exe, thread+"--check "+Chr(34)+file+Chr(34), GetPathPart(exe), #PB_Program_Open | #PB_Program_Read)
+      ;Debug compiler
+      
+      Output$ = ""
+      do=#False
+      If Compiler
+        While ProgramRunning(Compiler)
+          If AvailableProgramOutput(Compiler)
+            a$=ReadProgramString(Compiler)
+            ;Debug a$
+            If a$="Starting syntax check..." Or a$="Starting compilation..."
+              do=#True
+            ElseIf do And a$<>""         
+              Output$ + a$ 
+            EndIf
+          EndIf
+        Wend
+        If ProgramExitCode(Compiler)      
+          If LCase(Right(output$,6))<>" only!"
+            If ret<>"":ret+#LFCR$:EndIf
+            ret+"("+pro+")"+output$+ " : "+sfile
           EndIf
         EndIf
-      Wend
-      If ProgramExitCode(Compiler)      
-        If LCase(Right(output$,6))<>" only!"
-          ret="("+pro+")"+output$+ " : "+sfile
-        EndIf
+        CloseProgram(Compiler) ; Close the connection to the program
+      Else
+        If ret<>"":ret+#LFCR$:EndIf
+        ret+"("+pro+") Compiler error! "+exe
       EndIf
-      CloseProgram(Compiler) ; Close the connection to the program
+    ElseIf exe<>""
+      If ret<>"":ret+#LFCR$:EndIf
+      ret+"("+pro+") Compiler not found! "+exe
     EndIf
-    CompilerIf Defined(alt_pbcompiler,#PB_Constant)
-      
-      
-    Next
-  CompilerEndIf
-  
+    
+  Next
+
   ProcedureReturn ret
 EndProcedure
+
 Procedure CheckFile(file.s)
   Protected in
   Protected check.s
@@ -172,164 +259,207 @@ Procedure CheckFile(file.s)
   Protected PosLimit
   Protected ext.s=UCase(GetExtensionPart(file))
   
+  If ext="PB" Or ext="PBI"
+    sum+1
+  EndIf  
+  
   ConsoleTitle("Check "+file)
     
   NewList FLine.s()
   
-  If ext="PB" Or ext="PBI" Or ext="TXT"
-    
-    in=ReadFile(#PB_Any,file )
-    If in
-      Format=ReadStringFormat(in)
-      
-      While Not Eof(in)
-        AddElement(FLine())
-        FLine()=ReadString(in,Format)
-        If Asc(Left(fline(),1))=65279 ;BOM entfernen!
-          fline()=Mid(FLine(),2)
-        EndIf
-      Wend
-      CloseFile(in)
-      
-      ;ProcedureReturn 0
-    EndIf
-  EndIf
-  
-  If format=#PB_Ascii And (ext="PB" Or ext="PBI")
-    PrintN("Convert to UTF8 "+file)
-    do=#True
-  EndIf
-  
   AddElement(codes())
   codes()\file=file
+  codes()\fLen=FileSize(file)
+  codes()\fDate=GetFileDate(file,#PB_Date_Modified)
   
-  
-  If FirstElement(fline())
-    While Left(Fline(),1)=";" And Left(fline(),2)<>";-"
-      posLimit=FindString(fline(),":")
-      
-      pos=FindString(fline(),"Description",0,#PB_String_NoCase)
-      If pos<PosLimit And pos>0
-        codes()\Description=Trim(Mid(fline(),PosLimit+1))
-      EndIf
-      
-      pos=FindString(fline(),"Author",0,#PB_String_NoCase)
-      If pos<PosLimit And pos>0
-        codes()\Author=Trim(Mid(fline(),PosLimit+1))
-      EndIf
-      
-      pos=FindString(fline(),"update",0,#PB_String_NoCase)
-      If pos<PosLimit And pos>0
-        PrintN("Wrong Tag Update "+file)
-      EndIf
-      
-      pos=FindString(fline(),"Date",0,#PB_String_NoCase)
-      If pos<PosLimit And pos>0
-        codes()\Date=Trim(Mid(fline(),PosLimit+1))
-        ;Debug codes()\date
-        If Len(codes()\date)=10 And IsNumeric(Right(codes()\date,4)) And IsNumeric(Mid(codes()\Date,4,2)) And IsNumeric(Left(codes()\Date,2)) And Not Val(Mid(codes()\Date,4,2))>12
-          codes()\date=Right(codes()\date,4)+"-"+Mid(codes()\date,4,2)+"-"+Left(codes()\date,2)
-          fline()=Left(fline(),PosLimit)+codes()\date
-          ;Debug fline()
-          do=#True
-          
-        EndIf
-        
-        If Len(codes()\date)<>10 Or Not IsNumeric(Left(codes()\date,4)) Or Not IsNumeric(Mid(codes()\Date,6,2)) Or Not IsNumeric(Right(codes()\Date,2)) Or Val(Mid(codes()\Date,6,2))>12
-          PrintN("Wrong Date "+codes()\date+" "+file)
-        EndIf
-      EndIf
-      
-      pos=FindString(fline(),"PB-Version",0,#PB_String_NoCase)
-      If pos<PosLimit And pos>0
-        codes()\PBVer=Trim(Mid(fline(),PosLimit+1))
-      EndIf
-      
-      pos=FindString(fline(),"OS",0,#PB_String_NoCase)
-      If pos<PosLimit And pos>0
-        check=Trim(Mid(fline(),PosLimit+1))
-        If FindString(check,"WIN",0,#PB_String_NoCase) : codes()\ForWindows=#True :EndIf
-        If FindString(check,"MAC",0,#PB_String_NoCase) : codes()\ForMac=#True :EndIf
-        If FindString(check,"LIN",0,#PB_String_NoCase) : codes()\ForLinux=#True :EndIf      
-      EndIf
-      
-      pos=FindString(fline(),"English-Forum",0,#PB_String_NoCase)
-      If pos<PosLimit And pos>0
-        codes()\EnglishURL=Trim(Mid(fline(),PosLimit+1))
-      EndIf
-      
-      pos=FindString(fline(),"French-Forum",0,#PB_String_NoCase)
-      If pos<PosLimit And pos>0
-        codes()\FrenchURL=Trim(Mid(fline(),PosLimit+1))
-      EndIf
-      
-      pos=FindString(fline(),"German-Forum",0,#PB_String_NoCase)
-      If pos<PosLimit And pos>0
-        codes()\GermanURL=Trim(Mid(fline(),PosLimit+1))
-      EndIf
-      
-      If FindString(fline(),"-Forum") 
-        pos=FindString(fline(),"&sid=")
-        If pos
-          fline()=Left(fline(),pos-1)
-          PrintN("Remove SID from URL "+file)
-          do=#True
-        EndIf
-      EndIf
-      If NextElement(fline())=#False
-        Break
-      EndIf    
-    Wend
-  EndIf
-  
-  If ext="PB" Or ext="PBI"
-    If LastElement(FLine())
-      While Left(FLine(),1)=";" And Left(FLine(),15)<>"; IDE Options =" And PreviousElement(FLine())
-      Wend
-      
-      ForEach NeedMask()
-        NeedMask()=0
-      Next
-      
-      While NextElement(FLine())
-        check=UCase(Trim(Mid(StringField(FLine(),1,"="),2)))
-        If KillMask(check)
-          DeleteElement(fline())
-          do=#True
-        EndIf
-        If FindMapElement(NeedMask(),check)
-          NeedMask()=#True
-        EndIf
-        If check="ENABLETHREAD"
-          EnableThread=#True
-        EndIf
-      Wend
-      
-      ForEach NeedMask()
-        If NeedMask()=0
-          PrintN("Missing "+MapKey(NeedMask())+" "+file)
-        EndIf
-      Next
-      
-    EndIf
-  EndIf
-  
-  If do And (ext="PB" Or ext="PBI"); And #False ;-------
-    PrintN( "ReCreate "+file)
-    out=CreateFile(#PB_Any,file,#PB_UTF8)
+  If codes()\fLen=cache(file)\fLen And codes()\fDate=cache()\fDate
+    ;Bereits überprüft -> übernehmen
+    codes()\ForMac      = cache()\ForMac     
+    codes()\ForWindows  = cache()\ForWindows 
+    codes()\ForLinux    = cache()\ForLinux   
+    codes()\Description = cache()\Description
+    codes()\GermanURL   = cache()\GermanURL  
+    codes()\FrenchURL   = cache()\FrenchURL  
+    codes()\EnglishURL  = cache()\EnglishURL 
+    codes()\PBVer       = cache()\PBVer      
+    codes()\Author      = cache()\Author     
+    codes()\Date        = cache()\Date       
+    codes()\fNoError    = #True
     
-    If out
-      WriteStringFormat(out,#PB_UTF8)
-      ForEach FLine()
-        WriteStringN(out,FLine(),#PB_UTF8)
-      Next
+  Else
+    
+    
+    If ext="PB" Or ext="PBI" Or ext="TXT"    
+      codes()\fNoError=#True  ; nur Dateien die man auswertet cachen!
+      
+      ;{ File einlesen
+      in=ReadFile(#PB_Any,file )
+      If in
+        Format=ReadStringFormat(in)
+        
+        While Not Eof(in)
+          AddElement(FLine())
+          FLine()=ReadString(in,Format)
+          If Asc(Left(fline(),1))=65279 ;BOM entfernen!
+            fline()=Mid(FLine(),2)
+          EndIf
+        Wend
+        CloseFile(in)
+        
+      EndIf
+      ;}
+      
+      ;{ Muss als UTF8 neu geschrieben werden!
+      If format=#PB_Ascii And (ext="PB" Or ext="PBI")
+        PrintN("Convert to UTF8 "+file)
+        do=#True
+      EndIf  
+      ;}
+            
+      ;{ header überprüfen
+      If FirstElement(fline())
+        While Left(Fline(),1)=";" And Left(fline(),2)<>";-" And Left(fline(),3)<>"; -"
+          posLimit=FindString(fline(),":")
+          
+          pos=FindString(fline(),"Description",0,#PB_String_NoCase)
+          If pos<PosLimit And pos>0
+            codes()\Description=Trim(Mid(fline(),PosLimit+1))
+          EndIf
+          
+          pos=FindString(fline(),"Author",0,#PB_String_NoCase)
+          If pos<PosLimit And pos>0
+            codes()\Author=Trim(Mid(fline(),PosLimit+1))
+          EndIf
+          
+          pos=FindString(fline(),"update",0,#PB_String_NoCase)
+          If pos<PosLimit And pos>0
+            PrintN("Wrong Tag Update "+file)
+            codes()\fNoError=#False
+          EndIf
+          
+          pos=FindString(fline(),"Date",0,#PB_String_NoCase)
+          If pos<PosLimit And pos>0
+            codes()\Date=Trim(Mid(fline(),PosLimit+1))
+            ;Debug codes()\date
+            If Len(codes()\date)=10 And IsNumeric(Right(codes()\date,4)) And IsNumeric(Mid(codes()\Date,4,2)) And IsNumeric(Left(codes()\Date,2)) And Not Val(Mid(codes()\Date,4,2))>12
+              codes()\date=Right(codes()\date,4)+"-"+Mid(codes()\date,4,2)+"-"+Left(codes()\date,2)
+              fline()=Left(fline(),PosLimit)+codes()\date
+              ;Debug fline()
+              do=#True            
+            EndIf
+            
+            If Len(codes()\date)<>10 Or Not IsNumeric(Left(codes()\date,4)) Or Not IsNumeric(Mid(codes()\Date,6,2)) Or Not IsNumeric(Right(codes()\Date,2)) Or Val(Mid(codes()\Date,6,2))>12
+              PrintN("Wrong Date "+codes()\date+" "+file)
+              codes()\fNoError=#False
+            EndIf
+          EndIf
+          
+          pos=FindString(fline(),"PB-Version",0,#PB_String_NoCase)
+          If pos<PosLimit And pos>0
+            codes()\PBVer=Trim(Mid(fline(),PosLimit+1))
+          EndIf
+          
+          pos=FindString(fline(),"OS",0,#PB_String_NoCase)
+          If pos<PosLimit And pos>0
+            check=Trim(Mid(fline(),PosLimit+1))
+            If FindString(check,"WIN",0,#PB_String_NoCase) : codes()\ForWindows=#True :EndIf
+            If FindString(check,"MAC",0,#PB_String_NoCase) : codes()\ForMac=#True :EndIf
+            If FindString(check,"LIN",0,#PB_String_NoCase) : codes()\ForLinux=#True :EndIf      
+          EndIf
+          
+          pos=FindString(fline(),"English-Forum",0,#PB_String_NoCase)
+          If pos<PosLimit And pos>0
+            codes()\EnglishURL=Trim(Mid(fline(),PosLimit+1))
+          EndIf
+          
+          pos=FindString(fline(),"French-Forum",0,#PB_String_NoCase)
+          If pos<PosLimit And pos>0
+            codes()\FrenchURL=Trim(Mid(fline(),PosLimit+1))
+          EndIf
+          
+          pos=FindString(fline(),"German-Forum",0,#PB_String_NoCase)
+          If pos<PosLimit And pos>0
+            codes()\GermanURL=Trim(Mid(fline(),PosLimit+1))
+          EndIf
+          
+          If FindString(fline(),"-Forum") 
+            pos=FindString(fline(),"&sid=")
+            If pos
+              fline()=Left(fline(),pos-1)
+              PrintN("Remove SID from URL "+file)
+              do=#True
+            EndIf
+          EndIf
+          If NextElement(fline())=#False
+            Break
+          EndIf    
+        Wend        
+      EndIf 
+      ;}
+      
+      ;{ Compileroption überprfen
+      If (ext="PB" Or ext="PBI") And LastElement(FLine())
+        While Left(FLine(),1)=";" And Left(FLine(),15)<>"; IDE Options =" And PreviousElement(FLine())
+        Wend
+        
+        ForEach NeedMask()
+          NeedMask()=0
+        Next
+        
+        While NextElement(FLine())
+          check=UCase(Trim(Mid(StringField(FLine(),1,"="),2)))
+          If KillMask(check)
+            DeleteElement(fline())
+            do=#True
+          EndIf
+          If FindMapElement(NeedMask(),check)
+            NeedMask()=#True
+          EndIf
+          If check="ENABLETHREAD"
+            EnableThread=#True
+          EndIf
+        Wend
+        
+        ForEach NeedMask()
+          If NeedMask()=0
+            PrintN("Missing "+MapKey(NeedMask())+" "+file)
+            codes()\fNoError=#False
+          EndIf
+        Next
+        
+      EndIf
+      ;}
+      
+      ;{ Datei neu schreiben?      
+      If do 
+        codes()\fNoError=#False
+        If (ext="PB" Or ext="PBI"); And #False ;-------
+          PrintN( "ReCreate "+file)
+          out=CreateFile(#PB_Any,file,#PB_UTF8)
+          
+          If out
+            WriteStringFormat(out,#PB_UTF8)
+            ForEach FLine()
+              WriteStringN(out,FLine(),#PB_UTF8)
+            Next
+          EndIf
+          CloseFile(out)
+        EndIf        
+      EndIf
+      ;}
+      
+      ;{ Syntax überprüfen
+      If ext="PB" Or ext="PBI"
+        Syncheck=CheckSyntax(file,EnableThread)
+        If Syncheck
+          PrintN(Syncheck)
+          codes()\fNoError=#False
+        EndIf
+      EndIf
+      ;}
+      
     EndIf
-    CloseFile(out)
-  EndIf
-  
-  Syncheck=CheckSyntax(file,EnableThread)
-  If Syncheck
-    PrintN(Syncheck)
+    
   EndIf
   
   
@@ -389,17 +519,14 @@ Procedure.s SimpleHTML(in.s)
   ProcedureReturn in
 EndProcedure
 
-
+LoadCache()
 
 dir()
 PrintN("")
 PrintN("Code Count:"+sum)
 
-ForEach codes()
-  codes()\sort=ReplaceString(GetPathPart(codes()\file),"/",Chr(255))+Chr(255)+Chr(255)+GetFilePart(codes()\file)
-Next
+SaveCache()
 
-;SortStructuredList(codes(),#PB_Sort_Ascending |#PB_Sort_NoCase,OffsetOf(codes\sort),TypeOf(codes\sort))
 
 Define template.s
 
@@ -513,11 +640,10 @@ EndDataSection
 
 ; IDE Options = PureBasic 5.41 LTS (Windows - x64)
 ; ExecutableFormat = Console
-; Folding = ---
+; Folding = -fy-
 ; EnableUnicode
 ; EnableXP
 ; Executable = CodeCleaner.exe
-; DisableDebugger
 ; Compiler = PureBasic 5.41 LTS (Windows - x86)
 ; DisableCompileCount = 61
 ; DisableBuildCount = 5
