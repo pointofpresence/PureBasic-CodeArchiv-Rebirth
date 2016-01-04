@@ -69,6 +69,21 @@
 			background-color: #bfbfbf;
 		}
 		
+		#spanbox {
+			display:block;
+			clear:left; 
+			width:100%;
+		}
+		#left {
+			float:left;
+			width:33%;			
+		}
+		#right {
+			text-align:right;
+		}
+		#center {
+			text-align:center;
+		}
 	</style>
 	<script type="text/javascript">
 		//<![CDATA[
@@ -135,9 +150,19 @@
 	</script>
 </head>
 
-<body>
-	<h1>CodeArchiv Rebirth</h1>
-	<main role="main">
+<body>	
+	<main>
+		<div id="spanbox">
+			<div id="left">
+				<h1>CodeArchiv Rebirth</h1>
+			</div>
+			<div id="right">
+				<a href="https://github.com/GPIforGit/PureBasic-CodeArchiv-Rebirth" target="_blank"><img src=".dat/github.png" alt="github"></a>
+				<a href="CodeArchivRebirth.7z"><img src=".dat/download.png" alt="download"></a>
+			</div>
+		</div>
+	
+		<div id="spanbox">
 		<table class="sortable">
 			<thead>
 				<tr>
@@ -146,7 +171,7 @@
 			</thead>
 			<tfoot>
 				<tr>
-					<td colspan="6" align="right">134 codes / 2016-01-01</td>
+					<td colspan="6" align="right">134 codes / 2016-01-04</td>
 				</tr>
 			</tfoot>
 			<tbody>
@@ -336,6 +361,7 @@
 
 			</tbody>
 		</table>
+		</div>
 	</main>
 </body>
 

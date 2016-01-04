@@ -1,6 +1,6 @@
 ﻿;    Description: Removes Options of the pb and pbi source and create the content.html
 ;         Author: GPI
-;           Date: 24-12-2015
+;           Date: 04-01-2016
 ;     PB-Version: 5.41
 ;             OS: Windows, Mac
 ;  English-Forum: 
@@ -63,6 +63,32 @@ NeedMask("ENABLEUNICODE")
 NeedMask("ENABLEXP")
 
 Global sum
+
+#packFile="CodeArchivRebirth.7z"
+
+
+Global forbiddenExt.s="CAB,MSI,MSM,MSP,EXE,BAT"
+Global ForbiddenName.s=#packFile+",.,..,.git,content.html,CodeCleaner.pb,ftp.temp.pb,template.pb,THUMBS.DB,EHTHUMBS.DB,DESKTOP.INI,$RECYCLE.BIN,Automatisch beibehalten von Corel,.DS_Store,.AppleDouble,.LSOverride,.Spotlight-V100,.Trashes"
+
+Procedure InList(a$,b$)
+  Protected i=0
+  Protected ok=#False
+  Protected c$
+  a$=UCase(a$)
+  b$=UCase(b$)
+  If a$<>""
+    Repeat
+      i+1
+      c$=Trim(StringField(b$,i,","))
+      If c$=a$
+        ok=#True
+        Break
+      EndIf
+    Until c$=""
+  EndIf
+  ProcedureReturn ok
+EndProcedure
+
 
 OpenConsole("CodeCleaner")
 
@@ -565,7 +591,7 @@ Procedure dir(Start.s="."+#slash)
         Else
           count +1          
           ext=UCase(GetExtensionPart(name))
-          If Left(name,1)<>"." And name<>"CodeCleaner.pb" And ext<>"EXE"  And name<>"content.html" And name<>"template.pb"
+          If Left(name,1)<>"." And Not inlist(name,ForbiddenName) And Not inList(ext,forbiddenExt);And name<>"CodeCleaner.pb" And ext<>"EXE" And ext<>"BAT" And name<>"content.html" And name<>"template.pb" And name<>"CodeArchivRebirth.7z"
             CheckFile(start+name)            
           EndIf          
           
@@ -724,10 +750,11 @@ EndDataSection
 
 ; IDE Options = PureBasic 5.41 LTS (Windows - x64)
 ; ExecutableFormat = Console
-; Folding = --F-
+; Folding = --L+
 ; EnableUnicode
 ; EnableXP
 ; Executable = CodeCleaner.exe
 ; DisableDebugger
 ; DisableCompileCount = 61
 ; DisableBuildCount = 5
+; EnableExeConstant
