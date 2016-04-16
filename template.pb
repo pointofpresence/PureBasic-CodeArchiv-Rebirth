@@ -1,8 +1,8 @@
 ﻿;    Description: 
 ;         Author: 
 ;           Date: 
-;     PB-Version: 5.41
-;             OS: Mac
+;     PB-Version: 5.42
+;             OS: Mac, Windows, Linux
 ;  English-Forum: 
 ;   French-Forum: 
 ;   German-Forum: 
@@ -28,8 +28,8 @@ CompilerEndIf
 CompilerIf #PB_Compiler_IsMainFile
 CompilerEndIf
 
-; IDE Options = PureBasic 5.41 LTS (Windows - x64)
-; CursorPosition = 28
+; IDE Options = PureBasic 5.42 LTS (Windows - x64)
+; CursorPosition = 4
 ; Folding = -
 ; EnableUnicode
 ; EnableXP
