@@ -68,7 +68,7 @@ Global sum
 
 
 Global forbiddenExt.s="CAB,MSI,MSM,MSP,EXE,BAT"
-Global ForbiddenName.s=#packFile+",.,..,.git,content.html,CodeCleaner.pb,ftp.temp.pb,template.pb,THUMBS.DB,EHTHUMBS.DB,DESKTOP.INI,$RECYCLE.BIN,Automatisch beibehalten von Corel,.DS_Store,.AppleDouble,.LSOverride,.Spotlight-V100,.Trashes"
+Global ForbiddenName.s=#packFile+",.,..,.git,content.html,CodeCleaner.pb,temp.txt,ftp.temp.pb,template.pb,THUMBS.DB,EHTHUMBS.DB,DESKTOP.INI,$RECYCLE.BIN,Automatisch beibehalten von Corel,.DS_Store,.AppleDouble,.LSOverride,.Spotlight-V100,.Trashes"
 
 Procedure InList(a$,b$)
   Protected i=0
@@ -748,8 +748,10 @@ DataSection
   Data.q 0
 EndDataSection
 
-; IDE Options = PureBasic 5.41 LTS (Windows - x64)
+; IDE Options = PureBasic 5.42 LTS (Windows - x64)
 ; ExecutableFormat = Console
+; CursorPosition = 71
+; FirstLine = 30
 ; Folding = --L+
 ; EnableUnicode
 ; EnableXP

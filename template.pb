@@ -1,4 +1,5 @@
 ﻿;    Description: 
+;Parameter (IDE):
 ;         Author: 
 ;           Date: 
 ;     PB-Version: 5.42
@@ -7,6 +8,8 @@
 ;   French-Forum: 
 ;   German-Forum: 
 ; -----------------------------------------------------------------------------
+
+EnableExplicit
 
 CompilerIf #PB_Compiler_OS<>#PB_OS_MacOS
   CompilerError "MacOs only!"
@@ -20,8 +23,12 @@ CompilerIf #PB_Compiler_Thread=#False
   CompilerError "Threadsafe needed!"
 CompilerEndIf
 
-CompilerIf #PB_Compiler_Processor=#PB_Processor_x86
+CompilerIf #PB_Compiler_Processor<>#PB_Processor_x86
   CompilerError "X86 only!"
+CompilerEndIf
+
+CompilerIf #PB_Compiler_Processor<>#PB_Processor_x64
+  CompilerError "X64 only!"
 CompilerEndIf
 
 ;-Example
@@ -29,8 +36,8 @@ CompilerIf #PB_Compiler_IsMainFile
 CompilerEndIf
 
 ; IDE Options = PureBasic 5.42 LTS (Windows - x64)
-; CursorPosition = 4
-; Folding = -
+; CursorPosition = 29
+; Folding = --
 ; EnableUnicode
 ; EnableXP
 ; EnableCompileCount = 0
