@@ -34,6 +34,7 @@ CompilerElse
 CompilerEndIf
 
 path$ = GetTemporaryDirectory()
+temp_dateiname$ = path$ + "mySelection.txt"
 print_dateiname$ = path$ + "mySelection.txt"
 
 row1$ = StringField(para_selection$, 1, "x")
@@ -83,7 +84,7 @@ EndIf
 ;ShellExecute_(#Null, "open", "notepad", "/P " + print_dateiname$, #Null, #SW_HIDE)
 ;oder
 RunProgram("Notepad", "/P " +Chr(34)+ print_dateiname$+Chr(34), "",#PB_Program_Wait|#PB_Program_Hide)
-DeleteFile(print_dateiname$)
+DeleteFile(temp_dateiname$)
 
 ; IDE Options = PureBasic 5.42 LTS (Windows - x64)
 ; EnableUnicode

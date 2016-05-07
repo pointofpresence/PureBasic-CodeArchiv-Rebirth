@@ -68,7 +68,7 @@ Global sum
 
 
 Global forbiddenExt.s="CAB,MSI,MSM,MSP,EXE,BAT"
-Global ForbiddenName.s=#packFile+",.,..,.git,content.html,CodeCleaner.pb,temp.txt,ftp.temp.pb,template.pb,THUMBS.DB,EHTHUMBS.DB,DESKTOP.INI,$RECYCLE.BIN,Automatisch beibehalten von Corel,.DS_Store,.AppleDouble,.LSOverride,.Spotlight-V100,.Trashes"
+Global ForbiddenName.s=#packFile+",.,..,.git,content.html,CodeCleaner.pb,todo.temp.txt,ftp.temp.pb,template.pb,THUMBS.DB,EHTHUMBS.DB,DESKTOP.INI,$RECYCLE.BIN,Automatisch beibehalten von Corel,.DS_Store,.AppleDouble,.LSOverride,.Spotlight-V100,.Trashes"
 
 Procedure InList(a$,b$)
   Protected i=0

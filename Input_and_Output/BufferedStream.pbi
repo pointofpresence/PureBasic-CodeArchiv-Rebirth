@@ -4,8 +4,8 @@
 ;     PB-Version: 5.42
 ;             OS: Mac, Windows, Linux
 ;  English-Forum: 
-;   French-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=26604
-;   German-Forum: 
+;   French-Forum: 
+;   German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=26604
 ; -----------------------------------------------------------------------------
 CompilerIf #PB_Compiler_Thread=#False
   CompilerError "Threadsafe needed!"
