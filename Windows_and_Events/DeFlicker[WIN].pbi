@@ -436,10 +436,6 @@ CompilerIf #PB_Compiler_IsMainFile
 
 CompilerEndIf
 ; IDE Options = PureBasic 5.42 LTS (Linux - x64)
-; CursorPosition = 436
-; FirstLine = 386
-; Folding = ---
 ; EnableUnicode
 ; EnableXP
-; CompileSourceDirectory
 ; EnablePurifier

@@ -1,4 +1,4 @@
-
+﻿
 XIncludeFile #PB_Compiler_FilePath + "libusb1/import.pbi"
 
 DeclareModule ILIBUSB1
@@ -422,8 +422,4 @@ Module ILIBUSB1
 	EndDataSection
 EndModule
 ; IDE Options = PureBasic 5.31 (Linux - x64)
-; CursorPosition = 16
-; FirstLine = 289
-; Folding = --94z-
 ; EnableXP
-; CompileSourceDirectory

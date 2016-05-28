@@ -1,4 +1,4 @@
-DeclareModule PBUSB_UTIL
+﻿DeclareModule PBUSB_UTIL
 	; descriptor type
 	#DESC_TYPE_DEVICE    = $01
 	#DESC_TYPE_CONFIG    = $02
@@ -52,7 +52,4 @@ EndDeclareModule
 Module PBUSB_UTIL
 EndModule
 ; IDE Options = PureBasic 5.21 LTS (Linux - x64)
-; CursorPosition = 48
-; FirstLine = 10
-; Folding = -
 ; EnableXP

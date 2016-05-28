@@ -1,4 +1,4 @@
-; From <bits/time.h>
+﻿; From <bits/time.h>
 ; struct timeval
 ;   {
 ;     __time_t tv_sec;		/* Seconds.  */
@@ -10,6 +10,4 @@ Structure timeval
 	tv_usec.q
 EndStructure
 ; IDE Options = PureBasic 5.21 LTS (Linux - x64)
-; CursorPosition = 9
-; Folding = -
 ; EnableXP

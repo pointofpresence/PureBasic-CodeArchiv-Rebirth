@@ -1,4 +1,4 @@
-DeclareModule PBUSB_CORE
+﻿DeclareModule PBUSB_CORE
 	
 	#PBUSB_SUCCESS             =  0  ;= #LIBUSB_SUCCESS
 	#PBUSB_ERROR_INVALID_PARAM = -2	;= #LIBUSB_ERROR_INVALID_PARAM
@@ -667,7 +667,7 @@ Module PBUSB_CORE
 			EndIf
 			*this\_active_cfg_index = *cfg\index
 			
-			ProcedureReturn #PBUSB_ERROR_INVALID_PARAM ;FIXME entfernen, wenn TODO gel�st
+			ProcedureReturn #PBUSB_ERROR_INVALID_PARAM ;FIXME entfernen, wenn TODO gelöst
 			ProcedureReturn *cfg
 		EndIf
 		
@@ -736,7 +736,4 @@ Module PBUSB_CORE
 	;}
 EndModule
 ; IDE Options = PureBasic 5.21 LTS (Linux - x64)
-; CursorPosition = 691
-; FirstLine = 115
-; Folding = --eeQAAQ+
 ; EnableXP

@@ -1,7 +1,7 @@
-; Public libusbx header file for Purebasic
-; Copyright © 2007-2008 Daniel Drake <dsd@gentoo.org>
-; Copyright © 2001 Johannes Erdfelt <johannes@erdfelt.com>
-; Copyright © 2013 Nicolas Göddel <nicolas@freakscorner.de>
+ï»¿; Public libusbx header file for Purebasic
+; Copyright Â© 2007-2008 Daniel Drake <dsd@gentoo.org>
+; Copyright Â© 2001 Johannes Erdfelt <johannes@erdfelt.com>
+; Copyright Â© 2013 Nicolas GÃ¶ddel <nicolas@freakscorner.de>
 ;
 ; This library is free software; you can redistribute it and/or
 ; modify it under the terms of the GNU Lesser General Public
@@ -451,8 +451,4 @@ Enumeration ; libusb_log_level
 	#LIBUSB_LOG_LEVEL_DEBUG
 EndEnumeration
 ; IDE Options = PureBasic 5.22 LTS (Linux - x64)
-; CursorPosition = 397
-; FirstLine = 137
-; Folding = AAAE-
 ; EnableXP
-; Compiler = PureBasic 5.21 LTS (Linux - x64)

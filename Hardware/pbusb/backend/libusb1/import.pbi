@@ -1,7 +1,7 @@
-; Public libusbx header file + Wrapper for Purebasic
-; Copyright © 2007-2008 Daniel Drake <dsd@gentoo.org>
-; Copyright © 2001 Johannes Erdfelt <johannes@erdfelt.com>
-; Copyright © 2013 Nicolas Göddel <nicolas@freakscorner.de>
+ï»¿; Public libusbx header file + Wrapper for Purebasic
+; Copyright Â© 2007-2008 Daniel Drake <dsd@gentoo.org>
+; Copyright Â© 2001 Johannes Erdfelt <johannes@erdfelt.com>
+; Copyright Â© 2013 Nicolas GÃ¶ddel <nicolas@freakscorner.de>
 ;
 ; This library is free software; you can redistribute it and/or
 ; modify it under the terms of the GNU Lesser General Public
@@ -19,7 +19,7 @@
 
 EnableExplicit
 
-; Aktuell sind nur die Headerdateien für libusb-1.0.9 bis libusb-1.0.11 angepasst
+; Aktuell sind nur die Headerdateien fÃ¼r libusb-1.0.9 bis libusb-1.0.11 angepasst
 
 DeclareModule LIBUSB1
 	
@@ -506,7 +506,4 @@ Module LIBUSB1
 	;}
 EndModule
 ; IDE Options = PureBasic 5.22 LTS (Linux - x64)
-; CursorPosition = 72
-; FirstLine = 47
-; Folding = PQw
 ; EnableXP
