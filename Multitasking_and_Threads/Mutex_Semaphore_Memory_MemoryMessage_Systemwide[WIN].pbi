@@ -1,27 +1,43 @@
 ﻿;   Description: System wide Mutex, Semaphore, Memory and Memory-Messages 
 ;        Author: Imhotheb
-;          Date: 2015-11-11
-;    PB-Version: 5,40
+;          Date: 2016-01-20
+;    PB-Version: 5.42
 ;            OS: Windows
 ; English-Forum: 
 ;  French-Forum: 
 ;  German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=29238
 ;-----------------------------------------------------------------------------
 
+; -------------------------
+; --- Update 20.01.2016 ---
+; -------------------------
+;
+; + parameter "OnlyNewMsg" to IPC_MemMsg::Create()
+; + parameter "ClearCreate" to IPC_Mem::Create()
+; + parameter "ClearOpen" to IPC_Mem::Create()
+; + function IPC_MemMsg::WaitSend()
+; + function IPC_MemMsg::CountSend()
+; * now all functions treat #INFINITE correct
+;
+; -------------------------
+
 CompilerIf #PB_Compiler_OS = #PB_OS_Windows
   CompilerIf #PB_Compiler_Thread = #False   
     CompilerWarning "IPC_Semaphore::BindCallback() - NEED THREADSAFE executable"
     CompilerWarning "IPC_MemMsg - NEED THREADSAFE executable"   
   CompilerEndIf
+  CompilerIf #PB_Compiler_Unicode = #False
+    CompilerWarning "IPC_MemMsg - works with Ascii-Mode, but ALL other Applications use this MemMsg have to be compiled with Ascii, too"
+  CompilerEndIf 
 CompilerElse 
-  CompilerError "Windows Only!"   
+  CompilerError "<IPC.pbi> Windows ONLY"   
 CompilerEndIf
 
 DeclareModule IPC_Mutex
   
-  #ERR_Abandoned = #WAIT_ABANDONED             ; Mutex was locked by a terminated thread/process ... but is now locked
-  #ERR_TimeOut = #WAIT_TIMEOUT                 ; Timeout reached
-  #ERR_Failed = #WAIT_FAILED                   ; Lock Failed (OS-Error)
+  #ERR_Abandoned = #WAIT_ABANDONED             ; mutex was locked by a terminated thread/process ... but is now locked
+  #ERR_TimeOut = #WAIT_TIMEOUT                 ; timeout reached
+  #ERR_Failed = #WAIT_FAILED                   ; lock failed (OS-Error)
   
   Declare Create(Name$, Security = #False)    ; returns a handle (hMutex), if security is needed use #True
   Declare Free(hMutex)                        ; free resources, close handels and cleanup
@@ -166,7 +182,7 @@ DeclareModule IPC_Semaphore
   Declare UnbindCallback(hSemaphore)                               ; unbind Callback
   
   
-  Declare GetError(hSemaphore)                                     ; if Wait()/Try() returns #False ... return value = #ERR_* or False (no Error=
+  Declare GetError(hSemaphore)                                     ; if Wait()/Try() returns #False ... return value = #ERR_* or False (no Error)
   Declare.s GetName(hSemaphore)                                    ; returns the name used to create the semaphore
   
 EndDeclareModule
@@ -344,14 +360,16 @@ Module IPC_Semaphore
 EndModule
 
 
-; Code aus dem PureBasic Forum
-; ----------------------------
+; Code from German PureBasic Forum
+; --------------------------------
 ; http://www.purebasic.fr/german/viewtopic.php?f=8&t=16659&sid=26ccf0dc50e3edc9f9985b99351eb52d
-; Dank an TS-Soft, MK-Soft und allen anderen Mitwirkenden
-; ----------------------------
+; Thanks to TS-Soft, MK-Soft and all other contributors
+; --------------------------------
 DeclareModule IPC_Mem
   
-  Declare Create(Name.s, Size.i, Security = #False)   ; returns a pointer (*Mem), if security is needed use #True
+  Declare Create(Name.s, Size.i, Security = #False,   ; returns a pointer (*Mem), if security is needed use #True
+                 ClearCreate = #True,                 ; empty memory when creating
+                 ClearOpen = #False)                  ; empty memory when opening
   Declare Free(*Mem)                                  ; free resources, close handels and cleanup
   
   Declare.s GetName(*Mem)                             ; returns the name used to create the SharedMemory
@@ -371,10 +389,11 @@ Module IPC_Mem
   
   Global NewMap Mem.Mem() 
   
-  Procedure Create(Name.s, Size.i, Security = #False)
-    Protected handle, *Mem, *SA
+  Procedure Create(Name.s, Size.i, Security = #False, ClearCreate = #True, ClearOpen = #False)
+    Protected handle, *Mem, *SA, ClearMem
     
     handle = OpenFileMapping_(#FILE_MAP_ALL_ACCESS, 0, Name)
+    ClearMem = ClearOpen
     
     If handle = #Null     
       If Security
@@ -395,11 +414,13 @@ Module IPC_Mem
         *SA = #Null
       EndIf     
       handle = CreateFileMapping_(#INVALID_HANDLE_VALUE, *SA, #PAGE_READWRITE | #SEC_COMMIT | #SEC_NOCACHE, 0, Size, Name)
+      ClearMem = ClearCreate
     EndIf
     
     If handle
       *Mem = MapViewOfFile_(handle, #FILE_MAP_ALL_ACCESS, 0, 0, 0)
       If *Mem
+        If ClearMem : FillMemory(*Mem, Size) : EndIf
         With Mem(Str(*Mem))
           \handle = handle
           \Name = Name         
@@ -428,14 +449,23 @@ EndModule
 
 DeclareModule IPC_MemMsg
   
-  Declare Create(Name$, Security = #False)            ; returns a handle (hMsg), if security is needed use #True
+  ; Create / Free (Cleanup)
+  ; -----------------------
+  Declare Create(Name$, Security = #False,            ; returns a handle (hMsg), if security is needed use #True
+                 OnlyNewMsg = #True)                  ; after create, read only NEW Msg (#True) or ALL in Buffer (#False)
   Declare Free(hMsg)                                  ; free resources, close handels and cleanup
   
-  Declare Add(hMsg, Msg$)                             ; add a message to queue
+  ; Receive-Queue
+  ; -------------
   Declare.s Get(hMsg)                                 ; get a message from queue
-  
-  Declare Wait(hMsg, TimeOut = #False)                ; wait for message until TimeOut reached
+  Declare Wait(hMsg, TimeOut = #INFINITE)             ; wait for message until TimeOut reached
   Declare Count(hMsg)                                 ; count messages in queue (for get())
+  
+  ; Send-Queue
+  ; ----------
+  Declare Add(hMsg, Msg$)                             ; add a message to queue
+  Declare WaitSend(hMsg, TimeOut = #INFINITE)         ; wait until all messages have sent or TimeOut reached
+  Declare CountSend(hMsg)                             ; count messages in "send-queue"
   
 EndDeclareModule
 Module IPC_MemMsg
@@ -443,7 +473,6 @@ Module IPC_MemMsg
   
   Declare Thread(hMsg)
   
-  #OnlyNewMsg = #True           ; after create, read only NEW Msg (#True) or ALL in Buffer (#False)
   #MsgBuffer = 100              ; Max. Shared Messages
   #MsgLength = 512              ; Max. Message Length (Chars)
   
@@ -452,8 +481,8 @@ Module IPC_MemMsg
   #MaxWait = 3000               ; max ms to wait for mutex in Add() and Get()
   
   #NamePrefix = "IPC_MemMsg_"
-  #MemMutexPostfix = "_MemMutex"
   #MemPostfix = "_Mem"
+  #MemMutexPostfix = "_MemMutex"
   
   Structure IPC_Msg   
     ID.i
@@ -472,21 +501,25 @@ Module IPC_MemMsg
     Mem_Mutex.i
     Thread_ID.i
     Thread_Exit.i
-    Name.s
     Send_Semaphore.i
     Send_Mutex.i
     Recv_Mutex.i
+    OnlyNewMsg.i
+    Name.s
     List SendMsg.s()
     List RecvMsg.s()
   EndStructure
   
   Global NewMap Msg.hMsg()
   
-  Macro ___ListSize___(___hMsg___)
+  Macro ___ListSizeRecv___(___hMsg___)
     ListSize(Msg(Str(___hMsg___))\RecvMsg())
   EndMacro
+  Macro ___ListSizeSend___(___hMsg___)
+    ListSize(Msg(Str(___hMsg___))\SendMsg())
+  EndMacro
   
-  Procedure Create(Name$, Security = #False)
+  Procedure Create(Name$, Security = #False, OnlyNewMsg = #True)
     Static New_hMsg
     Protected hMsg
     
@@ -500,9 +533,10 @@ Module IPC_MemMsg
     If Not hMsg
       New_hMsg + 1
       hMsg = New_hMsg
-    EndIf   
+    EndIf
     
     With Msg(Str(hMsg))     
+      \OnlyNewMsg = OnlyNewMsg
       \Mem_Size = SizeOf(Mem_Buffer)
       \Mem_Mutex = IPC_Mutex::Create(#NamePrefix + Name$ + #MemMutexPostfix, Security)
       If \Mem_Mutex
@@ -562,6 +596,52 @@ Module IPC_MemMsg
     DeleteMapElement(Msg(), Str(hMsg))       
   EndProcedure
   
+  Procedure.s Get(hMsg)
+    Protected startTime, Ret$ = ""
+    With Msg(Str(hMsg))
+      
+      startTime = ElapsedMilliseconds()
+      If ___ListSizeRecv___(hMsg)
+        Repeat
+          If TryLockMutex(\Recv_Mutex)       
+            FirstElement(\RecvMsg())
+            Ret$ = \RecvMsg()
+            DeleteElement(\RecvMsg())
+            UnlockMutex(\Recv_Mutex)
+            Break
+          Else
+            Delay(#GlobalDelay)
+          EndIf       
+        Until ElapsedMilliseconds() - startTime > #MaxWait
+      EndIf
+      
+    EndWith
+    ProcedureReturn Ret$
+  EndProcedure 
+  Procedure Wait(hMsg, TimeOut = #INFINITE)
+    Protected startTime, Size
+    
+    startTime = ElapsedMilliseconds()
+    Repeat
+      Size = ___ListSizeRecv___(hMsg)
+      If Size
+        ProcedureReturn Size
+      ElseIf TimeOut > 0
+        If ElapsedMilliseconds() - startTime > TimeOut
+          Break
+        EndIf
+      Else
+        Delay(#GlobalDelay)
+      EndIf
+    ForEver
+    
+    ProcedureReturn #False
+  EndProcedure
+  Procedure Count(hMsg)
+    
+    ProcedureReturn ___ListSizeRecv___(hMsg)
+  EndProcedure
+  
   Procedure Add(hMsg, Msg$)
     Protected startTime   
     With Msg(Str(hMsg))
@@ -583,38 +663,15 @@ Module IPC_MemMsg
     EndWith
     ProcedureReturn #False
   EndProcedure
-  Procedure.s Get(hMsg)
-    Protected startTime, Ret$ = ""
-    With Msg(Str(hMsg))
-      
-      startTime = ElapsedMilliseconds()
-      If ___ListSize___(hMsg)
-        Repeat
-          If TryLockMutex(\Recv_Mutex)       
-            FirstElement(\RecvMsg())
-            Ret$ = \RecvMsg()
-            DeleteElement(\RecvMsg())
-            UnlockMutex(\Recv_Mutex)
-            Break
-          Else
-            Delay(#GlobalDelay)
-          EndIf       
-        Until ElapsedMilliseconds() - startTime > #MaxWait
-      EndIf
-      
-    EndWith
-    ProcedureReturn Ret$
-  EndProcedure
-  
-  Procedure Wait(hMsg, TimeOut = #False)
+  Procedure WaitSend(hMsg, TimeOut = #INFINITE)
     Protected startTime, Size
     
     startTime = ElapsedMilliseconds()
     Repeat
-      Size = ___ListSize___(hMsg)
-      If Size
-        ProcedureReturn Size
-      ElseIf TimeOut
+      Size = ___ListSizeSend___(hMsg)
+      If Size = 0
+        ProcedureReturn #True
+      ElseIf TimeOut > 0
         If ElapsedMilliseconds() - startTime > TimeOut
           Break
         EndIf
@@ -625,21 +682,21 @@ Module IPC_MemMsg
     
     ProcedureReturn #False
   EndProcedure
-  Procedure Count(hMsg)
+  Procedure CountSend(hMsg)
     
-    ProcedureReturn ___ListSize___(hMsg)
+    ProcedureReturn ___ListSizeSend___(hMsg)
   EndProcedure
   
   Procedure Thread(hMsg)
     Protected LastRead, LastWrite, LastCount, ReadCount, i
     With Msg(Str(hMsg))
       
-      CompilerIf #OnlyNewMsg
+      If \OnlyNewMsg
         LastRead = \Mem\LastMsg
         If LastRead
           LastCount = \Mem\CountID
         EndIf
-      CompilerEndIf 
+      EndIf 
       
       Repeat
         
@@ -732,9 +789,9 @@ EndModule
 
 
 
-;-Example
+
 ; !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-; !!!!!!!!!!!!! zum testen mehrmals starten !!!!!!!!!!!!!
+; !!!!!!!!!!!!! start several times to test !!!!!!!!!!!!!
 ; !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 CompilerIf #PB_Compiler_IsMainFile
@@ -757,14 +814,14 @@ CompilerIf #PB_Compiler_IsMainFile
     Define hMutex
     Define ms, starttime
     
-    hMutex = IPC_Mutex::Create(#MutexName) ; Mutex erstellen oder öffnen
+    hMutex = IPC_Mutex::Create(#MutexName) ; open / create Mutex
     
     If hMutex     
       Repeat
         Print("Checking Mutex ... ")
-        If IPC_Mutex::Lock(hMutex, 500)   ; versuche Mutex zu sperren         
+        If IPC_Mutex::Lock(hMutex, 500)   ; try to lock
           PrintN("LOCKED")
-          ms = Random(10000, 3000)      ; zufällige Wartezeit ... 3 bis 10 Sek.
+          ms = Random(10000, 3000)      ; random wait ... 3 to 10 sec.
           startTime = ElapsedMilliseconds()
           PrintN("waiting " + Str(ms) + " ms")
           Repeat
@@ -776,11 +833,10 @@ CompilerIf #PB_Compiler_IsMainFile
           PrintN("Mutex UNLOCKED")
         Else
           Select IPC_Mutex::GetError(hMutex)
-            Case IPC_Mutex::#ERR_TimeOut       ; Zeit abgelaufen
+            Case IPC_Mutex::#ERR_TimeOut       ; timeout
               PrintN("TIMEOUT")
-            Case IPC_Mutex::#ERR_Abandoned     ; verwaist
-              IPC_Mutex::Unlock(hMutex)        ; um weitere Prozesse nicht zu blockieren ...
-                                               ; alternativ Free(hMutex) um den Mutex zu zerstören
+            Case IPC_Mutex::#ERR_Abandoned     ; abandoned
+              IPC_Mutex::Unlock(hMutex)        ; maybe isn't needed, but to prevent locking other processes
               PrintN("ABANDONED")
               PrintN("WAITING 10 sec.")
               Delay(10000)
@@ -792,7 +848,7 @@ CompilerIf #PB_Compiler_IsMainFile
         EndIf
       Until Inkey()
       IPC_Mutex::Unlock(hMutex)
-      IPC_Mutex::Free(hMutex)   ; Mutex freigeben
+      IPC_Mutex::Free(hMutex)   ; release mutex
     Else
       PrintN("Cannot create/open mutex object")
       PrintN("waiting 5 sec.")
@@ -860,7 +916,7 @@ CompilerIf #PB_Compiler_IsMainFile
       PrintN(#CRLF$ +
              "Generate some signals")
       PrintN("---------------------")   
-      For i = 1 To 5                  ; Add Some Signals     
+      For i = 1 To 5                  ; add some signals     
         Delay(100)
         AddSignals = Random(10, 2)    ; random number of signals
         queue = IPC_Semaphore::Signal(hSemaphore, AddSignals)
@@ -938,7 +994,7 @@ CompilerIf #PB_Compiler_IsMainFile
           Print(" Read SharedMem ... %" +
                 RSet(Bin(bVar, #PB_Byte), 8, "0") +
                 Space(20))
-          If IPC_Mutex::Lock(hMutex, 10)   ; versuche Mutex zu sperren         
+          If IPC_Mutex::Lock(hMutex, 10)   ; try to lock mutex
             ConsoleLocate(0, 0)
             RandomData(@bVar, #MemSize)
             PrintN("Write SharedMem ... %" +
@@ -954,7 +1010,7 @@ CompilerIf #PB_Compiler_IsMainFile
           Delay(100)
         Until Inkey()
         IPC_Mutex::Unlock(hMutex)
-        IPC_Mutex::Free(hMutex)   ; Mutex freigeben         
+        IPC_Mutex::Free(hMutex)   ; release mutex
       EndIf
       IPC_Mem::Free(*IPC_Mem)
     EndIf
@@ -978,7 +1034,7 @@ CompilerIf #PB_Compiler_IsMainFile
     Define Msg$
     Define hMsg, i, MsgCount, Wait, Counter
     
-    hMsg = IPC_MemMsg::Create(#MsgName)
+    hMsg = IPC_MemMsg::Create(#MsgName, #False, ~#OnlyRead)
     If hMsg
       Repeat
         
@@ -1022,11 +1078,10 @@ CompilerIf #PB_Compiler_IsMainFile
     PrintN("------------------------------" + #CRLF$)
     Repeat
       Delay(100)
-    Until Inkey() 
+    Until Inkey()
     
-    
-  CompilerEndIf 
+  CompilerEndIf
 CompilerEndIf
-; IDE Options = PureBasic 5.40 LTS (MacOS X - x64)
+; IDE Options = PureBasic 5.42 LTS (Linux - x64)
 ; EnableUnicode
 ; EnableXP

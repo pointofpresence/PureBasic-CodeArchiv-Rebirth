@@ -28,6 +28,7 @@ Automatisch beibehalten von Corel
 
 # User-specific files
 *.exe
+*.out
 *.pre.pb
 *.temp.*
 *.bat

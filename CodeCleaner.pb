@@ -2,7 +2,7 @@
 ;         Author: GPI
 ;           Date: 04-01-2016
 ;     PB-Version: 5.41
-;             OS: Windows, Mac
+;             OS: Windows, Linux, Mac
 ;  English-Forum: 
 ;   French-Forum: 
 ;   German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=29323
@@ -66,9 +66,8 @@ Global sum
 
 #packFile="CodeArchivRebirth.7z"
 
-
-Global forbiddenExt.s="CAB,MSI,MSM,MSP,EXE,BAT"
-Global ForbiddenName.s=#packFile+",.,..,.git,content.html,CodeCleaner.pb,todo.temp.txt,ftp.temp.pb,template.pb,THUMBS.DB,EHTHUMBS.DB,DESKTOP.INI,$RECYCLE.BIN,Automatisch beibehalten von Corel,.DS_Store,.AppleDouble,.LSOverride,.Spotlight-V100,.Trashes"
+Global forbiddenExt.s="CAB,MSI,MSM,MSP,EXE,BAT,OUT"
+Global ForbiddenName.s=#packFile+",.,..,.git,content.html,CodeCleaner.pb,Code_formatting_helper.pb,todo.temp.txt,ftp.temp.pb,template.pb,THUMBS.DB,EHTHUMBS.DB,DESKTOP.INI,$RECYCLE.BIN,Automatisch beibehalten von Corel,.DS_Store,.AppleDouble,.LSOverride,.Spotlight-V100,.Trashes"
 
 Procedure InList(a$,b$)
   Protected i=0
@@ -92,17 +91,23 @@ EndProcedure
 
 OpenConsole("CodeCleaner")
 
-CompilerIf #PB_Compiler_OS=#PB_OS_Windows
-  Global Compiler1.s="C:\Program Files\PureBasic\Compilers\pbcompiler.exe"
-  Global Compiler2.s="C:\Program Files (x86)\PureBasic\Compilers\pbcompiler.exe"
-  Global Compiler1Pro.s="x64"
-  Global Compiler2Pro.s="x32"
-CompilerElse
-  Global Compiler1.s=#PB_Compiler_Home+"Compilers/pbcompiler"
-  Global Compiler2.s=""
-  Global Compiler1Pro.s="x"  
-  Global Compiler2Pro.s=""
-CompilerEndIf
+CompilerSelect #PB_Compiler_OS
+  CompilerCase #PB_OS_Windows
+    Global Compiler1.s="C:\Program Files\PureBasic\Compilers\pbcompiler.exe"
+    Global Compiler2.s="C:\Program Files (x86)\PureBasic\Compilers\pbcompiler.exe"
+    Global Compiler1Pro.s="x64"
+    Global Compiler2Pro.s="x32"
+  CompilerCase #PB_OS_MacOS
+    Global Compiler1.s=#PB_Compiler_Home+"Compilers/pbcompiler"
+    Global Compiler2.s=""
+    Global Compiler1Pro.s="x"  
+    Global Compiler2Pro.s=""
+  CompilerCase #PB_OS_Linux
+    Global Compiler1.s=#PB_Compiler_Home+"compilers/pbcompiler"
+    Global Compiler2.s=""
+    Global Compiler1Pro.s="x"  
+    Global Compiler2Pro.s=""
+CompilerEndSelect
 
 Procedure.s inString(in)
   Protected l=ReadUnicodeCharacter(in)
@@ -752,11 +757,3 @@ EndDataSection
 ; ExecutableFormat = Console
 ; CursorPosition = 71
 ; FirstLine = 30
-; Folding = --L+
-; EnableUnicode
-; EnableXP
-; Executable = CodeCleaner.exe
-; DisableDebugger
-; DisableCompileCount = 61
-; DisableBuildCount = 5
-; EnableExeConstant
