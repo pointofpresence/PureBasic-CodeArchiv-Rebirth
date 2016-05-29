@@ -650,7 +650,41 @@ template=PeekS(?template,-1,#PB_UTF8)
 Define tab.s,oldpath.s
 Define p.s
 Define counter
+Define *curpos
+Define sfile.s,oldfile.s,oldlength
+Define do
 tab="":oldpath=""
+
+ForEach codes()
+  If UCase(GetExtensionPart(codes()\file))="ZIP"
+    Debug "FOUND ZIP:"+codes()\file
+    oldfile=codes()\file
+    oldlength=codes()\fLen
+    sfile=UCase(Left(oldfile,Len(oldfile)-3)+"TXT")
+    *curpos=@codes()
+    do=#False
+    ForEach codes()
+      If sfile=UCase(codes()\file)
+        Debug "--> TXT:"+codes()\file
+        codes()\file=oldfile
+        codes()\fLen=oldlength
+        do=#True
+        Break
+      EndIf      
+    Next
+    ChangeCurrentElement(codes(),*curpos)  
+    
+    If do
+      DeleteElement(codes())
+    EndIf    
+    
+    
+  EndIf
+  
+Next
+
+
+
 ForEach codes()
   
   p=ReplaceString(GetPathPart(codes()\file),"\","/")
@@ -755,5 +789,10 @@ EndDataSection
 
 ; IDE Options = PureBasic 5.42 LTS (Windows - x64)
 ; ExecutableFormat = Console
-; CursorPosition = 71
-; FirstLine = 30
+; CursorPosition = 665
+; FirstLine = 413
+; Folding = --A-
+; DisableDebugger
+; EnableCompileCount = 7
+; EnableBuildCount = 0
+; EnableExeConstant

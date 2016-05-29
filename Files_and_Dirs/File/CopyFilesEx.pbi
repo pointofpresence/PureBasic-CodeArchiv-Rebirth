@@ -392,7 +392,8 @@ CompilerIf #PB_Compiler_IsMainFile
     ForEver
   EndIf
 CompilerEndIf
-; IDE Options = PureBasic 5.42 LTS (Linux - x64)
+; IDE Options = PureBasic 5.42 LTS (Windows - x64)
 ; EnableUnicode
+; EnableThread
 ; EnableXP
 ; EnablePurifier

@@ -1,0 +1,8 @@
+;    Description: Easy creation of dynamic GUIs
+;         Author: PureLust
+;           Date: 27-05-2016
+;     PB-Version: 5.42
+;             OS: Windows, Linux, Mac
+;  English-Forum: 
+;   French-Forum: 
+;   German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=29476

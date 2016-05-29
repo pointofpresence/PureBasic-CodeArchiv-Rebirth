@@ -959,8 +959,7 @@ CompilerIf #PB_Compiler_OS = #PB_OS_Windows
 
     EndIf
 
-    ProcedureReturn SendMessage_ (GadgetID (DateGadget), #DTM_SETRANGE, #GDTR_MIN * Bool (Not *GadgetRange\ Minimum = #DateA_ErroneousDate) + #GDTR_MAX *
-    Bool (Not *GadgetRange\ Maximum = #DateA_ErroneousDate), SystemTimes ())
+    ProcedureReturn SendMessage_ (GadgetID (DateGadget), #DTM_SETRANGE, #GDTR_MIN * Bool (Not *GadgetRange\ Minimum = #DateA_ErroneousDate) + #GDTR_MAX * Bool (Not *GadgetRange\ Maximum = #DateA_ErroneousDate), SystemTimes ())
   EndProcedure
 CompilerEndIf
 
@@ -1008,7 +1007,7 @@ CompilerIf #PB_Compiler_IsMainFile
     Date = AddDateA(Date, #PB_Date_Day, -1)
     Debug FormatDateA(Date, "%dd.%mm.%yyyy")
 CompilerEndIf
-; IDE Options = PureBasic 5.42 LTS (Linux - x64)
+; IDE Options = PureBasic 5.42 LTS (Windows - x64)
 ; EnableUnicode
 ; EnableXP
 ; EnablePurifier

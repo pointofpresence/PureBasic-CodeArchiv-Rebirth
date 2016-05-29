@@ -57,7 +57,7 @@ Procedure CreateShortcut(Path.s, Link.s, WorkingDir.s = "", Argument.s = "", Sho
   DEFINE_GUID(IID_IPersistFile, $0000010B, $0000,$0000, $C0, $00, $00, $00, $00, $00, $00, $46); {0000010b-0000-0000-C000-000000000046}
 
   If IconFile = "|" : IconFile = Path : EndIf
-  If Not WorkingDir : WorkingDir = GetPathPart(Path) : EndIf
+  If WorkingDir="" : WorkingDir = GetPathPart(Path) : EndIf
 
   CoInitialize_(0)
   If CoCreateInstance_(@CLSID_ShellLink, 0, 1, @IID_IShellLink, @psl) =  #S_OK
@@ -81,7 +81,7 @@ Procedure CreateShortcut(Path.s, Link.s, WorkingDir.s = "", Argument.s = "", Sho
   CoUninitialize_()
   ProcedureReturn result
 EndProcedure
-; IDE Options = PureBasic 5.42 LTS (Linux - x64)
+; IDE Options = PureBasic 5.42 LTS (Windows - x64)
 ; EnableUnicode
 ; EnableXP
 ; EnablePurifier

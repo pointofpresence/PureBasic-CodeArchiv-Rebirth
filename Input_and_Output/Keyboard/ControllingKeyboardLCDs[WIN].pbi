@@ -717,7 +717,8 @@ CompilerIf #PB_Compiler_IsMainFile
       Data.b $B7,$00,$00,$00,$00,$49,$45,$4E,$44,$AE,$42,$60,$82
   EndDataSection
 CompilerEndIf
-; IDE Options = PureBasic 5.42 LTS (Linux - x64)
+; IDE Options = PureBasic 5.42 LTS (Windows - x64)
 ; EnableUnicode
+; EnableThread
 ; EnableXP
 ; EnablePurifier
