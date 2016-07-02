@@ -1,0 +1,8 @@
+;    Description: LineGraph and oscilloscope
+;         Author: SBond
+;           Date: 2013-05-23
+;     PB-Version: 5.42
+;             OS: Windows
+;  English-Forum: 
+;   French-Forum: 
+;   German-Forum: http://www.purebasic.fr/german/viewtopic.php?f=8&t=26795
