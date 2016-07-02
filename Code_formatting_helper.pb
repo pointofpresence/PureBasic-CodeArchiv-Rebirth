@@ -35,6 +35,7 @@ Runtime Enumeration Gadget
   #String_EnglishForum
   #String_FrenchForum
   #String_GermanForum
+  #String_PostDate
 
   #CheckBox_NeedsThreadSafe
   #CheckBox_Only_x86_Systems
@@ -99,6 +100,10 @@ XML$ = "<window id='#Window_Main' name='Window_Main' text='CodeArchiv - " + #Pro
        "      <string id='#String_GermanForum'/>" + #CRLF$ +
        "    </hbox>" + #CRLF$ +
        "    <hbox expand='item:2'>" + #CRLF$ +
+       "      <text text='Post date:' width='100'/>" + #CRLF$ +
+       "      <string id='#String_PostDate'/>" + #CRLF$ +
+       "    </hbox>" + #CRLF$ +
+       "    <hbox expand='item:2'>" + #CRLF$ +
        "      <text text='Code limitations:' width='100'/>" + #CRLF$ +
        "      <hbox>" + #CRLF$ +
        "        <gridbox columns='3'>" + #CRLF$ +
@@ -146,7 +151,7 @@ Repeat
     ; Set main informations
     Code$ = ";    Description: " + Trim(GetGadgetText(#String_Description)) + #CRLF$ +
             ";         Author: " + Trim(GetGadgetText(#String_Author)) + #CRLF$ +
-            ";           Date: " + FormatDate("%yyyy-%mm-%dd", Date()) + #CRLF$ +
+            ";           Date: " + GetGadgetText(#String_PostDate) + #CRLF$ +
             ";     PB-Version: " + Trim(GetGadgetText(#String_PBVersion)) + #CRLF$ +
             ";             OS: "
     If GetGadgetState(#CheckBox_Windows) : Supported_OS$ + "|Windows|" : EndIf
@@ -232,10 +237,11 @@ Until Event = #PB_Event_CloseWindow
 CleanUp:
 If IsXML(#XML) : FreeXML(#XML) : EndIf
 DeleteFile(CodeFile$) ; Removes the file in order to prevent that the previous code is displayed 
-; IDE Options = PureBasic 5.42 LTS (Linux - x64)
-; CursorPosition = 233
-; FirstLine = 183
-; EnableUnicode
+; IDE Options = PureBasic 5.50 beta 1 (Linux - x64)
+; CursorPosition = 153
+; FirstLine = 119
 ; EnableXP
+; Executable = ../../../.purebasic/MyTools/Code formatting helper
 ; CompileSourceDirectory
 ; EnablePurifier
+; EnableUnicode
