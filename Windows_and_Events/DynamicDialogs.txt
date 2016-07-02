@@ -1,6 +1,6 @@
 ;    Description: Easy creation of dynamic GUIs
 ;         Author: PureLust
-;           Date: 27-05-2016
+;           Date: 2016-05-27
 ;     PB-Version: 5.42
 ;             OS: Windows, Linux, Mac
 ;  English-Forum: 
