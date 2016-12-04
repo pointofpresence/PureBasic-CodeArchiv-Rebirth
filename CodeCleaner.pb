@@ -786,13 +786,13 @@ DataSection
   IncludeBinary ".dat"+#slash+"CodeCleaner_template.html"
   Data.q 0
 EndDataSection
-
-; IDE Options = PureBasic 5.42 LTS (Windows - x64)
+; IDE Options = PureBasic 5.50 (Linux - x64)
 ; ExecutableFormat = Console
-; CursorPosition = 665
-; FirstLine = 413
-; Folding = --A-
+; CursorPosition = 105
+; FirstLine = 48
+; Folding = A9w
 ; DisableDebugger
-; EnableCompileCount = 7
+; CompileSourceDirectory
+; EnableCompileCount = 12
 ; EnableBuildCount = 0
 ; EnableExeConstant

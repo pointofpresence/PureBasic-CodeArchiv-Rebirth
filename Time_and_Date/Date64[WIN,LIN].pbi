@@ -563,10 +563,6 @@ CompilerIf #PB_Compiler_IsMainFile
   Debug "Test wurde durchgeführt"
 CompilerEndIf
 ; IDE Options = PureBasic 5.50 beta 3 (Linux - x64)
-; CursorPosition = 563
-; FirstLine = 430
-; Folding = ---
 ; EnableXP
-; CompileSourceDirectory
 ; EnablePurifier
 ; EnableUnicode
