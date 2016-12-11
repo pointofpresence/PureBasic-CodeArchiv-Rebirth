@@ -101,7 +101,7 @@ XML$ = "<window id='#Window_Main' name='Window_Main' text='CodeArchiv - " + #Pro
        "    </hbox>" + #CRLF$ +
        "    <hbox expand='item:2'>" + #CRLF$ +
        "      <text text='Post date:' width='100'/>" + #CRLF$ +
-       "      <string id='#String_PostDate'/>" + #CRLF$ +
+       "      <string id='#String_PostDate' text='yyyy-mm-dd'/>" + #CRLF$ +
        "    </hbox>" + #CRLF$ +
        "    <hbox expand='item:2'>" + #CRLF$ +
        "      <text text='Code limitations:' width='100'/>" + #CRLF$ +
@@ -237,9 +237,9 @@ Until Event = #PB_Event_CloseWindow
 CleanUp:
 If IsXML(#XML) : FreeXML(#XML) : EndIf
 DeleteFile(CodeFile$) ; Removes the file in order to prevent that the previous code is displayed 
-; IDE Options = PureBasic 5.50 beta 1 (Linux - x64)
-; CursorPosition = 153
-; FirstLine = 119
+; IDE Options = PureBasic 5.51 Beta 1 (Linux - x64)
+; CursorPosition = 103
+; FirstLine = 68
 ; EnableXP
 ; Executable = ../../../.purebasic/MyTools/Code formatting helper
 ; CompileSourceDirectory
