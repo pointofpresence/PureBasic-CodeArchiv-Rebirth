@@ -65,7 +65,7 @@ If CodeFile$ = ""
 EndIf
 
 XML$ = "<window id='#Window_Main' name='Window_Main' text='CodeArchiv - " + #ProgramName + "' " +
-       "flags='#PB_Window_Tool | #PB_Window_ScreenCentered | #PB_Window_SizeGadget | #PB_Window_Invisible'>" + #CRLF$ +
+       "flags='#PB_Window_Tool | #PB_Window_SizeGadget | #PB_Window_Invisible'>" + #CRLF$ +
        "  <vbox>" + #CRLF$ +
        "    <hbox expand='item:2'>" + #CRLF$ +
        "      <text text='Description:' width='100'/>" + #CRLF$ +
@@ -141,7 +141,7 @@ EndIf
 
 WindowBounds(#Window_Main, WindowWidth(#Window_Main), WindowHeight(#Window_Main), #PB_Ignore, #PB_Ignore)
 StickyWindow(#Window_Main, #True)
-HideWindow(#Window_Main, #False)
+HideWindow(#Window_Main, #False, #PB_Window_ScreenCentered)
 
 Repeat
   Event = WaitWindowEvent()
@@ -238,8 +238,8 @@ CleanUp:
 If IsXML(#XML) : FreeXML(#XML) : EndIf
 DeleteFile(CodeFile$) ; Removes the file in order to prevent that the previous code is displayed 
 ; IDE Options = PureBasic 5.51 Beta 1 (Linux - x64)
-; CursorPosition = 103
-; FirstLine = 68
+; CursorPosition = 67
+; FirstLine = 53
 ; EnableXP
 ; Executable = ../../../.purebasic/MyTools/Code formatting helper
 ; CompileSourceDirectory
