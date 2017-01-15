@@ -9,12 +9,12 @@ ClearXML()	; make sure, the XML-Dialog is empty before you begin a new one
 
 Window__(#PB_Any, "", "DynamicDialog Example", #PB_Window_SizeGadget | #PB_Window_SystemMenu)	; create a resizeable window
 	vBox__(1)																; create a vertical-Box, where only the first Element in the vBox will be auto-resized
-		Editor__(#PB_Ignore, "myEditorGadget","",0,0,180)		; create a EditorGadget() with the 'Name': "myEditorGadget"
+		Editor__(#PB_Ignore, "myEditorGadget","",0,0,180)		; create an EditorGadget() with the 'Name': "myEditorGadget"
 		Button__(1,"","Click me ...")									; create a Button with Gadget-Number = 1
 	EndVBox__()																; End-Tag for the previously opened vBox
 EndWindow__()																; End-Tag for the window
 
-UnuseModule	DynamicDialogs_suffixed
+UnuseModule	DynamicDialogs_suffixed									; we don't need the XML-Elements any more
 
 If OpenDialogWindow(1, GetXML())		; Open the last created Window (or specify the Window by ID or Name$)
 	
@@ -26,5 +26,10 @@ If OpenDialogWindow(1, GetXML())		; Open the last created Window (or specify the
 EndIf
 
 ; IDE Options = PureBasic 5.42 Beta 3 LTS (Windows - x86)
+; CursorPosition = 12
+; FirstLine = 2
 ; EnableUnicode
 ; EnableXP
+; EnableCompileCount = 14
+; EnableBuildCount = 0
+; EnableExeConstant

@@ -93,5 +93,11 @@ If OpenDialogWindow(0, xmlWinMain$, #WinMain, "", #PB_Ignore,#PB_Ignore,850,600,
 EndIf
 
 ; IDE Options = PureBasic 5.42 Beta 3 LTS (Windows - x86)
+; CursorPosition = 31
+; FirstLine = 26
+; Folding = -
 ; EnableUnicode
 ; EnableXP
+; EnableCompileCount = 165
+; EnableBuildCount = 0
+; EnableExeConstant

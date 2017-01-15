@@ -77,6 +77,11 @@ If OpenDialogWindow(#DialogMain, xmlWinMain$,0, "MainWindow",0,0,0,0,0,#DialogEr
 EndIf
 
 ; IDE Options = PureBasic 5.42 Beta 3 LTS (Windows - x86)
+; CursorPosition = 2
+; Folding = -
 ; EnableUnicode
 ; EnableXP
 ; DisableDebugger
+; EnableCompileCount = 157
+; EnableBuildCount = 0
+; EnableExeConstant

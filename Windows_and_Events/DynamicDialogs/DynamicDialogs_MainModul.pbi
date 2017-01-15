@@ -43,6 +43,8 @@
 		
 		#Dialog_AutoMinSize	= -64738
 		
+		#NoExtraCommand = -1
+		
 		Enumeration	XML_NodeID		; Nodes for Elements, which can contain other Elements - so they need an EndNode
 			#Node_FirstNode
 			
@@ -463,7 +465,7 @@ Module DynamicDialogs
 				Margin$ = " margin='"+#XmlDefaultMargin$+"'"
 			ElseIf Margin$ <> "" 
 				Margin$ = " margin='"+Margin$+"'"
-			ElseIf ForceZeroMargin
+			ElseIf ForceZeroMargin > 0
 				Margin$ = ZeroMargin$
 			EndIf
 			
@@ -484,12 +486,12 @@ Module DynamicDialogs
 				vBoxText$ + "<singlebox expand='horizontal' align='"+vAlign$+"'"+Margin$+Col$+Row$+">"+CR$
 				EndText$	+ "</singlebox>"+CR$
 				Margin$	= ZeroMargin$
-				ForceZeroMargin = #False
+				If ForceZeroMargin > 0 : ForceZeroMargin = #False : EndIf
 				Col$		= ""
 				Row$		= ""
 				AddIndent + 1
 			EndIf
-			If Len(hAlign$) Or (Margin$<>ZeroMargin$ And Margin$<>"" And ForceZeroMargin)			; SingleBox mit horizontaler Expansion für left/right Ausrichtung
+			If Len(hAlign$) Or (Margin$<>ZeroMargin$ And Margin$<>"" And ForceZeroMargin > 0)			; SingleBox mit horizontaler Expansion für left/right Ausrichtung
 				If AddIndent : hBoxText$ + Indent(AddIndent) : EndIf
 				hBoxText$ + "<singlebox expand='vertical' align='"+hAlign$+"'" + Margin$+Col$+Row$+">"+CR$
 				EndText$	= "</singlebox>"+CR$+EndText$
@@ -503,18 +505,22 @@ Module DynamicDialogs
 				For n = Len(XML_Code$) To 1 Step -1
 					If Mid(XML_Code$, n, 1)=">"
 						If Mid(XML_Code$, n-1, 2)="/>" : n-1 : EndIf
-						If ForceZeroMargin And Margin$ = ZeroMargin$ : Margin$ = "" : EndIf
+						If ForceZeroMargin > 0 And Margin$ = ZeroMargin$ : Margin$ = "" : EndIf
 						XML_Code$ = Left(XML_Code$,n-1) + Col$ + Row$ + Margin$ + Mid(XML_Code$, n)
 						Break
 					EndIf
 				Next
 			EndIf
 			
-			If AddIndent
-				XML_Code$ = Indent(AddIndent) + XML_Code$
-			EndIf
+			If ForceZeroMargin < 0    ; keine zusätzlichen Boxen für Container-Gadgets
+				FinalXML$ = XML_Code$+CR$
+			Else
+				If AddIndent
+					XML_Code$ = Indent(AddIndent) + XML_Code$
+				EndIf
 			
-			FinalXML$ = vBoxText$+hBoxText$+XML_Code$+CR$+EndText$
+				FinalXML$ = vBoxText$+hBoxText$+XML_Code$+CR$+EndText$
+			EndIf
 			If Right(FinalXML$,1) = Chr(13)
 				FinalXML$ = Left(FinalXML$, Len(FinalXML$)-1)
 			EndIf
@@ -1357,7 +1363,7 @@ Module DynamicDialogs
 			
 			XML$ + ">"
 			
-			XML$ = Align(XML$, Align, Margin$, ColSpan, RowSpan)
+			XML$ = Align(XML$, Align, Margin$, ColSpan, RowSpan, #NoExtraCommand)
 			
 			XMLBuffer$		+ Indent() + XML$ + CR$
 			LastXMLLine$	= XML$ + CR$			; Store last XML-Line, to show in Error-Message
@@ -1393,7 +1399,7 @@ Module DynamicDialogs
 			
 			XML$ + ">"
 			
-			XML$ = Align(XML$, Align, Margin$, ColSpan, RowSpan)
+			XML$ = Align(XML$, Align, Margin$, ColSpan, RowSpan, #NoExtraCommand)
 			
 			XMLBuffer$		+ Indent() + XML$ + CR$
 			LastXMLLine$	= XML$ + CR$			; Store last XML-Line, to show in Error-Message
@@ -1416,7 +1422,7 @@ Module DynamicDialogs
 			
 			XML$ + ">"
 			
-			XML$ = Align(XML$, Align, Margin$, ColSpan, RowSpan)
+			XML$ = Align(XML$, Align, Margin$, ColSpan, RowSpan, #NoExtraCommand)
 			
 			XMLBuffer$		+ Indent() + XML$ + CR$
 			LastXMLLine$	= XML$ + CR$			; Store last XML-Line, to show in Error-Message
@@ -1435,7 +1441,7 @@ Module DynamicDialogs
 			
 			XML$ + ">"
 			
-			XML$ = Align(XML$, #PB_Default, Margin$, #PB_Ignore, #PB_Ignore)
+			XML$ = Align(XML$, #PB_Default, Margin$, #PB_Ignore, #PB_Ignore, #NoExtraCommand)
 			
 			XMLBuffer$		+ Indent() + XML$ + CR$
 			LastXMLLine$	= XML$ + CR$			; Store last XML-Line, to show in Error-Message
@@ -1461,7 +1467,7 @@ Module DynamicDialogs
 			
 			XML$ + ">"
 			
-			XML$ = Align(XML$, Align, Margin$, ColSpan, RowSpan)
+			XML$ = Align(XML$, Align, Margin$, ColSpan, RowSpan, #NoExtraCommand)
 			
 			XMLBuffer$		+ Indent() + XML$ + CR$
 			LastXMLLine$	= XML$ + CR$			; Store last XML-Line, to show in Error-Message
@@ -1499,7 +1505,7 @@ Module DynamicDialogs
 			
 			XML$ + ">"
 			
-			XML$ = Align(XML$, Align, Margin$, ColSpan, RowSpan)
+			XML$ = Align(XML$, Align, Margin$, ColSpan, RowSpan, #NoExtraCommand)
 			
 			XMLBuffer$		+ Indent() + XML$ + CR$
 			LastXMLLine$	= XML$ + CR$			; Store last XML-Line, to show in Error-Message
@@ -2439,6 +2445,12 @@ Module DynamicDialogs
 		;<
 		
 EndModule
-; IDE Options = PureBasic 5.42 Beta 3 LTS (Windows - x86)
-; EnableUnicode
+; IDE Options = PureBasic 5.51 (Windows - x86)
+; CursorPosition = 521
+; FirstLine = 127
+; Folding = DgAAAAAAAJAAAAAMAAAAAA+
 ; EnableXP
+; EnableCompileCount = 198
+; EnableBuildCount = 0
+; EnableExeConstant
+; EnableUnicode
