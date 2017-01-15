@@ -1,4 +1,4 @@
-﻿; XML-Dialog-Variante zu Michael Vogels Beispiel   =>   http://www.purebasic.fr/english/viewtopic.php?f=13&t=64868
+﻿; XML-Dialog-Variante zu Michael Vogels Beispiel   =>   http: //www.purebasic.fr/english/viewtopic.php?f=13&t=64868
 
 EnableExplicit
 
@@ -249,11 +249,5 @@ If CreateDialog(#Dialog) And OpenXMLDialog(#Dialog, #XMLWinMain, "winMain")
    EndDataSection;
 
 ; IDE Options = PureBasic 5.42 Beta 3 LTS (Windows - x86)
-; CursorPosition = 10
-; FirstLine = 6
-; Folding = -
 ; EnableUnicode
 ; EnableXP
-; EnableCompileCount = 277
-; EnableBuildCount = 0
-; EnableExeConstant

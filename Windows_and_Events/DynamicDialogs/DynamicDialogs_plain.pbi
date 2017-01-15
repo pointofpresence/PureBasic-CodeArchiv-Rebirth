@@ -290,10 +290,5 @@ CompilerIf	#PB_Compiler_IsMainFile
 	
 CompilerEndIf
 ; IDE Options = PureBasic 5.42 Beta 3 LTS (Windows - x86)
-; CursorPosition = 235
-; Folding = 0-AA-0Hwv----DAAAw-
 ; EnableUnicode
 ; EnableXP
-; EnableCompileCount = 99
-; EnableBuildCount = 0
-; EnableExeConstant

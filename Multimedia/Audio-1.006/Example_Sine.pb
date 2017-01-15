@@ -128,9 +128,6 @@ Until Main\Quit
 AudioOut::Deinitialize(Main\AudioOut)
 
 ; IDE Options = PureBasic 5.30 (Windows - x64)
-; CursorPosition = 57
-; FirstLine = 34
-; Folding = -
 ; EnableUnicode
 ; EnableThread
 ; EnableXP

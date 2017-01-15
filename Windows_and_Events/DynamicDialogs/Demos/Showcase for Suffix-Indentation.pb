@@ -48,9 +48,5 @@ UnuseModule	DynamicDialogs_suffixed
 
 
 ; IDE Options = PureBasic 5.42 Beta 3 LTS (Windows - x86)
-; CursorPosition = 1
 ; EnableUnicode
 ; EnableXP
-; EnableCompileCount = 4
-; EnableBuildCount = 0
-; EnableExeConstant

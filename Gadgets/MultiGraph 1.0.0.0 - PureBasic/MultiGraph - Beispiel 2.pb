@@ -212,17 +212,9 @@ ForEver
 
 
 ; IDE Options = PureBasic 5.11 (Windows - x86)
-; CursorPosition = 118
-; FirstLine = 87
-; Folding = 9-
 ; EnableUnicode
 ; EnableThread
 ; EnableXP
 ; EnableUser
 ; UseIcon = scope.ico
-; Executable = MultiGraph - Beispiel 2 - x86.exe
 ; DisableDebugger
-; CurrentDirectory = C:\Users\SBond\Desktop\
-; EnableCompileCount = 1985
-; EnableBuildCount = 6
-; EnableExeConstant

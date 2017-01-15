@@ -59,7 +59,7 @@ KillMask("CONSTANT")=#True
 KillMask("COMPILESOURCEDIRECTORY")=#True
 
 Global NewMap NeedMask()
-NeedMask("ENABLEUNICODE")
+;NeedMask("ENABLEUNICODE")
 NeedMask("ENABLEXP")
 
 Global sum
@@ -786,13 +786,13 @@ DataSection
   IncludeBinary ".dat"+#slash+"CodeCleaner_template.html"
   Data.q 0
 EndDataSection
-; IDE Options = PureBasic 5.50 (Linux - x64)
+; IDE Options = PureBasic 5.51 (Linux - x64)
 ; ExecutableFormat = Console
-; CursorPosition = 105
-; FirstLine = 48
-; Folding = A9w
+; CursorPosition = 61
+; FirstLine = 23
+; Folding = A93-
 ; DisableDebugger
 ; CompileSourceDirectory
-; EnableCompileCount = 12
+; EnableCompileCount = 14
 ; EnableBuildCount = 0
 ; EnableExeConstant

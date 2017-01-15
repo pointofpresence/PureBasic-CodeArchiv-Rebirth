@@ -61,8 +61,6 @@ DataSection
 EndDataSection
 
 ; IDE Options = PureBasic 5.30 (Windows - x64)
-; CursorPosition = 45
-; FirstLine = 1
 ; EnableUnicode
 ; EnableThread
 ; EnableXP

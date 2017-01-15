@@ -141,9 +141,6 @@ Until Main\Quit
 AudioIn::Deinitialize(Main\AudioIn)
 
 ; IDE Options = PureBasic 5.30 (Windows - x64)
-; CursorPosition = 104
-; FirstLine = 78
-; Folding = -
 ; EnableUnicode
 ; EnableThread
 ; EnableXP

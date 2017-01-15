@@ -155,13 +155,6 @@ DataSection
 EndDataSection
 
 ; IDE Options = PureBasic 5.42 Beta 3 LTS (Windows - x86)
-; CursorPosition = 111
-; FirstLine = 99
-; Folding = -
 ; EnableUnicode
 ; EnableXP
-; Executable = DynamicDialogs_Suffix Indentation-Injector
 ; DisableDebugger
-; EnableCompileCount = 17
-; EnableBuildCount = 1
-; EnableExeConstant

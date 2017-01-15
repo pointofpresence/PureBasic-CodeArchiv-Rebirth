@@ -4000,14 +4000,7 @@ Procedure _MG_Graph_entfernen (iGraph.i)
 EndProcedure	;==> _MG_Graph_entfernen
 
 ; IDE Options = PureBasic 5.11 (Windows - x86)
-; CursorPosition = 1
-; Folding = HA-9TFkyZee+9-6zn---f+---6---n--n--n--nnnnP--
 ; EnableUnicode
 ; EnableThread
 ; EnableXP
 ; EnableUser
-; Executable = rr.exe
-; CurrentDirectory = C:\Users\SBond\Desktop\
-; EnableCompileCount = 1657
-; EnableBuildCount = 0
-; EnableExeConstant

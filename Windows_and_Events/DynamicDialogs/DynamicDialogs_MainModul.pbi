@@ -2446,11 +2446,5 @@ Module DynamicDialogs
 		
 EndModule
 ; IDE Options = PureBasic 5.51 (Windows - x86)
-; CursorPosition = 521
-; FirstLine = 127
-; Folding = DgAAAAAAAJAAAAAMAAAAAA+
 ; EnableXP
-; EnableCompileCount = 198
-; EnableBuildCount = 0
-; EnableExeConstant
 ; EnableUnicode

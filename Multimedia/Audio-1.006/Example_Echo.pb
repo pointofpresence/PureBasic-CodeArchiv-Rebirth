@@ -121,9 +121,6 @@ AudioIn::Deinitialize(Main\AudioIn)
 AudioOut::Deinitialize(Main\AudioOut)
 
 ; IDE Options = PureBasic 5.30 (Windows - x64)
-; CursorPosition = 83
-; FirstLine = 54
-; Folding = -
 ; EnableUnicode
 ; EnableThread
 ; EnableXP

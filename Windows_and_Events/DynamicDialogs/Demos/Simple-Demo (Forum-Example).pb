@@ -26,10 +26,5 @@ If OpenDialogWindow(1, GetXML())		; Open the last created Window (or specify the
 EndIf
 
 ; IDE Options = PureBasic 5.42 Beta 3 LTS (Windows - x86)
-; CursorPosition = 12
-; FirstLine = 2
 ; EnableUnicode
 ; EnableXP
-; EnableCompileCount = 14
-; EnableBuildCount = 0
-; EnableExeConstant
