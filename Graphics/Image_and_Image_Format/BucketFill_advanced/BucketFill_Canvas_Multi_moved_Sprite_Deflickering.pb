@@ -14,10 +14,10 @@ Define window_0, win_event, canvas_ID, window_ID, texture_ID, texture_1_ID, text
 Define canvas_x, canvas_y, canvas_width, canvas_height, point, arc
 Define path$
 
-#GeeBee="./Bucket_fill_image_set/Geebee2.bmp"
-#SoilWall="./Bucket_fill_image_set/soil_wall.jpg"
-#Testtexture="./Bucket_fill_image_set/testtexture_large.png"
-#Penguin="./Bucket_fill_image_set/Penguin.png"
+#GeeBee="./BucketFill_Image_Set/Geebee2.bmp"
+#SoilWall="./BucketFill_Image_Set/soil_wall.jpg"
+#Testtexture="./BucketFill_Image_Set/testtexture_large.png"
+#Penguin="./BucketFill_Image_Set/Penguin.png"
 
 ; Presets
 canvas_x=50
@@ -237,5 +237,8 @@ Repeat
   EndIf
 ForEver
 ; IDE Options = PureBasic 5.51 (Windows - x64)
+; CursorPosition = 17
+; FirstLine = 13
+; Folding = -
 ; EnableXP
 ; DisableDebugger

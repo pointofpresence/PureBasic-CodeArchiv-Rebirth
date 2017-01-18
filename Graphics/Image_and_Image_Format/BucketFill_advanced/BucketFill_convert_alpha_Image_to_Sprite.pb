@@ -1,4 +1,4 @@
-﻿XIncludeFile("./BucketFill_Image.pb")
+XIncludeFile("./BucketFill_Image.pb")
 
 ; - Demo - convert a image with alpha channel to a masked sprite -
 
@@ -17,8 +17,10 @@ percent_color_distance=20; You can set a color distance for the background color
 ; The FloodFill mode works from the corners inward - the BucketFill mode over all 
 
 result=BucketFill_Image::CreateSprite_from_AlphaImage_BF(mode, image_ID, mask_color, percent_color_distance)
+BucketFill_Image::ErrorCheck_BF(result)
 
 SaveImage(result, Left(path$, Len(path$)-4)+".jpg", #PB_ImagePlugin_JPEG, 10, 24)
-BucketFill_Image::ErrorCheck_BF(result)
+
 ; IDE Options = PureBasic 5.51 (Windows - x64)
+; CursorPosition = 12
 ; EnableXP

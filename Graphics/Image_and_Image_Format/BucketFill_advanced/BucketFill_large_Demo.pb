@@ -1,4 +1,4 @@
-﻿XIncludeFile("./BucketFill_Image.pb")
+XIncludeFile("./BucketFill_Image.pb")
 XIncludeFile("./BucketFill_Canvas.pb")
 
 ;- Demo - large
@@ -14,17 +14,17 @@ CompilerIf #PB_Compiler_IsMainFile
   Define path$
   
 CompilerEndIf
-Define GeeBee$=     "./Bucket_fill_image_set/Geebee2.bmp"
-Define Clouds$=     "./Bucket_fill_image_set/Clouds.jpg"
-Define SoilWall$=   "./Bucket_fill_image_set/soil_wall.jpg"
-Define RustySteel$= "./Bucket_fill_image_set/RustySteel.jpg"
-Define Caisse$=     "./Bucket_fill_image_set/Caisse.png"
-Define Dirt$=       "./Bucket_fill_image_set/Dirt.jpg"
-Define Background$= "./Bucket_fill_image_set/Background.bmp"
-Define Hubble$=     "./Bucket_fill_image_set/Hubble.jpg"
-Define Alpha$=      "./Bucket_fill_image_set/Alpha.png"
-Define Cat_03$=     "./Bucket_fill_image_set/Cat_03.jpg"
-Define Cat_02$=     "./Bucket_fill_image_set/Cat_02.jpg"
+Define GeeBee$=     "./BucketFill_Image_Set/Geebee2.bmp"
+Define Clouds$=     "./BucketFill_Image_Set/Clouds.jpg"
+Define SoilWall$=   "./BucketFill_Image_Set/soil_wall.jpg"
+Define RustySteel$= "./BucketFill_Image_Set/RustySteel.jpg"
+Define Caisse$=     "./BucketFill_Image_Set/Caisse.png"
+Define Dirt$=       "./BucketFill_Image_Set/Dirt.jpg"
+Define Background$= "./BucketFill_Image_Set/Background.bmp"
+Define Hubble$=     "./BucketFill_Image_Set/Hubble.jpg"
+Define Alpha$=      "./BucketFill_Image_Set/Cubes.png"
+Define Cat_03$=     "./BucketFill_Image_Set/Cat_03.jpg"
+Define Cat_02$=     "./BucketFill_Image_Set/Cat_02.jpg"
 
 ; Presets
 canvas_x=50
@@ -562,7 +562,11 @@ Repeat
   EndIf
 ForEver
 ; IDE Options = PureBasic 5.51 (Windows - x64)
+; CursorPosition = 18
+; FirstLine = 5
+; Folding = -
 ; EnableXP
+; Executable = test.exe
 ; DisableDebugger
 ; EnablePurifier
 ; EnableUnicode

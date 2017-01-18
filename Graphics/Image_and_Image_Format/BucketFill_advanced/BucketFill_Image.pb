@@ -85,6 +85,8 @@ DeclareModule BucketFill_Image
                                           percent_color_distance) ; You can set a color distance for the mask color in percent
                                                                   ;  mode=0 = Create mask with BucketFill - mode=1 = create mask with FloodFill
                                                                   ;  The FloodFill mode works from the corners inward - the BucketFill mode over all
+  Declare CreateAlphaImage_from_Sprite_BF(image_ID,
+                                          percent_color_distance) ; You can set a color distance for the mask color in percent
   Declare PhotoBrush_BF(mode, image_ID, texture_ID, 
                         x, ; Output coordinates
                         y, 
@@ -892,6 +894,64 @@ Module BucketFill_Image
     ProcedureReturn texture_ID
   EndProcedure
   
+  Procedure CreateAlphaImage_from_Sprite_BF(image_ID,
+                                            percent_color_distance)
+    If Not IsImage(image_ID) : ProcedureReturn -1 : EndIf
+    Protected image_width=ImageWidth(image_ID)-1
+    Protected image_height=ImageHeight(image_ID)-1
+    Protected image_width_1=image_width+1
+    Protected image_height_1=image_height+1
+    Protected point, i, ii, old_percent_color_distance, alpha_image_ID
+    
+    Protected Dim image.q(image_width, image_height)
+    
+    If StartDrawing(ImageOutput(image_ID)) ; Put image in array
+      
+      point=Point(0, 0)
+      
+      For i=0 To image_height
+        For ii=0 To image_width
+          If ColorDistance_BF(point, Point(ii,i))>=percent_color_distance 
+            image(ii, i)=Point(ii, i)
+          Else
+            image(ii, i)=-1
+          EndIf
+        Next ii
+      Next i
+    Else
+      ProcedureReturn -5
+    EndIf
+    
+    StopDrawing()
+    
+    alpha_image_ID=CreateImage(#PB_Any, image_width_1, image_height_1, 32, #PB_Image_Transparent)
+    If Not alpha_image_ID : ProcedureReturn -1 : EndIf
+    
+    old_percent_color_distance=percent_1
+    percent_1=percent_color_distance
+    
+    If StartDrawing(ImageOutput(alpha_image_ID)) ; Put array in image
+      
+      DrawingMode(#PB_2DDrawing_AllChannels)
+      For i=0 To image_height
+        For ii=0 To image_width
+          point=image(ii,i)
+          If point<>-1
+            Plot(ii, i, RGBA (Red(point), Green(point), Blue(point), $FF))
+          EndIf
+        Next ii
+      Next i
+    Else
+      ProcedureReturn -5
+    EndIf
+    
+    StopDrawing()
+    
+    percent_1=old_percent_color_distance
+    
+    ProcedureReturn alpha_image_ID
+  EndProcedure
+  
   Procedure Texture_FloodFill(x, y, image_ID, texture_ID)
     Protected texture_width_=ImageWidth(texture_ID)-1
     Protected texture_height_=ImageHeight(texture_ID)-1
@@ -1100,9 +1160,11 @@ Module BucketFill_Image
     
     If Not temporary_texture_ID : ProcedureReturn -6 : EndIf
     
-    If Not ResizeImage(temporary_texture_ID, texture_width, texture_height)
-      FreeImage(temporary_texture_ID)
-      ProcedureReturn -6
+    If ImageWidth(temporary_texture_ID)<>texture_width Or ImageHeight(temporary_texture_ID)<>texture_height
+      If Not ResizeImage(temporary_texture_ID, texture_width, texture_height)
+        FreeImage(temporary_texture_ID)
+        ProcedureReturn -6
+      EndIf
     EndIf
     
     percent_visibility-1
@@ -1174,22 +1236,22 @@ CompilerIf #PB_Compiler_IsMainFile
   
   CompilerIf #PB_Compiler_OS=#PB_OS_Linux
     Define font_1=LoadFont(1, "Arial", 11)
-    #GeeBee="./Bucket_fill_image_set/Geebee2.bmp"
-    #Clouds="./Bucket_fill_image_set/Clouds.jpg"
-    #SoilWall="./Bucket_fill_image_set/soil_wall.jpg"
-    #RustySteel="./Bucket_fill_image_set/RustySteel.jpg"
-    #Caisse="./Bucket_fill_image_set/Caisse.png"
-    #Dirt="./Bucket_fill_image_set/Dirt.jpg"
-    #Background="./Bucket_fill_image_set/Background.bmp"
+    #GeeBee="./BucketFill_Image_Set/Geebee2.bmp"
+    #Clouds="./BucketFill_Image_Set/Clouds.jpg"
+    #SoilWall="./BucketFill_Image_Set/soil_wall.jpg"
+    #RustySteel="./BucketFill_Image_Set/RustySteel.jpg"
+    #Caisse="./BucketFill_Image_Set/Caisse.png"
+    #Dirt="./BucketFill_Image_Set/Dirt.jpg"
+    #Background="./BucketFill_Image_Set/Background.bmp"
   CompilerElse
     ; Linux/Mac can not load examples from the Compiler_Home path
     #GeeBee=#PB_Compiler_Home+"Examples/Sources/Data/Geebee2.bmp"
     #Clouds=#PB_Compiler_Home+"Examples/3D/Data/Textures/Clouds.jpg"
-    #SoilWall=#PB_Compiler_Home+"Examples/3D\Data/Textures/soil_wall.jpg"
+    #SoilWall=#PB_Compiler_Home+"Examples/3D/Data/Textures/soil_wall.jpg"
     #RustySteel=#PB_Compiler_Home+"Examples/3D/Data/Textures/RustySteel.jpg"
     #Caisse=#PB_Compiler_Home+"Examples/3D/Data/Textures/Caisse.png"
     #Dirt=#PB_Compiler_Home+"Examples/3D/Data/Textures/Dirt.jpg"
-    #Background=#PB_Compiler_Home+"Examples/Sources\Data/Background.bmp"
+    #Background=#PB_Compiler_Home+"Examples/Sources/Data/Background.bmp"
   CompilerEndIf
   
   ; Presets
@@ -1553,7 +1615,10 @@ CompilerIf #PB_Compiler_IsMainFile
   ForEver
 CompilerEndIf
 ; IDE Options = PureBasic 5.51 (Windows - x64)
-; Markers = 1030,1411
+; CursorPosition = 1615
+; FirstLine = 1578
+; Folding = ----------
+; Markers = 1090,1473
 ; EnableXP
 ; DisableDebugger
 ; EnableUnicode

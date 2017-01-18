@@ -93,7 +93,8 @@ DeclareModule BucketFill_Canvas
   ; mode=1 to 3        - With seamless embedding    - Delay available
   ; percent_visibility - Visibility in percent
   ; delay              - Delay for animation - ms
-  ; A setted delay fire WindowEvent calls for refreshing the seamless animation immediately, so you become not all window events back !
+  ; A setted delay fire WindowEvent calls for refreshing the internal created seamless animation immediately,
+  ;  so you become not all actually window events directly back after a animation output !
   
   Structure textures
     texture_ID.i
@@ -1096,9 +1097,11 @@ Module BucketFill_Canvas
     
     If Not temporary_texture_ID : ProcedureReturn -6 : EndIf
     
-    If Not ResizeImage(temporary_texture_ID, texture_width, texture_height)
-      FreeImage(temporary_texture_ID)
-      ProcedureReturn -6
+    If ImageWidth(temporary_texture_ID)<>texture_width Or ImageHeight(temporary_texture_ID)<>texture_height
+      If Not ResizeImage(temporary_texture_ID, texture_width, texture_height)
+        FreeImage(temporary_texture_ID)
+        ProcedureReturn -6
+      EndIf
     EndIf
     
     percent_visibility-1
@@ -1164,6 +1167,8 @@ Module BucketFill_Canvas
           While WindowEvent() : Wend
         EndIf 
         
+        While WindowEvent() : Wend
+        
         Delay(delay)
         
         If mode
@@ -1196,22 +1201,22 @@ CompilerIf #PB_Compiler_IsMainFile
   
   CompilerIf #PB_Compiler_OS=#PB_OS_Linux
     Define font_1=LoadFont(1, "Arial", 11)
-    #GeeBee="./Bucket_fill_image_set/Geebee2.bmp"
-    #Clouds="./Bucket_fill_image_set/Clouds.jpg"
-    #SoilWall="./Bucket_fill_image_set/soil_wall.jpg"
-    #RustySteel="./Bucket_fill_image_set/RustySteel.jpg"
-    #Caisse="./Bucket_fill_image_set/Caisse.png"
-    #Dirt="./Bucket_fill_image_set/Dirt.jpg"
-    #Background="./Bucket_fill_image_set/Background.bmp"
+    #GeeBee="./BucketFill_Image_Set/Geebee2.bmp"
+    #Clouds="./BucketFill_Image_Set/Clouds.jpg"
+    #SoilWall="./BucketFill_Image_Set/soil_wall.jpg"
+    #RustySteel="./BucketFill_Image_Set/RustySteel.jpg"
+    #Caisse="./BucketFill_Image_Set/Caisse.png"
+    #Dirt="./BucketFill_Image_Set/Dirt.jpg"
+    #Background="./BucketFill_Image_Set/Background.bmp"
   CompilerElse
     ; Linux/Mac can not load examples from the Compiler_Home path
     #GeeBee=#PB_Compiler_Home+"Examples/Sources/Data/Geebee2.bmp"
     #Clouds=#PB_Compiler_Home+"Examples/3D/Data/Textures/Clouds.jpg"
-    #SoilWall=#PB_Compiler_Home+"Examples/3D\Data/Textures/soil_wall.jpg"
+    #SoilWall=#PB_Compiler_Home+"Examples/3D/Data/Textures/soil_wall.jpg"
     #RustySteel=#PB_Compiler_Home+"Examples/3D/Data/Textures/RustySteel.jpg"
     #Caisse=#PB_Compiler_Home+"Examples/3D/Data/Textures/Caisse.png"
     #Dirt=#PB_Compiler_Home+"Examples/3D/Data/Textures/Dirt.jpg"
-    #Background=#PB_Compiler_Home+"Examples/Sources\Data/Background.bmp"
+    #Background=#PB_Compiler_Home+"Examples/Sources/Data/Background.bmp"
   CompilerEndIf
   
   ; Presets
@@ -1551,6 +1556,9 @@ CompilerIf #PB_Compiler_IsMainFile
   ForEver
 CompilerEndIf
 ; IDE Options = PureBasic 5.51 (Windows - x64)
+; CursorPosition = 1556
+; FirstLine = 1519
+; Folding = ----------
 ; EnableXP
 ; DisableDebugger
 ; EnableUnicode

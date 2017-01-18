@@ -1,4 +1,4 @@
-﻿
+
 XIncludeFile("./BucketFill_Image.pb")
 XIncludeFile("./BucketFill_Canvas.pb")
 
@@ -14,7 +14,7 @@ CompilerIf #PB_Compiler_IsMainFile
   Define canvas_x, canvas_y, canvas_width, canvas_height, point
   Define path$, path_1$
   
-  Define SoilWall$="./Bucket_fill_image_set/soil_wall.jpg"
+  Define SoilWall$="./BucketFill_Image_Set/soil_wall.jpg"
   
   ; Presets
   canvas_x=50
@@ -185,8 +185,12 @@ CompilerEndIf
 ; Repeat
 ;   If WaitWindowEvent()=#PB_Event_CloseWindow : Break : EndIf
 ; ForEver
-; IDE Options = PureBasic 5.44 LTS (Linux - x64)
+; IDE Options = PureBasic 5.51 (Windows - x64)
+; CursorPosition = 16
+; FirstLine = 3
+; Folding = -
 ; Markers = 4
-; EnableUnicode
 ; EnableXP
+; Executable = Bucket_fill_large_demo_set\test.exe
 ; DisableDebugger
+; EnableUnicode

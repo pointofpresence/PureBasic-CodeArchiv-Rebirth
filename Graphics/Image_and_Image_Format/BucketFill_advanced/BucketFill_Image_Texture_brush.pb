@@ -14,7 +14,7 @@ Define x, y, x1, y1, rnd_x, rnd_Y, snap, i, ii, alpha
 Define *drawing_buffer_grabed_canvas, *drawing_buffer
 Define path$
 
-#SoilWall="./Bucket_fill_image_set/soil_wall.jpg"
+#SoilWall="./BucketFill_Image_Set/soil_wall.jpg"
 
 window_ID=OpenWindow(#PB_Any, #PB_Ignore, #PB_Ignore, 650, 500, "Bucket Fill Advanced - For Canvas",
                      #PB_Window_SystemMenu | #PB_Window_ScreenCentered | #PB_Window_Invisible)
@@ -128,6 +128,8 @@ Repeat
   EndIf
 ForEver
 ; IDE Options = PureBasic 5.51 (Windows - x64)
+; CursorPosition = 16
+; Folding = -
 ; EnableXP
 ; DisableDebugger
 ; EnableUnicode

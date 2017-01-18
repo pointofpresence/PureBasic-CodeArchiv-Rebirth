@@ -13,7 +13,7 @@ Define window_ID, win_event, image_ID, texture_ID, background_ID, result
 Define image_x, image_y, image_width, image_height, point
 Define path$, path_1$
 
-#SoilWall="./Bucket_fill_image_set/soil_wall.jpg"
+#SoilWall="./BucketFill_Image_Set/soil_wall.jpg"
 
 ; Presets
 image_width=600 : image_height=475
@@ -72,4 +72,6 @@ Repeat
   EndIf
 ForEver
 ; IDE Options = PureBasic 5.51 (Windows - x64)
+; CursorPosition = 14
+; FirstLine = 6
 ; EnableXP
